@@ -1,0 +1,40 @@
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+import ImageSlot from "./ImageSlot";
+import { S2S_ASSETS } from "../../data/home";
+import type { SnippetVideo } from "../../data/home";
+
+/** A portrait video still with a play button; pressing it plays the clip in place. */
+const VideoCard = ({ title, src, poster }: SnippetVideo) => {
+  const [playing, setPlaying] = useState(false);
+
+  return (
+    <div className="relative aspect-[300/530] w-[260px] shrink-0 snap-start overflow-hidden md:w-[300px]">
+      {playing && src ? (
+        <video className="absolute inset-0 h-full w-full object-cover" src={src} poster={poster} autoPlay controls playsInline />
+      ) : (
+        <button
+          type="button"
+          onClick={() => setPlaying(true)}
+          disabled={!src}
+          aria-label={`Play: ${title}`}
+          className="group absolute inset-0 block focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white disabled:cursor-default"
+        >
+          <ImageSlot src={poster} alt="" tone="dark" sizes="300px" className="absolute inset-0" />
+          <Image
+            src={`${S2S_ASSETS}/icon-play.svg`}
+            alt=""
+            width={33.5}
+            height={33.5}
+            unoptimized
+            className="absolute left-1/2 top-1/2 h-[33.5px] w-[33.5px] max-w-none -translate-x-1/2 -translate-y-1/2 transition-transform duration-300 group-hover:scale-110"
+          />
+        </button>
+      )}
+    </div>
+  );
+};
+
+export default VideoCard;
