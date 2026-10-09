@@ -28,14 +28,9 @@ const Arrow = ({ direction, enabled, onClick, label }: ArrowProps) => (
     }`}
   >
     <span className={`relative block h-[24px] w-[24px] -rotate-90 ${direction === "next" ? "-scale-y-100" : ""}`}>
-      <Image
-        src={`${S2S_ASSETS}/${enabled ? "arrow-maroon" : "arrow-light"}.svg`}
-        alt=""
-        width={10.5}
-        height={19}
-        unoptimized
-        className="absolute left-[6.25px] top-[2.25px] h-[19px] w-[10.5px] max-w-none"
-      />
+      <span className="absolute left-[6.25px] top-[2.25px] h-[19px] w-[10.5px]">
+        <Image src={`${S2S_ASSETS}/${enabled ? "arrow-maroon" : "arrow-light"}.svg`} alt="" fill unoptimized />
+      </span>
     </span>
   </button>
 );

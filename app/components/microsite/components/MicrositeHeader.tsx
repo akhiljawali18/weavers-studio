@@ -6,6 +6,7 @@ import Link from "next/link";
 import { micrositeNavigation } from "../data/navigation";
 import { S2S_ASSETS } from "../data/home";
 import { useMicrositeNav } from "../hooks/useMicrositeNav";
+import { stitchMask } from "./home/UnderlineLink";
 
 type NavLinkProps = {
   href: string;
@@ -13,32 +14,38 @@ type NavLinkProps = {
   onNavigate?: () => void;
 };
 
-/** The current page is set in Bodoni italic over a drawn underline; the rest in plain lowercase. */
+/**
+ * The current page is set in Bodoni italic over a drawn underline; the rest in
+ * plain lowercase, taking on the same italic and underline while hovered. While
+ * hovered the underline also runs with gaps, like the calls to action.
+ *
+ * Both versions of the label sit in one grid cell, so the link is always as wide
+ * as the wider of the two and the menu does not shift when the font changes.
+ */
 const NavLink = ({ href, label, onNavigate }: NavLinkProps) => {
   const isActive = useMicrositeNav(href);
+  const shown = isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100";
+  const hidden = isActive ? "opacity-0" : "opacity-100 group-hover:opacity-0 group-focus-visible:opacity-0";
 
   return (
     <Link
       href={href}
       onClick={onNavigate}
       aria-current={isActive ? "page" : undefined}
-      className="group relative inline-block whitespace-nowrap lowercase text-s2s-brown focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon"
+      className="group relative inline-grid whitespace-nowrap lowercase text-s2s-brown focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon"
     >
-      {isActive ? (
-        <>
-          <span className="font-Bodoni text-[16px] italic leading-[24.8px]">{label}</span>
-          <Image
-            src={`${S2S_ASSETS}/nav-underline.svg`}
-            alt=""
-            width={79.73}
-            height={3.5}
-            unoptimized
-            className="absolute left-0 top-[24px] h-[3.5px] w-[79.73px] max-w-none"
-          />
-        </>
-      ) : (
-        <span className="text-[15px] leading-[24.8px] transition-colors group-hover:text-s2s-maroon">{label}</span>
-      )}
+      <span className={`[grid-area:1/1] text-[15px] leading-[24.8px] transition-opacity duration-200 ${hidden}`}>{label}</span>
+      <span aria-hidden className={`[grid-area:1/1] font-Bodoni text-[16px] italic leading-[24.8px] transition-opacity duration-200 ${shown}`}>
+        {label}
+      </span>
+      <span
+        aria-hidden
+        className={`absolute left-0 top-[24px] h-[3.5px] w-[max(79.73px,calc(100%-5px))] origin-left transition-transform duration-300 ${stitchMask} ${
+          isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100 group-focus-visible:scale-x-100"
+        }`}
+      >
+        <Image src={`${S2S_ASSETS}/nav-underline.svg`} alt="" fill unoptimized />
+      </span>
     </Link>
   );
 };

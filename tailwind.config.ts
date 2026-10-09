@@ -133,7 +133,6 @@ const config: Config = {
                     muted: "#666666",
                     soft: "#999999",
                     line: "#aaaaaa",
-                    rule: "#c4c4c4",
                     panel: "#f8f8f8",
                     tan: "#a39385",
                     gold: "#cd8c3f",

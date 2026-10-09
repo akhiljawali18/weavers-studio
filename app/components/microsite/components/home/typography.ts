@@ -13,3 +13,6 @@ export const displayTitle =
   "font-Bodoni text-[36px] font-normal leading-[46px] tracking-[-1.35px] text-s2s-maroon md:text-[45px] md:leading-[58px]";
 
 export const bodyText = "text-[16px] leading-[28px] text-s2s-ink";
+
+/** Black spaced capitals in the medium weight: "With Sabine Bolk", "Object details". */
+export const labelCaps = "text-[14px] font-medium uppercase leading-[24px] tracking-[1.68px] text-black";

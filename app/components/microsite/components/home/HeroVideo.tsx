@@ -10,13 +10,81 @@ type HeroVideoProps = {
   poster?: string;
 };
 
+type NetworkInformation = { saveData?: boolean };
+
+/** Visitors who asked for less data or less motion keep the still and never fetch the film. */
+const videoIsWelcome = () => {
+  const connection = (navigator as Navigator & { connection?: NetworkInformation }).connection;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  return !connection?.saveData && !reducedMotion;
+};
+
 /**
- * The opening film. It starts muted, as browsers only autoplay silent video, and
- * the speaker in the corner turns the sound on.
+ * The opening film.
+ *
+ * The still is what paints first; the video file is not requested until the page
+ * has finished loading and the hero is actually on screen, so it never competes
+ * with the page itself. It then plays muted (browsers only autoplay silent video),
+ * fades in over the still once it is running, and pauses whenever it is scrolled
+ * out of view. The speaker in the corner turns the sound on.
  */
 const HeroVideo = ({ src, poster }: HeroVideoProps) => {
+  const frameRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [load, setLoad] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
+
+  // Decide when to fetch the film: after the window's load event, once the hero is visible.
+  useEffect(() => {
+    const frame = frameRef.current;
+    if (!src || !frame || !videoIsWelcome()) {
+      return;
+    }
+
+    let observer: IntersectionObserver | undefined;
+    const watch = () => {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            setLoad(true);
+            observer?.disconnect();
+          }
+        },
+        { rootMargin: "200px" }
+      );
+      observer.observe(frame);
+    };
+
+    if (document.readyState === "complete") {
+      watch();
+    } else {
+      window.addEventListener("load", watch, { once: true });
+    }
+    return () => {
+      window.removeEventListener("load", watch);
+      observer?.disconnect();
+    };
+  }, [src]);
+
+  // Once loaded, play only while on screen.
+  useEffect(() => {
+    const frame = frameRef.current;
+    const video = videoRef.current;
+    if (!load || !frame || !video) {
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.some((entry) => entry.isIntersecting);
+      if (visible) {
+        video.play().catch(() => undefined);
+      } else {
+        video.pause();
+      }
+    });
+    observer.observe(frame);
+    return () => observer.disconnect();
+  }, [load]);
 
   // React does not keep the `muted` attribute in sync after the first render, so
   // the property is set directly.
@@ -24,29 +92,38 @@ const HeroVideo = ({ src, poster }: HeroVideoProps) => {
     if (videoRef.current) {
       videoRef.current.muted = muted;
     }
-  }, [muted]);
+  }, [muted, load]);
 
   return (
-    <div className="relative aspect-[1296/504] w-full overflow-hidden">
-      {src ? (
+    <div ref={frameRef} className="relative aspect-[1296/504] w-full overflow-hidden">
+      <ImageSlot
+        src={poster}
+        alt="Sarong to Sari exhibition film"
+        className="absolute inset-0"
+        sizes="(min-width: 1440px) 1296px, 100vw"
+        priority
+      />
+      {load && src && (
         <video
           ref={videoRef}
-          className="absolute inset-0 h-full w-full object-cover"
-          autoPlay
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+            playing ? "opacity-100" : "opacity-0"
+          }`}
+          src={src}
           muted
           loop
           playsInline
-          poster={poster}
-        >
-          <source src={src} />
-        </video>
-      ) : (
-        <ImageSlot src={poster} alt="Sarong to Sari exhibition film" className="absolute inset-0" priority />
+          preload="auto"
+          onPlaying={() => setPlaying(true)}
+          // A missing or unplayable file leaves the still in place.
+          onError={() => setLoad(false)}
+          aria-hidden
+        />
       )}
       <button
         type="button"
         onClick={() => setMuted((value) => !value)}
-        disabled={!src}
+        disabled={!playing}
         aria-pressed={!muted}
         aria-label={muted ? "Turn on the film's sound" : "Mute the film"}
         className="absolute bottom-[3.97%] right-[1.85%] flex rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-white disabled:cursor-default"

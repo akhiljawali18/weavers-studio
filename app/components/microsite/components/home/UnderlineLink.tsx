@@ -20,7 +20,7 @@ const activeLabel =
   "group-hover:font-Bodoni group-hover:text-[16px] group-hover:font-normal group-hover:italic "
   + "group-focus-visible:font-Bodoni group-focus-visible:text-[16px] group-focus-visible:font-normal group-focus-visible:italic";
 
-const stitchMask =
+export const stitchMask =
   "group-hover:[mask-image:linear-gradient(90deg,#000_54px,transparent_54px)] group-hover:[mask-size:64px_100%] "
   + "group-focus-visible:[mask-image:linear-gradient(90deg,#000_54px,transparent_54px)] group-focus-visible:[mask-size:64px_100%] "
   + "motion-safe:group-hover:animate-stitch motion-safe:group-focus-visible:animate-stitch";
@@ -42,17 +42,16 @@ const UnderlineLink = ({ href, children, className = "", variant = "default", on
       >
         {children}
       </span>
-      <Image
-        src={`${S2S_ASSETS}/link-underline.svg`}
-        alt=""
+      {/* The drawn line stretches to the label, so it fills a sized box rather than
+          fixing its own width and height. */}
+      <span
         aria-hidden
-        width={130}
-        height={4}
-        unoptimized
-        className={`absolute h-[4px] max-w-none ${stitchMask} ${
+        className={`absolute h-[4px] ${stitchMask} ${
           compact ? "bottom-0 left-0 w-full" : "left-[3.3px] top-[19.5px] w-[calc(100%-3.3px)]"
         }`}
-      />
+      >
+        <Image src={`${S2S_ASSETS}/link-underline.svg`} alt="" fill unoptimized />
+      </span>
     </Link>
   );
 };

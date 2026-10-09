@@ -1,8 +1,9 @@
+import Image from "next/image";
 import Carousel from "./Carousel";
 import ImageSlot from "./ImageSlot";
 import SectionHeading from "./SectionHeading";
 import { bodyText } from "./typography";
-import { galleries, galleriesIntro } from "../../data/home";
+import { S2S_ASSETS, galleries, galleriesIntro } from "../../data/home";
 
 const GalleriesSection = () => (
   <section
@@ -21,7 +22,19 @@ const GalleriesSection = () => (
 
     <div className="relative min-w-0 lg:flex-1 lg:pt-[44px]">
       <span aria-hidden className="absolute left-0 top-0 hidden h-[626px] w-px bg-s2s-line lg:block" />
-      <span aria-hidden className="absolute -left-[74px] right-0 top-[43px] hidden h-px bg-s2s-line lg:block" />
+      <span aria-hidden className="absolute -left-[37px] right-0 top-[43px] hidden h-px bg-s2s-line lg:block" />
+      {/* The line's tilde lead-in, shown through a window onto the Snippets flourish,
+          where the same stroke is drawn. */}
+      <span aria-hidden className="absolute -left-[74px] top-[2px] hidden h-[46px] w-[38px] overflow-hidden lg:block">
+        <Image
+          src={`${S2S_ASSETS}/deco-snippets-flourish.svg`}
+          alt=""
+          width={331}
+          height={46}
+          unoptimized
+          className="absolute left-0 top-0 h-[46px] w-[331px] max-w-none"
+        />
+      </span>
       <Carousel
         label="The four galleries"
         itemLabel="gallery"

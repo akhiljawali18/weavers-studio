@@ -6,20 +6,36 @@ import ImageSlot from "./ImageSlot";
 import { S2S_ASSETS } from "../../data/home";
 import type { SnippetVideo } from "../../data/home";
 
-/** A portrait video still with a play button; pressing it plays the clip in place. */
+/**
+ * A portrait video still with a play button; pressing it plays the clip in place.
+ * If the file cannot be played the still comes back and the button is retired.
+ */
 const VideoCard = ({ title, src, poster }: SnippetVideo) => {
   const [playing, setPlaying] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const playable = Boolean(src) && !failed;
 
   return (
     <div className="relative aspect-[300/530] w-[260px] shrink-0 snap-start overflow-hidden md:w-[300px]">
-      {playing && src ? (
-        <video className="absolute inset-0 h-full w-full object-cover" src={src} poster={poster} autoPlay controls playsInline />
+      {playing && playable ? (
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src={src}
+          poster={poster}
+          autoPlay
+          controls
+          playsInline
+          onError={() => {
+            setFailed(true);
+            setPlaying(false);
+          }}
+        />
       ) : (
         <button
           type="button"
           onClick={() => setPlaying(true)}
-          disabled={!src}
-          aria-label={`Play: ${title}`}
+          disabled={!playable}
+          aria-label={playable ? `Play: ${title}` : `${title} (video unavailable)`}
           className="group absolute inset-0 block focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white disabled:cursor-default"
         >
           <ImageSlot src={poster} alt="" tone="dark" sizes="300px" className="absolute inset-0" />

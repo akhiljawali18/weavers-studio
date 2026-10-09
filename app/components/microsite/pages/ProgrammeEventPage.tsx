@@ -12,7 +12,7 @@ const smallCaps = "text-[14px] font-medium uppercase leading-[17px] tracking-[1.
 
 /** A panel column heading with the rule beneath it, as in the design. */
 const PanelHeading = ({ children }: { children: string }) => (
-  <h2 className={`border-b border-s2s-rule pb-4 pl-[22px] ${smallCaps}`}>{children}</h2>
+  <h2 className={`border-b border-s2s-line pb-4 pl-[22px] ${smallCaps}`}>{children}</h2>
 );
 
 type ProgrammeEventPageProps = {
@@ -53,11 +53,11 @@ const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
               {item.type}
             </span>
 
-            <dl className="mt-[29px] border-b border-s2s-rule">
+            <dl className="mt-[29px] border-b border-s2s-line">
               {facts.map(([label, value]) => (
                 <div
                   key={label}
-                  className="grid min-h-[49px] grid-cols-[110px_1fr] items-center gap-x-3 border-t border-s2s-rule py-2 sm:grid-cols-[125px_1fr] sm:gap-x-0"
+                  className="grid min-h-[49px] grid-cols-[110px_1fr] items-center gap-x-3 border-t border-s2s-line py-2 sm:grid-cols-[125px_1fr] sm:gap-x-0"
                 >
                   <dt className="pl-[3px] text-[14px] font-medium uppercase leading-[17px] tracking-[1.68px] text-s2s-ink">
                     {label}
@@ -119,7 +119,7 @@ const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
             </div>
           </div>
 
-          <p className={`mt-12 border-t border-s2s-rule pt-[22px] lg:mt-[84px] lg:pl-[28px] ${bodyText}`}>
+          <p className={`mt-12 border-t border-s2s-line pt-[22px] lg:mt-[84px] lg:pl-[28px] ${bodyText}`}>
             For further details, please email us on{" "}
             <a href="mailto:wsrc@weaversstudio.in" className="font-medium hover:text-s2s-maroon">
               wsrc@weaversstudio.in

@@ -4,7 +4,7 @@ import type { RichText } from "../types";
  * Content for the Sarong to Sari home page, copied from the Figma file.
  *
  * Every `src`/`image` left undefined is a photo still waiting to be supplied
- * (portraits of the last four team members, so far). The page
+ * (portraits of Peter Lee, Subham China and Kavita N. Patel, so far). The page
  * draws a neutral block of the right size in its place, so filling one in is a
  * one-line change here and nothing else moves.
  *
@@ -185,14 +185,8 @@ export const programmeEvents: ProgrammeEvent[] = [
   },
 ];
 
-/**
- * `artwork` is the photograph exported together with the hairlines and the two
- * flowers beside it, which only exist as part of that export. Wide screens show it;
- * narrow ones, where the text drops below, show the photograph alone.
- */
-export const programmeImage: { src?: string; artwork?: string; alt: string } = {
+export const programmeImage: { src?: string; alt: string } = {
   src: `${S2S_ASSETS}/event-photo.jpg`,
-  artwork: `${S2S_ASSETS}/event-opening.jpg`,
   alt: "Guests seated at the exhibition opening",
 };
 
@@ -237,6 +231,7 @@ export const team: TeamMember[] = [
     nameItalic: "Oroon ",
     nameRegular: "Das",
     role: "Exhibition designer",
+    image: `${S2S_ASSETS}/voice-5.jpg`,
     bio: [{ text: "Multidisciplinary artist, performer, scenographer, and designer", tone: "strong" }],
   },
   {

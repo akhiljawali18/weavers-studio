@@ -9,7 +9,7 @@ import type { Voice } from "../../data/voices";
  * One artist, scholar or curator: portrait, name, and a biography cut to three
  * lines that "read more" opens in place.
  */
-const VoiceCard = ({ nameItalic, nameRegular, bio, image, imageAlt }: Voice) => {
+const VoiceCard = ({ nameItalic, nameRegular, bio, image, imagePosition, imageAlt }: Voice) => {
   const [expanded, setExpanded] = useState(false);
   const bioId = useId();
 
@@ -20,6 +20,7 @@ const VoiceCard = ({ nameItalic, nameRegular, bio, image, imageAlt }: Voice) => 
         alt={imageAlt}
         sizes="(min-width: 992px) 30vw, (min-width: 576px) 50vw, 100vw"
         className="aspect-[1267/1089] w-full"
+        objectPosition={imagePosition}
       />
       <h2 className="mt-6 font-Bodoni text-[22px] font-normal leading-[28px] text-s2s-maroon">
         <span className="italic">{nameItalic}</span>

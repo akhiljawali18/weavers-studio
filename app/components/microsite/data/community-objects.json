@@ -1,0 +1,129 @@
+[
+  {
+    "slug": "batik-sari",
+    "titleItalic": "Batik",
+    "titleRegular": " Sari",
+    "technique": "Batik",
+    "collection": "Hutheesing Collection",
+    "date": "c.1930s",
+    "images": ["object-batik-sari.jpg", null],
+    "imageAlt": "Batik silk sari with a crackled central field and a broad floral lower border",
+    "attribution": ["Possibly designed by Nandalal Bose", "Santiniketan, India, c. 1930s"],
+    "facts": [
+      { "label": "Materials & techniques", "value": "Silk, batik; wax resist and dyeing" },
+      { "label": "Collection", "value": "Umang Hutheesing, Ahmedabad, India" },
+      { "label": "Gifted to", "value": "Shrimati Hutheesing" }
+    ],
+    "summary": [
+      "This silk sari was made in Santiniketan in the 1930s and gifted to ",
+      { "text": "Shrimati Hutheesing", "tone": "maroon" },
+      ", a Gujarati student of Kala Bhavana."
+    ],
+    "description": [
+      [
+        "It is possibly ",
+        { "text": "designed by Nandalal Bose", "tone": "strong" },
+        ", under whom Hutheesing studied painting. The sari belongs to an important period of experimentation at Santiniketan, when batik, a resist dyeing technique associated with ",
+        { "text": "Java", "tone": "strong" },
+        ", was adapted to ",
+        { "text": "new forms of Indian artistic expression.", "tone": "strong" }
+      ],
+      [
+        "The design is structured by horizontal borders enclosing a broad central field. Fine branching lines and scattered floral forms animate the ground, while the borders incorporate scrolling foliage, stylised flowers and geometric motifs. The broad lower border is composed of ",
+        { "text": "symmetrical vegetal forms", "tone": "strong" },
+        " and curling scrolls arranged as a continuous rhythmic frieze. The flowing lines, stylised vegetation and rhythmic organisation recall the ",
+        { "text": "visual language of the murals of Ajanta", "tone": "strong" },
+        ", which had a profound influence on Bose and the artists of Santiniketan. Rather than directly reproducing an Ajanta composition, the design translates its formal qualities into the medium of batik."
+      ],
+      [
+        "The sari also records the movement of Santiniketan's ",
+        { "text": "artistic culture beyond its institutional setting", "tone": "strong" },
+        ". Hutheesing studied painting with Bose, music with Dinendranath Tagore, and dance, becoming part of the ",
+        { "text": "interdisciplinary artistic community", "tone": "strong" },
+        " shaped by Rabindranath Tagore. Through students such as Hutheesing, the aesthetic practices and ideas developed at Santiniketan travelled into wider social and cultural networks. As an object made for and gifted to a particular wearer, this sari therefore connects artistic education, personal exchange and everyday use, while demonstrating how ",
+        { "text": "painting, craft and textile design came together", "tone": "strong" },
+        " in the experimental culture of Santiniketan."
+      ]
+    ]
+  },
+  {
+    "slug": "baluchari-sari",
+    "titleItalic": "Baluchari",
+    "titleRegular": " Sari",
+    "technique": "Woven Silk",
+    "collection": "Bengal Collection",
+    "date": "c.1890",
+    "images": [null],
+    "imageAlt": "Baluchari Sari",
+    "attribution": [],
+    "facts": [{ "label": "Collection", "value": "Bengal Collection" }],
+    "summary": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."],
+    "description": [
+      ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."]
+    ]
+  },
+  {
+    "slug": "geringsing-cloth",
+    "titleItalic": "Geiringsing",
+    "titleRegular": " Cloth",
+    "technique": "Double Ikat",
+    "collection": "Bali Collection",
+    "date": "c. 1950",
+    "images": [null],
+    "imageAlt": "Geiringsing Cloth",
+    "attribution": [],
+    "facts": [{ "label": "Collection", "value": "Bali Collection" }],
+    "summary": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."],
+    "description": [
+      ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."]
+    ]
+  },
+  {
+    "slug": "ceremonial-kain-panjang",
+    "titleItalic": "Ceremonial",
+    "titleRegular": " Kain Panjang",
+    "technique": "Batik",
+    "collection": "Java Collection",
+    "date": "c.1920",
+    "images": [null],
+    "imageAlt": "Ceremonial Kain Panjang",
+    "attribution": [],
+    "facts": [{ "label": "Collection", "value": "Java Collection" }],
+    "summary": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."],
+    "description": [
+      ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."]
+    ]
+  },
+  {
+    "slug": "baluchari-saree",
+    "titleItalic": "Baluchari",
+    "titleRegular": " Saree",
+    "technique": "Woven Silk",
+    "collection": "Bengal Collection",
+    "date": "c.1890",
+    "images": [null],
+    "imageAlt": "Baluchari Saree",
+    "attribution": [],
+    "facts": [{ "label": "Collection", "value": "Bengal Collection" }],
+    "summary": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."],
+    "description": [
+      ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."]
+    ]
+  },
+  {
+    "slug": "geringsing-cloth-2",
+    "titleItalic": "Geiringsing",
+    "titleRegular": " Cloth",
+    "technique": "Double Ikat",
+    "collection": "Bali Collection",
+    "date": "c. 1950",
+    "images": [null],
+    "imageAlt": "Geiringsing Cloth",
+    "attribution": [],
+    "facts": [{ "label": "Collection", "value": "Bali Collection" }],
+    "summary": ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."],
+    "description": [
+      ["Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."]
+    ]
+  }
+]

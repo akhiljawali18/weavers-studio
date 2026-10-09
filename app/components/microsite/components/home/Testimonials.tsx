@@ -36,14 +36,10 @@ const Testimonials = ({ items }: TestimonialsProps) => {
         className="relative flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon disabled:cursor-default"
       >
         <span className="relative block h-[24px] w-[24px] -rotate-90 -scale-y-100">
-          <Image
-            src={`${S2S_ASSETS}/arrow-maroon.svg`}
-            alt=""
-            width={10.5}
-            height={19}
-            unoptimized
-            className="absolute left-[6.25px] top-[2.25px] h-[19px] w-[10.5px] max-w-none"
-          />
+          {/* The design draws this arrow in grey; the shared arrow is maroon, so it is greyed here. */}
+          <span className="absolute left-[6.25px] top-[2.25px] h-[19px] w-[10.5px] opacity-75 grayscale">
+            <Image src={`${S2S_ASSETS}/arrow-maroon.svg`} alt="" fill unoptimized />
+          </span>
         </span>
       </button>
     </div>

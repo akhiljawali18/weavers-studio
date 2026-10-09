@@ -11,6 +11,8 @@ type ImageSlotProps = {
   tone?: "light" | "dark" | "none";
   /** Classes for the picture itself; photos crop to fill, logos pass `object-contain`. */
   imageClassName?: string;
+  /** Anchor for the crop, e.g. "50% 15%" to keep a face in frame. */
+  objectPosition?: string;
 };
 
 const toneClass = {
@@ -35,12 +37,21 @@ const ImageSlot = ({
   priority,
   tone = "light",
   imageClassName = "object-cover",
+  objectPosition,
 }: ImageSlotProps) => {
   if (src) {
     return (
       <div className={`overflow-hidden ${className}`}>
         <div className="relative h-full w-full">
-          <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className={imageClassName} />
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            sizes={sizes}
+            priority={priority}
+            className={imageClassName}
+            style={objectPosition ? { objectPosition } : undefined}
+          />
         </div>
       </div>
     );
