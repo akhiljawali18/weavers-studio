@@ -3,15 +3,25 @@ import type { RichText } from "../types";
 /**
  * Content for the Sarong to Sari home page, copied from the Figma file.
  *
- * Every `src`/`image` left undefined is a photo still waiting to be supplied
- * (portraits of Peter Lee, Subham China and Kavita N. Patel, so far). The page
- * draws a neutral block of the right size in its place, so filling one in is a
- * one-line change here and nothing else moves.
+ * Every `src`/`image` left undefined is a photo still waiting to be supplied.
+ * The page draws a neutral block of the right size in its place, so filling one
+ * in is a one-line change here and nothing else moves.
  *
  * The video posters are stills taken from the videos themselves.
  */
 
 export const S2S_ASSETS = "/images/sarong-to-sari";
+
+/**
+ * Pieces of the desktop page that the mobile design leaves out. Each one set to
+ * `true` is hidden below `lg`; flip a flag to change what phones show.
+ */
+export const hiddenOnMobile = {
+  wsrcLogo: true,
+  voyagePortrait: false,
+  galleriesIntro: false,
+  carouselArrows: false,
+};
 
 export const heroIntro: RichText = [
   "An ",
@@ -31,9 +41,10 @@ export const heroVideo: { src?: string; poster?: string } = {
   poster: `${S2S_ASSETS}/hero-poster.jpg`,
 };
 
+// "\n" marks where the mobile design breaks a line; on desktop the text runs on.
 export const exhibitionVenues = [
   {
-    dates: "Thursday, 21 January to Wednesday, 31 March 2027",
+    dates: "Thursday, 21 January to\nWednesday, 31 March 2027",
     venue: "at Kolkata Centre for Creativity, Kolkata, India",
   },
   {
@@ -42,7 +53,7 @@ export const exhibitionVenues = [
   },
   {
     dates: "Monday, 25 January to Friday, 26 February 2027",
-    venue: "at Nandan Museum, Visva-Bharati, Santiniketan, India",
+    venue: "at Nandan Museum, Visva-Bharati,\nSantiniketan, India",
   },
 ];
 
@@ -163,12 +174,17 @@ export const galleries: Gallery[] = [
 
 export type ProgrammeEvent = {
   titleItalic: string;
-  titleRegular: string;
+  /** The upright second line; left out when the title is a single italic word. */
+  titleRegular?: string;
   lines: RichText[];
-  href: string;
+  link: { label: string; href: string };
+  image?: string;
+  imageAlt: string;
+  /** The two flowers and hairlines beside the photo; the second event has their colours swapped. */
+  decoration: string;
 };
 
-// The design pages through three events; only the first is written out in Figma.
+// The three slides of the "3 Events Carousel" component in Figma.
 export const programmeEvents: ProgrammeEvent[] = [
   {
     titleItalic: "Exhibition Opening",
@@ -181,14 +197,45 @@ export const programmeEvents: ProgrammeEvent[] = [
       ["Opening & Book Launch on ", { text: "Thursday, 21 January, 2027", tone: "strong" }],
       ["Exhibition continues till ", { text: "31 March 2027", tone: "strong" }, " in Kolkata"],
     ],
-    href: "/microsite/programme",
+    link: { label: "view events", href: "/microsite/programme" },
+    image: `${S2S_ASSETS}/exi-1.jpg`,
+    imageAlt: "Guests in conversation at the exhibition opening",
+    decoration: "exi-decor-1.png",
+  },
+  {
+    titleItalic: "Exhibition travels to",
+    titleRegular: "Santiniketan",
+    lines: [
+      [{ text: "Saturday, 24 January to Sunday, 4 April 2027", tone: "strong" }],
+      ["at Arthshila, Santiniketan, India."],
+      [],
+      [{ text: "Monday, 25 January to Friday, 26 February 2027", tone: "strong" }],
+      ["at Nandan Museum, Visva-Bharati, Santiniketan, India."],
+    ],
+    link: { label: "view events", href: "/microsite/programme" },
+    image: `${S2S_ASSETS}/exi-2.jpg`,
+    imageAlt: "A hand tracing a batik pattern on white cloth",
+    decoration: "exi-decor-2.png",
+  },
+  {
+    titleItalic: "Symposium",
+    lines: [
+      [
+        "A two-day symposium brings together curators, artists and scholars from India and Indonesia to explore batik as a shared, living tradition from Tagore's Visva-Bharati to the workshops of Santiniketan today.",
+      ],
+      [],
+      [{ text: "22 & 23 January 2027  •  Friday – Saturday", tone: "strong" }],
+      [{ text: "10:00 AM – 6:00 PM", tone: "strong" }],
+      ["Kolkata Centre for Creativity,"],
+      ["777 Anandapur, E.M. Bypass, Kolkata 700107"],
+    ],
+    // The design names no destination for "register here" yet.
+    link: { label: "register here", href: "/microsite/programme" },
+    image: `${S2S_ASSETS}/exi-3.jpg`,
+    imageAlt: "A speaker addressing the symposium audience",
+    decoration: "exi-decor-1.png",
   },
 ];
-
-export const programmeImage: { src?: string; alt: string } = {
-  src: `${S2S_ASSETS}/event-photo.jpg`,
-  alt: "Guests seated at the exhibition opening",
-};
 
 export type TeamMember = {
   nameItalic: string;
@@ -207,8 +254,8 @@ export const team: TeamMember[] = [
     bio: [{ text: "Founder Trustee", tone: "strong" }, ", Weavers Studio Resource Centre, Kolkata, India"],
   },
   {
-    nameItalic: "Dr. Maria Wronska",
-    nameRegular: "-Friend",
+    nameItalic: "Dr. Maria Wronska-",
+    nameRegular: "Friend",
     role: "Curator",
     image: `${S2S_ASSETS}/team-2.jpg`,
     bio: [{ text: "Adjunct Senior Research Fellow", tone: "strong" }, ", James Cook University in Cairns"],
@@ -220,11 +267,11 @@ export const team: TeamMember[] = [
     image: `${S2S_ASSETS}/team-3.jpg`,
     bio: [{ text: "Artist, Art historian", tone: "strong" }, ", former curator of Kala Bhavana Museum"],
   },
-  // The four below are not in the Figma file; they come from the prototype recording.
   {
     nameItalic: "Peter ",
     nameRegular: "Lee",
     role: "Mentor",
+    image: `${S2S_ASSETS}/team-4.jpg`,
     bio: [{ text: "Independent Curator", tone: "strong" }, ", founding curator of the NUS Baba House"],
   },
   {
@@ -238,12 +285,14 @@ export const team: TeamMember[] = [
     nameItalic: "Subham ",
     nameRegular: "China",
     role: "Co-curator",
+    image: `${S2S_ASSETS}/team-6.jpg`,
     bio: [{ text: "PhD at the Department of International Relations", tone: "strong" }, ", Jadavpur University, Kolkata"],
   },
   {
-    nameItalic: "Kavita ",
-    nameRegular: "N. Patel",
+    nameItalic: "Kavita N. ",
+    nameRegular: "Patel",
     role: "Assistant project director",
+    image: `${S2S_ASSETS}/team-7.jpg`,
     bio: [{ text: "Assistant Project Director", tone: "strong" }, ", Weavers Studio Resource Centre"],
   },
 ];
@@ -258,9 +307,14 @@ export type PartnerLogo = {
 export const partners = {
   presentedBy: { name: "Weavers Studio Resource Centre", src: `${S2S_ASSETS}/partner-wsrc.jpg`, width: 207, height: 114 },
   presentingPartner: { name: "Garden Vareli", src: `${S2S_ASSETS}/partner-garden-vareli.jpg`, width: 161, height: 85 },
+  // Two rows: Emami on its own, the other three beneath it.
   supportedBy: [
-    { name: "Emami Foundation", src: `${S2S_ASSETS}/partner-emami.jpg`, width: 256, height: 24 },
-    { name: "MPJ Jewellers", src: `${S2S_ASSETS}/partner-mpj.jpg`, width: 99, height: 100 },
+    [{ name: "Emami Foundation", src: `${S2S_ASSETS}/EmamiFoundation.jpg`, width: 282, height: 28 }],
+    [
+      { name: "MPJ Jewellers", src: `${S2S_ASSETS}/mpj.jpg`, width: 83, height: 84 },
+      { name: "Sar-La Education Trust", src: `${S2S_ASSETS}/sar-la.jpg`, width: 83, height: 84 },
+      { name: "LGT Wealth India", src: `${S2S_ASSETS}/lgt.jpg`, width: 163, height: 84 },
+    ],
   ],
   collaboration: [
     { name: "Indonesia India: Mitra Selamanya, Partners Forever", src: `${S2S_ASSETS}/partner-indonesia.jpg`, width: 256, height: 52 },
@@ -270,16 +324,38 @@ export const partners = {
     { name: "Kolkata Centre for Creativity", src: `${S2S_ASSETS}/partner-kcc.jpg`, width: 256, height: 80 },
     { name: "Arthshila Santiniketan", src: `${S2S_ASSETS}/partner-arthshila.png`, width: 159, height: 80 },
   ],
-} satisfies Record<string, PartnerLogo | PartnerLogo[]>;
+} satisfies Record<string, PartnerLogo | PartnerLogo[] | PartnerLogo[][]>;
 
-// Placeholder heading carried over from the design.
-export const communityArchiveTitle = "Title goes here";
+export const testimonialsTitle = "Testimonials";
 
-export const testimonials = [
+export type Testimonial = {
+  attribution: string;
+  quote: string;
+  /** The quote's text width on desktop. Each slide in the design has its own, which sets its line breaks. */
+  width: number;
+};
+
+// The three slides of the "Testimonials" component in Figma, in its order.
+export const testimonials: Testimonial[] = [
   {
     attribution: "Ina Puri | Author",
     quote:
       '"It all began with a casual visit to the store\'s original address where I remember being quite delighted to find many beautiful weaves...thereafter Weavers Studio became a frequent haunt, each time there is something new to admire and acquire!"',
+    width: 764,
+  },
+  {
+    attribution: "Jayasri Burman | Painter & Sculptor",
+    quote:
+      "I am very grateful, because as an artist when I visit Weavers Studio I really enjoy looking at all the textiles and I get so inspired by the colours and the textures… I come back to my own studio and do something different!",
+    width: 840,
+  },
+  {
+    attribution: "Sangeeta Datta | Film Director",
+    quote:
+      "I enjoy wearing these saris, they are not merely pieces of textile but a reflection of all the work and the energy and the joy and the positivity that Weavers Studio stands for.",
+    // 671 in Figma; the browser's Bodoni sets the second line 0.4px wider, so it
+    // needs one more pixel to keep "that" on that line as the design does.
+    width: 672,
   },
 ];
 

@@ -3,22 +3,23 @@ import Decoration from "./Decoration";
 import ImageSlot from "./ImageSlot";
 import RichText from "./RichText";
 import Testimonials from "./Testimonials";
-import { communityArchive, communityArchiveTitle, testimonials } from "../../data/home";
+import { communityArchive, testimonialsTitle, testimonials } from "../../data/home";
 
 const CommunitySection = () => (
   <section
     id="community-archive"
-    aria-labelledby="community-heading"
+    aria-labelledby="testimonials-heading"
     className="relative mx-auto mt-20 w-full max-w-[1440px] scroll-mt-[64px] lg:mt-[152px]"
   >
     <div className="relative">
       <h2
-        id="community-heading"
-        className="px-5 text-[16px] font-medium uppercase leading-[29px] tracking-[1.6px] text-s2s-ink lg:pl-[158px]"
+        id="testimonials-heading"
+        className="px-5 text-[16px] font-medium uppercase leading-[29px] tracking-[1.92px] text-s2s-ink lg:pl-[158px]"
       >
-        {communityArchiveTitle}
+        {testimonialsTitle}
       </h2>
-      <span aria-hidden className="absolute left-0 top-[46px] hidden h-px w-[570px] bg-s2s-line lg:block" />
+      {/* The rule under the heading, curling up at its end. */}
+      <Decoration file="testi-decor.jpg" width={594} height={27} className="left-0 top-[20px]" />
     </div>
 
     <Decoration file="deco-paisley-round.svg" width={101} height={137} className="right-0 top-[11px]" />

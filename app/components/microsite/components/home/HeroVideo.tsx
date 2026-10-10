@@ -95,12 +95,14 @@ const HeroVideo = ({ src, poster }: HeroVideoProps) => {
   }, [muted, load]);
 
   return (
-    <div ref={frameRef} className="relative aspect-[1296/504] w-full overflow-hidden">
+    // Portrait on phones, as the mobile design draws it: the landscape still and film
+    // are cropped to its centre.
+    <div ref={frameRef} className="relative aspect-[317/564] w-full overflow-hidden lg:aspect-[1296/504]">
       <ImageSlot
         src={poster}
         alt="Sarong to Sari exhibition film"
         className="absolute inset-0"
-        sizes="(min-width: 1440px) 1296px, 100vw"
+        sizes="(min-width: 1440px) 1296px, (min-width: 992px) 100vw, 317px"
         priority
       />
       {load && src && (

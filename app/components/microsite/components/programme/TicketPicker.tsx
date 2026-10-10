@@ -4,8 +4,10 @@ import { useState } from "react";
 
 const MAX_TICKETS = 10;
 
+// The minus and plus are hairline strokes in the design, drawn here in the
+// button's text colour so they turn maroon on hover with it.
 const stepButton =
-  "flex h-[24px] w-[17px] items-center justify-center rounded-sm text-[28px] font-normal leading-none text-s2s-ink "
+  "relative flex h-[24px] items-center justify-center rounded-sm text-s2s-ink "
   + "transition-colors hover:text-s2s-maroon disabled:cursor-default disabled:hover:text-s2s-ink "
   + "focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon";
 
@@ -24,13 +26,13 @@ const TicketPicker = () => {
           onClick={() => setQuantity((count) => Math.max(1, count - 1))}
           disabled={quantity <= 1}
           aria-label="One ticket fewer"
-          className={stepButton}
+          className={`${stepButton} w-[15px]`}
         >
-          −
+          <span aria-hidden className="h-px w-[15px] bg-current" />
         </button>
         <output
           aria-live="polite"
-          className="flex h-[31px] w-[31px] items-center justify-center rounded-full border border-s2s-maroon text-[14px] leading-none text-s2s-maroon"
+          className="flex h-[32px] w-[32px] items-center justify-center rounded-full border border-s2s-maroon text-[14px] leading-none text-s2s-maroon"
         >
           {quantity}
         </output>
@@ -39,14 +41,15 @@ const TicketPicker = () => {
           onClick={() => setQuantity((count) => Math.min(MAX_TICKETS, count + 1))}
           disabled={quantity >= MAX_TICKETS}
           aria-label="One ticket more"
-          className={stepButton}
+          className={`${stepButton} w-[14px]`}
         >
-          +
+          <span aria-hidden className="absolute h-px w-[14px] bg-current" />
+          <span aria-hidden className="absolute h-[14px] w-px bg-current" />
         </button>
       </div>
       <button
         type="button"
-        className="ml-8 h-[35px] w-[249px] max-w-full rounded-[3px] bg-s2s-maroon text-[14px] lowercase text-white transition-colors duration-200 hover:bg-[#4d0f14] focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon focus-visible:ring-offset-2"
+        className="ml-[36px] h-[35px] w-[250px] max-w-full rounded-[4px] bg-s2s-maroon text-[15px] font-medium lowercase text-white transition-colors duration-200 hover:bg-[#4d0f14] focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon focus-visible:ring-offset-2"
       >
         buy tickets
       </button>

@@ -9,7 +9,7 @@ import type { EventType, ProgrammeItem } from "../../data/programme";
 type Filter = "all" | EventType;
 
 const chipBase =
-  "h-[35px] rounded-[3px] border border-s2s-maroon px-[14px] text-[14px] lowercase leading-none transition-colors duration-200 "
+  "h-[34px] rounded-[4px] border border-s2s-maroon px-[15px] text-[14px] lowercase leading-none transition-colors duration-200 "
   + "focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon focus-visible:ring-offset-2";
 
 type ProgrammeListingProps = {
@@ -24,11 +24,16 @@ const ProgrammeListing = ({ items }: ProgrammeListingProps) => {
 
   return (
     <div>
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:gap-[19px]">
+      {/* The chips are centred in the space to the right of the label. */}
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:gap-[10px]">
         <p id={labelId} className={`shrink-0 font-medium ${kicker}`}>
           Sort by event type
         </p>
-        <div role="group" aria-labelledby={labelId} className="flex flex-wrap gap-[10px]">
+        <div
+          role="group"
+          aria-labelledby={labelId}
+          className="flex flex-wrap gap-x-[10px] gap-y-[11px] lg:flex-1 lg:justify-center"
+        >
           {(["all", ...eventTypes] as Filter[]).map((type) => {
             const active = filter === type;
             return (
@@ -49,7 +54,7 @@ const ProgrammeListing = ({ items }: ProgrammeListingProps) => {
       </div>
 
       {visible.length > 0 ? (
-        <ul className="mt-10 grid gap-x-[81px] gap-y-12 sm:grid-cols-2 lg:mt-[59px] lg:grid-cols-3 lg:gap-y-[54px]">
+        <ul className="mt-10 grid gap-x-[81px] gap-y-12 sm:grid-cols-2 lg:mt-[59px] lg:grid-cols-3 lg:gap-y-[50px]">
           {visible.map((item) => (
             <li key={item.slug}>
               <ProgrammeCard {...item} />

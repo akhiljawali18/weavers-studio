@@ -131,6 +131,7 @@ const config: Config = {
                     brown: "#7f665b",
                     ink: "#444444",
                     muted: "#666666",
+                    gray: "#737373",
                     soft: "#999999",
                     line: "#aaaaaa",
                     panel: "#f8f8f8",

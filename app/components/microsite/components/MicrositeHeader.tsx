@@ -6,6 +6,7 @@ import Link from "next/link";
 import { micrositeNavigation } from "../data/navigation";
 import { S2S_ASSETS } from "../data/home";
 import { useMicrositeNav } from "../hooks/useMicrositeNav";
+import { CloseIcon } from "./icons";
 import { stitchMask } from "./home/UnderlineLink";
 
 type NavLinkProps = {
@@ -55,9 +56,17 @@ const MicrositeHeader = () => {
 
   return (
     <header className="sticky top-0 z-40 bg-white shadow-[0px_5px_34px_0px_rgba(127,102,91,0.1)]">
-      <div className="mx-auto flex h-[64px] max-w-[1440px] items-center px-5 lg:px-[60px]">
+      <div className="mx-auto flex h-[57px] max-w-[1440px] items-center pl-4 pr-[14px] lg:h-[64px] lg:px-[60px]">
         <Link href="/microsite" className="shrink-0" aria-label="Sarong to Sari home">
-          <Image src={`${S2S_ASSETS}/s2s-logo.svg`} alt="" width={94.996} height={42.012} unoptimized priority />
+          <Image
+            src={`${S2S_ASSETS}/s2s-logo.svg`}
+            alt=""
+            width={94.996}
+            height={42.012}
+            unoptimized
+            priority
+            className="h-auto w-[76px] lg:w-[95px]"
+          />
         </Link>
 
         <nav
@@ -76,9 +85,14 @@ const MicrositeHeader = () => {
           onClick={() => setMenuOpen((open) => !open)}
           aria-expanded={menuOpen}
           aria-controls="microsite-menu"
-          className="ml-auto text-[15px] lowercase leading-[24.8px] text-s2s-brown lg:hidden"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          className="ml-auto flex h-[25px] w-[25px] items-center justify-center rounded-sm text-s2s-brown focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon lg:hidden"
         >
-          {menuOpen ? "close" : "menu"}
+          {menuOpen ? (
+            <CloseIcon className="h-[22px] w-[22px]" />
+          ) : (
+            <Image src={`${S2S_ASSETS}/icon-menu.svg`} alt="" width={25} height={25} unoptimized />
+          )}
         </button>
       </div>
 

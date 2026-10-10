@@ -3,6 +3,7 @@ import type { RichText as RichTextContent, RichTextTone } from "../../types";
 
 const toneClass: Record<RichTextTone, string> = {
   strong: "font-medium",
+  bold: "font-bold",
   accent: "font-Bodoni italic text-s2s-maroon",
   maroon: "text-s2s-maroon",
 };

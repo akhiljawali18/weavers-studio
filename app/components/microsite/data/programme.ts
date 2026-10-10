@@ -33,8 +33,12 @@ export type ProgrammeItem = {
   titleRegular: string;
   type: EventType;
   host: string;
+  /** The photograph on the event's own page. */
   image?: string;
   imageAlt: string;
+  /** The listing card's photograph, which the design shows as a different picture. */
+  cardImage?: string;
+  cardImageAlt: string;
   venue: string;
   date: string;
   timings: string;
@@ -46,24 +50,25 @@ export type ProgrammeItem = {
   aboutHost: RichText[];
 };
 
-// Stand-in pictures and copy until the real ones arrive; the photographs are
-// borrowed from the home page.
 export const programmeHero = {
-  image: `${S2S_ASSETS}/hero-poster.jpg`,
-  imageAlt: "An audience gathered for a talk",
+  image: `${S2S_ASSETS}/programme-hero.jpg`,
+  imageAlt: "A speaker addressing a full house on tiered seating",
 };
 
 /** The short introduction under the photograph; the page leaves it out while empty. */
 export const programmeIntro = "";
 
-// The one event written out in the design, repeated to fill the grid.
+// The one event written out in the design, repeated to fill the grid. Its two
+// photographs are the design's own stand-ins until the real ones arrive.
 const placeholder: Omit<ProgrammeItem, "slug"> = {
   titleItalic: "Batik ",
   titleRegular: "the Dutch Way",
   type: "workshop",
   host: "Sabine Bolk",
-  image: `${S2S_ASSETS}/community-1.jpg`,
-  imageAlt: "Sabine Bolk holding up a batik cloth",
+  image: `${S2S_ASSETS}/programme-event.jpg`,
+  imageAlt: "A batik painting of a woman reading",
+  cardImage: `${S2S_ASSETS}/programme-card.jpg`,
+  cardImageAlt: "Sabine Bolk holding up a batik cloth",
   venue: "Terrace, Kolkata Centre for Creativity (KCC)",
   date: "Sunday, 7 February 2027",
   timings: "11:00 AM – 5:00 PM",

@@ -58,6 +58,13 @@ export const PlusIcon = ({ className = base }: IconProps) => (
     </svg>
 );
 
+export const MinusIcon = ({ className = base }: IconProps) => (
+    <svg className={className} viewBox="0 0 20 20" fill="none" stroke="currentColor"
+         strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
+        <path d="M4.5 10h11" />
+    </svg>
+);
+
 /** Purely decorative motion, so it is hidden from assistive tech like the rest. */
 export const SpinnerIcon = ({ className = base }: IconProps) => (
     <svg className={`${className} animate-spin`} viewBox="0 0 20 20" fill="none" aria-hidden="true">

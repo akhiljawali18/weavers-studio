@@ -68,6 +68,8 @@ type CarouselProps = {
   trackClassName?: string;
   navClassName?: string;
   showNav?: boolean;
+  /** Keeps the arrows to `lg` and up; phones still swipe the row. */
+  hideNavOnMobile?: boolean;
 };
 
 /**
@@ -77,7 +79,15 @@ type CarouselProps = {
  * library: touchpads, touch screens and the keyboard all scroll it natively, and
  * the arrows only have to nudge it one card at a time.
  */
-const Carousel = ({ label, itemLabel, children, trackClassName = "", navClassName = "", showNav = true }: CarouselProps) => {
+const Carousel = ({
+  label,
+  itemLabel,
+  children,
+  trackClassName = "",
+  navClassName = "",
+  showNav = true,
+  hideNavOnMobile = false,
+}: CarouselProps) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const [canPrevious, setCanPrevious] = useState(false);
   const [canNext, setCanNext] = useState(false);
@@ -122,7 +132,7 @@ const Carousel = ({ label, itemLabel, children, trackClassName = "", navClassNam
         {children}
       </div>
       {showNav && (
-        <div className={`flex justify-center ${navClassName}`}>
+        <div className={`${hideNavOnMobile ? "hidden lg:flex" : "flex"} justify-center ${navClassName}`}>
           <div className="-translate-x-[1.5px]">
             <CarouselNav
               canPrevious={canPrevious}

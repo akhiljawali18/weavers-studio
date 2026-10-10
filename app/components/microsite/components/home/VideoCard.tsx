@@ -16,7 +16,7 @@ const VideoCard = ({ title, src, poster }: SnippetVideo) => {
   const playable = Boolean(src) && !failed;
 
   return (
-    <div className="relative aspect-[300/530] w-[260px] shrink-0 snap-start overflow-hidden md:w-[300px]">
+    <div className="relative aspect-[300/530] w-[300px] shrink-0 snap-start overflow-hidden">
       {playing && playable ? (
         <video
           className="absolute inset-0 h-full w-full object-cover"

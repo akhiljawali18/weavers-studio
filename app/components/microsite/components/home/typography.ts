@@ -12,6 +12,14 @@ export const kicker =
 export const displayTitle =
   "font-Bodoni text-[36px] font-normal leading-[46px] tracking-[-1.35px] text-s2s-maroon md:text-[45px] md:leading-[58px]";
 
+/**
+ * The display title as the home page's mobile design sets it: a 58px line, like
+ * desktop, and the tracking scaled to the 36px size. Other pages keep
+ * `displayTitle` until their own mobile designs are checked.
+ */
+export const homeDisplayTitle =
+  "font-Bodoni text-[36px] font-normal leading-[58px] tracking-[-1.08px] text-s2s-maroon md:text-[45px] md:tracking-[-1.35px]";
+
 export const bodyText = "text-[16px] leading-[28px] text-s2s-ink";
 
 /** Black spaced capitals in the medium weight: "With Sabine Bolk", "Object details". */
