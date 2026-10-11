@@ -11,14 +11,19 @@ const VoicesPage = () => (
     className="relative mx-auto w-full max-w-[1440px] px-5 pt-8 lg:px-[60px] lg:pt-[79px]"
   >
     {/* The gold paisley from the team section, turned to face into the page. */}
-    <Decoration file="deco-paisley-gold.svg" width={226} height={120} className="right-0 top-[49px] -scale-x-100" />
+    <Decoration
+      file="deco-paisley-gold.svg"
+      width={226}
+      height={120}
+      className="right-0 top-[49px] -scale-x-100"
+    />
 
     <p className={kicker}>Artists, scholars and curators</p>
     <h1 id="voices-heading" className={`-mt-[3px] ${displayTitle}`}>
       <span className="italic">from India and</span> Indonesia
     </h1>
 
-    <ul className="mt-12 grid gap-x-[26px] gap-y-14 sm:grid-cols-2 lg:mt-[81px] lg:grid-cols-3 lg:gap-y-[60px]">
+    <ul className="mt-12 grid gap-x-[26px] gap-y-[20px] sm:grid-cols-2 lg:mt-[81px] lg:grid-cols-3 lg:gap-y-[60px]">
       {voices.map((voice) => (
         <li key={voice.id}>
           <VoiceCard {...voice} />
@@ -26,7 +31,7 @@ const VoicesPage = () => (
       ))}
     </ul>
 
-    <div className="mb-[84px] mt-24 flex justify-center lg:mt-[274px]">
+    <div className="lg:mb-[84px] my-[30px] flex justify-center lg:mt-[35px]">
       <BackToTop />
     </div>
   </section>
