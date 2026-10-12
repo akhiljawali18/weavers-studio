@@ -65,5 +65,8 @@
     "tailwind-clip-path": "^1.0.0",
     "tailwind-scrollbar": "^3.0.5",
     "tailwindcss-animate": "^1.0.7"
+  },
+  "resolutions": {
+    "@types/react": "18.2.22"
   }
 }
