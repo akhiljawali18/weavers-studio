@@ -33,7 +33,13 @@ const socialLinks: {
     href: "https://www.linkedin.com/company/weavers-studio-kolkata?originalSubdomain=in",
   },
   // The link is still to come.
-  { name: "YouTube", icon: "icon-youtube.svg", width: 27, height: 23 },
+  {
+    name: "YouTube",
+    icon: "icon-youtube.svg",
+    width: 27,
+    height: 23,
+    href: "https://youtube.com/@weaversstudiokolkata?si=wBJQNQgooBBZd5B5",
+  },
 ];
 
 const MicrositeFooter = () => {
