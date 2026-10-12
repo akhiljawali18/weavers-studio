@@ -4,12 +4,13 @@ import ImageSlot from "./ImageSlot";
 import RichText from "./RichText";
 import Testimonials from "./Testimonials";
 import { communityArchive, testimonialsTitle, testimonials } from "../../data/home";
+import { sectionGap } from "./spacing";
 
 const CommunitySection = () => (
   <section
     id="community-archive"
     aria-labelledby="testimonials-heading"
-    className="relative mx-auto mt-20 w-full max-w-[1440px] scroll-mt-[64px] lg:mt-[152px]"
+    className={`relative mx-auto w-full max-w-[1440px] scroll-mt-[64px] ${sectionGap}`}
   >
     <div className="relative">
       <h2

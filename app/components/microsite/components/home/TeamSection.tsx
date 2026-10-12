@@ -3,11 +3,12 @@ import Decoration from "./Decoration";
 import ImageSlot from "./ImageSlot";
 import RichText from "./RichText";
 import { team } from "../../data/home";
+import { sectionGap } from "./spacing";
 
 const TeamSection = () => (
   <section
     aria-labelledby="team-heading"
-    className="relative mx-auto mt-20 flex w-full max-w-[1440px] flex-col lg:mt-[142px] lg:min-h-[685px] lg:flex-row"
+    className={`relative mx-auto flex w-full max-w-[1440px] flex-col lg:min-h-[685px] lg:flex-row ${sectionGap}`}
   >
     <div className="px-5 pb-8 lg:w-[23.61%] lg:shrink-0 lg:px-0 lg:pb-0 lg:pt-[268px]">
       <h2
@@ -18,19 +19,33 @@ const TeamSection = () => (
       </h2>
     </div>
 
-    <Decoration file="deco-paisley-gold.svg" width={187} height={99} className="left-0 top-[459px]" />
+    <Decoration
+      file="deco-paisley-gold.svg"
+      width={187}
+      height={99}
+      className="left-0 top-[459px]"
+    />
 
     <div className="relative min-w-0 lg:flex-1 lg:pt-[53px]">
-      <span aria-hidden className="absolute left-0 top-0 hidden h-[685px] w-px bg-s2s-line lg:block" />
-      <span aria-hidden className="absolute -left-[63px] right-0 top-[52px] hidden h-px bg-s2s-line lg:block" />
+      <span
+        aria-hidden
+        className="absolute left-0 top-0 hidden h-[685px] w-px bg-s2s-line lg:block"
+      />
+      <span
+        aria-hidden
+        className="absolute -left-[63px] right-0 top-[52px] hidden h-px bg-s2s-line lg:block"
+      />
       <Carousel
         label="The Sarong to Sari team"
         itemLabel="team member"
         showNav={false}
-        trackClassName="gap-6 scroll-pl-5 px-5 lg:scroll-pl-5 lg:pl-5 lg:pr-0"
+        trackClassName="gap-5 scroll-pl-5 px-5 lg:scroll-pl-5 lg:pl-5 lg:pr-0"
       >
         {team.map((member) => (
-          <article key={member.nameItalic + member.nameRegular} className="w-[280px] shrink-0 snap-start md:w-[327px]">
+          <article
+            key={member.nameItalic + member.nameRegular}
+            className="w-[280px] shrink-0 snap-start md:w-[327px]"
+          >
             <div className="relative aspect-[327/505] w-full">
               <ImageSlot
                 src={member.image}
@@ -44,7 +59,9 @@ const TeamSection = () => (
                   <span className="italic">{member.nameItalic}</span>
                   {member.nameRegular}
                 </h3>
-                <p className="mt-[9px] text-[14px] uppercase leading-[17px] tracking-[1.68px]">{member.role}</p>
+                <p className="mt-[9px] text-[14px] uppercase leading-[17px] tracking-[1.68px]">
+                  {member.role}
+                </p>
               </div>
             </div>
             <p className="mt-[10px] px-3 text-[14px] leading-[25px] text-s2s-ink">

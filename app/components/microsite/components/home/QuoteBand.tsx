@@ -1,6 +1,7 @@
 import Image from "next/image";
 import ImageSlot from "./ImageSlot";
 import { S2S_ASSETS, tagoreQuote } from "../../data/home";
+import { sectionGap } from "./spacing";
 
 type TurnedClusterProps = {
   /** The motif's own (upright) size; the box it sits in is that turned on its side. */
@@ -26,7 +27,7 @@ const TurnedCluster = ({ width, height, className }: TurnedClusterProps) => (
 
 /** Full-width maroon band carrying Tagore's line from 1927. */
 const QuoteBand = () => (
-  <section aria-label="From Rabindranath Tagore" className="relative mt-20 w-full bg-s2s-maroon lg:mt-[108px]">
+  <section aria-label="From Rabindranath Tagore" className={`relative w-full bg-s2s-maroon ${sectionGap}`}>
     <ImageSlot src={tagoreQuote.background} alt="" tone="none" className="absolute inset-0" />
     <figure className="relative mx-auto flex min-h-[513px] max-w-[510px] flex-col items-center justify-center px-5 py-16 text-center text-white">
       <blockquote className="max-w-[324px] font-Bodoni text-[24px] italic leading-[36px] lg:max-w-none">

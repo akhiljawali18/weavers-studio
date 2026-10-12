@@ -80,9 +80,7 @@ const ArchiveObjectPage = ({ object }: ArchiveObjectPageProps) => (
       <Decoration file="deco-paisley-round.svg" width={83} height={113} className="bottom-[83px] left-[141px] -scale-x-100" />
     </div>
 
-    <div className="mb-[84px] mt-16 flex justify-center lg:mt-20">
-      <BackToTop />
-    </div>
+    <BackToTop />
   </div>
 );
 

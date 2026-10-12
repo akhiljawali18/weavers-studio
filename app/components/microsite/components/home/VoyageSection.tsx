@@ -4,6 +4,7 @@ import RichText from "./RichText";
 import SectionHeading from "./SectionHeading";
 import { bodyText } from "./typography";
 import { hiddenOnMobile, voyageImage, voyageIntro, voyageParagraphs } from "../../data/home";
+import { sectionGap } from "./spacing";
 
 const [firstParagraph, secondParagraph] = voyageParagraphs;
 
@@ -11,7 +12,7 @@ const VoyageSection = () => (
   <section
     id="journey"
     aria-labelledby="voyage-heading"
-    className="relative mx-auto mt-[95px] w-full max-w-[1440px] scroll-mt-[64px] lg:mt-[126px]"
+    className={`relative mx-auto w-full max-w-[1440px] scroll-mt-[64px] ${sectionGap}`}
   >
     <div className="flex flex-col lg:flex-row">
       <div
@@ -45,13 +46,17 @@ const VoyageSection = () => (
     >
       {/* The ruled margin with the wave ornament at its foot. */}
       <Decoration file="deco-voyage-wave.svg" width={745} height={377} className="left-0 top-[35px]" />
-      <div className="relative min-h-[437px] pl-[92px] pr-[28px] lg:min-h-0 lg:flex-1 lg:p-0">
+      {/* The two columns split the width evenly, as in the design. Between 1200 and
+          1439px the second paragraph, which is a little longer, gets 51% so the two
+          still end on the same line there. */}
+      <div className="relative min-h-[437px] pl-[92px] pr-[28px] lg:min-h-0 lg:flex-1 lg:p-0 xl:flex-[49_1_0%] min-[1440px]:flex-1">
         <Decoration on="mobile" file="deco-voyage-wave-mobile.svg" width={408} height={437} className="-left-[34px] top-0" />
-        <p className={`relative ${bodyText}`}>
+        <p className={`relative lg:text-justify ${bodyText}`}>
           <RichText content={firstParagraph} />
         </p>
       </div>
-      <p className={`pl-[17px] pr-[28px] lg:flex-1 lg:p-0 ${bodyText}`}>
+      {/* Both paragraphs are justified on desktop, so their right edges line up. */}
+      <p className={`pl-[17px] pr-[28px] lg:flex-1 lg:p-0 lg:text-justify xl:flex-[51_1_0%] min-[1440px]:flex-1 ${bodyText}`}>
         <RichText content={secondParagraph} />
       </p>
     </div>

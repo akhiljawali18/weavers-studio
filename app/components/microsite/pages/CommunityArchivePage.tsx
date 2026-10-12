@@ -48,9 +48,7 @@ const CommunityArchivePage = () => (
       <ArchiveBrowser objects={archiveObjects} />
     </section>
 
-    <div className="mb-[84px] mt-20 flex justify-center lg:mt-[103px]">
-      <BackToTop />
-    </div>
+    <BackToTop />
   </div>
 );
 

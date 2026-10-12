@@ -140,9 +140,7 @@ const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
         </div>
       </section>
 
-      <div className="mb-[84px] mt-16 flex justify-center lg:mt-[90px]">
-        <BackToTop />
-      </div>
+      <BackToTop />
     </div>
   );
 };

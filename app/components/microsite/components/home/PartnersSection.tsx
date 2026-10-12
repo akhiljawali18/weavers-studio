@@ -3,6 +3,7 @@ import SectionHeading from "./SectionHeading";
 import { kicker } from "./typography";
 import { partners } from "../../data/home";
 import type { PartnerLogo } from "../../data/home";
+import { sectionGap } from "./spacing";
 
 /**
  * Each logo keeps the box it has in the design; the sizes live with the data.
@@ -28,7 +29,7 @@ const label = `font-medium ${kicker}`;
 const divider = "lg:before:absolute lg:before:left-0 lg:before:top-0 lg:before:w-px lg:before:bg-s2s-line";
 
 const PartnersSection = () => (
-  <section aria-labelledby="partners-heading" className="mt-20 w-full lg:mt-[91px]">
+  <section aria-labelledby="partners-heading" className={`w-full ${sectionGap}`}>
     <SectionHeading id="partners-heading" kicker="Sarong to Sari" variant="home">
       <span className="italic">Partners</span>
     </SectionHeading>

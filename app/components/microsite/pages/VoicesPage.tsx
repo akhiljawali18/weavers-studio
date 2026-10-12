@@ -31,9 +31,7 @@ const VoicesPage = () => (
       ))}
     </ul>
 
-    <div className="lg:mb-[84px] my-[30px] flex justify-center lg:mt-[35px]">
-      <BackToTop />
-    </div>
+    <BackToTop />
   </section>
 );
 

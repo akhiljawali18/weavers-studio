@@ -22,9 +22,7 @@ const HomePage = () => {
       <TeamSection />
       <PartnersSection />
       <CommunitySection />
-      <div className="mb-[84px] mt-24 flex justify-center lg:mt-[138px]">
-        <BackToTop />
-      </div>
+      <BackToTop />
     </div>
   );
 };

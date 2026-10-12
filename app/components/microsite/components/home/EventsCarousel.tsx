@@ -30,7 +30,7 @@ const EventsCarousel = ({ events }: EventsCarouselProps) => {
     <div
       aria-roledescription="carousel"
       aria-label="Programmes and events"
-      className="flex flex-col lg:min-h-[576px] lg:flex-row lg:items-start"
+      className="flex flex-col lg:flex-row lg:items-start"
     >
       {/* The two flowers and their hairlines cross the photograph's right edge, so
           they are pinned to the photograph and stay with it at any width. A

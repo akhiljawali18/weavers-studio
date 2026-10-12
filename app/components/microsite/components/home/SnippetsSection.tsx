@@ -3,12 +3,13 @@ import Decoration from "./Decoration";
 import VideoCard from "./VideoCard";
 import { homeDisplayTitle, kicker } from "./typography";
 import { hiddenOnMobile, snippetVideos } from "../../data/home";
+import { sectionGap } from "./spacing";
 
 const SnippetsSection = () => (
   <section
     id="voices"
     aria-labelledby="snippets-heading"
-    className="relative mx-auto mt-[85px] flex w-full max-w-[1440px] scroll-mt-[64px] flex-col lg:mt-[118px] lg:flex-row"
+    className={`relative mx-auto flex w-full max-w-[1440px] scroll-mt-[64px] flex-col lg:flex-row ${sectionGap}`}
   >
     <div className="mb-[44px] text-center lg:order-last lg:mb-0 lg:flex-1 lg:pr-[30px] lg:pt-[202px]">
       <h2 id="snippets-heading" className={`italic ${homeDisplayTitle}`}>

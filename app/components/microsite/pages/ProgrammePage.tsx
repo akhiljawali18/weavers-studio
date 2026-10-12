@@ -32,9 +32,7 @@ const ProgrammePage = () => (
       <ProgrammeListing items={programmeItems} />
     </section>
 
-    <div className="mb-[84px] mt-24 flex justify-center lg:mt-[105px]">
-      <BackToTop />
-    </div>
+    <BackToTop />
   </div>
 );
 
