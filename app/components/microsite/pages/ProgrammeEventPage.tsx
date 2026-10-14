@@ -1,12 +1,19 @@
+import { Fragment } from "react";
 import BackToTop from "../components/home/BackToTop";
 import Decoration from "../components/home/Decoration";
 import ImageSlot from "../components/home/ImageSlot";
 import RichText from "../components/home/RichText";
 import { bodyText, displayTitle } from "../components/home/typography";
 import TicketPicker from "../components/programme/TicketPicker";
-import type { ProgrammeItem } from "../data/programme";
+import EmailLink, { linkEmails } from "../components/EmailLink";
+import { typesWithExpert } from "../data/programme";
+import type { Paragraph, ProgrammeItem } from "../data/programme";
+import type { RichText as RichTextContent } from "../types";
 
 const rupees = new Intl.NumberFormat("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+/** A paragraph written as plain text becomes a single unstyled piece. */
+const asRichText = (paragraph: Paragraph): RichTextContent => (typeof paragraph === "string" ? [paragraph] : paragraph);
 
 /** Black spaced capitals: "With Sabine Bolk", "Event details", "About the expert". */
 const smallCaps = "text-[14px] font-medium uppercase leading-[17px] tracking-[1.68px] text-black";
@@ -26,11 +33,16 @@ type ProgrammeEventPageProps = {
  * Spacing follows the design at 1440px.
  */
 const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
-  const facts = [
-    ["Venue", item.venue],
-    ["Date", item.date],
-    ["Timings", item.timings],
-  ];
+  const showExpert = typesWithExpert.includes(item.type) && Boolean(item.aboutHost?.length);
+  // The event's own rows if it lists them (a tour's Dates, Duration, Stay...),
+  // otherwise Venue, Date and Timings, skipping any left empty.
+  const facts =
+    item.facts ??
+    [
+      { label: "Venue", value: item.venue },
+      { label: "Date", value: item.date },
+      { label: "Timings", value: item.timings },
+    ].filter((fact): fact is { label: string; value: string } => Boolean(fact.value?.trim()));
 
   return (
     <div className="overflow-x-clip">
@@ -56,30 +68,44 @@ const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
               <span className="italic">{item.titleItalic}</span>
               {item.titleRegular}
             </h1>
-            <p className={`mt-[6px] ${smallCaps}`}>With {item.host}</p>
+            {item.host && <p className={`mt-[6px] ${smallCaps}`}>With {item.host}</p>}
             {/* The design sets this chip's label a shade redder than the other maroon. */}
             <span className="mt-[23px] inline-flex h-[34px] items-center rounded-[4px] border border-s2s-maroon px-[14px] text-[14px] lowercase leading-none text-[#7c1126]">
               {item.type}
             </span>
 
-            <dl className="mt-[29px] border-b border-s2s-line">
-              {facts.map(([label, value]) => (
-                <div
-                  key={label}
-                  className="grid min-h-[49px] grid-cols-[110px_1fr] items-center gap-x-3 border-t border-s2s-line py-2 sm:grid-cols-[125px_1fr] sm:gap-x-0"
-                >
-                  <dt className="pl-[3px] text-[14px] font-medium uppercase leading-[17px] tracking-[1.68px] text-s2s-ink">
+            {/* One grid for all rows, so the label column is as wide as the longest
+                label (never under the design's 125px) and every value lines up. */}
+            <dl className="mt-[29px] grid grid-cols-[minmax(110px,max-content)_1fr] border-b border-s2s-line sm:grid-cols-[minmax(125px,max-content)_1fr]">
+              {facts.map(({ label, value }) => (
+                <Fragment key={label}>
+                  <dt className="flex min-h-[49px] max-w-[150px] items-center border-t border-s2s-line py-2 pl-[3px] pr-6 text-[14px] font-medium uppercase leading-[17px] tracking-[1.68px] text-s2s-ink sm:max-w-none">
                     {label}
                   </dt>
-                  <dd className="text-[16px] leading-[22px] text-s2s-ink">{value}</dd>
-                </div>
+                  <dd className="flex items-center border-t border-s2s-line py-2 text-[16px] leading-[22px] text-s2s-ink">
+                    {value}
+                  </dd>
+                </Fragment>
               ))}
             </dl>
 
-            <p className="mt-[18px] text-[14px] font-bold leading-[40px] tracking-[1.68px] text-s2s-maroon">
-              ₹ {rupees.format(item.price)}
-            </p>
-            <div className="mt-[16px]">
+            {item.prices ? (
+              <ul className="mt-[26px] space-y-[6px]">
+                {item.prices.map((option) => (
+                  <li key={option.note} className="text-[14px] leading-[24px] text-s2s-ink">
+                    <span className="font-bold tracking-[1.68px] text-s2s-maroon">₹ {rupees.format(option.amount)}</span>{" "}
+                    {option.note}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              item.price !== undefined && (
+                <p className="mt-[18px] text-[14px] font-bold leading-[40px] tracking-[1.68px] text-s2s-maroon">
+                  ₹ {rupees.format(item.price)}
+                </p>
+              )
+            )}
+            <div className={item.prices ? "mt-[24px]" : "mt-[16px]"}>
               <TicketPicker />
             </div>
           </div>
@@ -91,22 +117,24 @@ const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
 
       <section aria-label="About this event" className="mx-auto mt-16 max-w-[1440px] px-5 lg:mt-[78px] lg:px-[60px]">
         <div className="bg-s2s-panel px-5 pb-10 pt-8 lg:px-[88px] lg:pb-[50px] lg:pt-[45px]">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-x-6 lg:gap-y-0">
+          {/* Workshops show "About the expert" beside the details; performances and
+              talks have none, and their details take the panel's full width. */}
+          <div className={`grid gap-12 lg:gap-x-6 lg:gap-y-0 ${showExpert ? "lg:grid-cols-2" : ""}`}>
             <div>
               <PanelHeading>Event details</PanelHeading>
               <div className={`mt-[38px] space-y-7 lg:pl-[27px] ${bodyText}`}>
                 {item.details.map((paragraph, index) => (
                   <p key={index}>
-                    <RichText content={paragraph} />
+                    <RichText content={asRichText(paragraph)} />
                   </p>
                 ))}
                 {item.includes && (
                   <div>
-                    <p>{item.includes.heading}</p>
+                    <p>{linkEmails(item.includes.heading)}</p>
                     <ul>
                       {item.includes.items.map((entry) => (
                         <li key={entry} className="relative pl-6 before:absolute before:left-[9px] before:content-['•']">
-                          {entry}
+                          {linkEmails(entry)}
                         </li>
                       ))}
                     </ul>
@@ -115,23 +143,23 @@ const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
               </div>
             </div>
 
-            <div>
-              <PanelHeading>About the expert</PanelHeading>
-              <div className={`mt-[38px] space-y-7 lg:pl-[27px] ${bodyText}`}>
-                {item.aboutHost.map((paragraph, index) => (
-                  <p key={index}>
-                    <RichText content={paragraph} />
-                  </p>
-                ))}
+            {showExpert && (
+              <div>
+                <PanelHeading>About the expert</PanelHeading>
+                <div className={`mt-[38px] space-y-7 lg:pl-[27px] ${bodyText}`}>
+                  {item.aboutHost?.map((paragraph, index) => (
+                    <p key={index}>
+                      <RichText content={asRichText(paragraph)} />
+                    </p>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           <p className={`mt-12 border-t border-s2s-line pt-[22px] lg:mt-[84px] lg:pl-[27px] ${bodyText}`}>
             For further details, please email us on{" "}
-            <a href="mailto:wsrc@weaversstudio.in" className="font-bold hover:text-s2s-maroon">
-              wsrc@weaversstudio.in
-            </a>{" "}
+            <EmailLink address="wsrc@weaversstudio.in" className="font-bold hover:text-s2s-maroon" />{" "}
             or call us on{" "}
             <a href="tel:+919874314888" className="font-bold hover:text-s2s-maroon">
               +91 98743 14888.

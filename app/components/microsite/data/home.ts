@@ -17,7 +17,7 @@ export const S2S_ASSETS = "/images/sarong-to-sari";
  * `true` is hidden below `lg`; flip a flag to change what phones show.
  */
 export const hiddenOnMobile = {
-  wsrcLogo: true,
+  wsrcLogo: false,
   voyagePortrait: false,
   galleriesIntro: false,
   carouselArrows: false,

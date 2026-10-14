@@ -9,8 +9,8 @@ import type { EventType, ProgrammeItem } from "../../data/programme";
 type Filter = "all" | EventType;
 
 const chipBase =
-  "h-[34px] rounded-[4px] border border-s2s-maroon px-[15px] text-[14px] lowercase leading-none transition-colors duration-200 "
-  + "focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon focus-visible:ring-offset-2";
+  "h-[34px] rounded-[4px] border border-s2s-maroon px-[15px] text-[14px] lowercase leading-none transition-colors duration-200 " +
+  "focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon focus-visible:ring-offset-2";
 
 type ProgrammeListingProps = {
   items: ProgrammeItem[];
@@ -20,7 +20,8 @@ type ProgrammeListingProps = {
 const ProgrammeListing = ({ items }: ProgrammeListingProps) => {
   const [filter, setFilter] = useState<Filter>("all");
   const labelId = useId();
-  const visible = filter === "all" ? items : items.filter((item) => item.type === filter);
+  const visible =
+    filter === "all" ? items : items.filter((item) => item.type === filter);
 
   return (
     <div>
@@ -32,7 +33,7 @@ const ProgrammeListing = ({ items }: ProgrammeListingProps) => {
         <div
           role="group"
           aria-labelledby={labelId}
-          className="flex flex-wrap gap-x-[10px] gap-y-[11px] lg:flex-1 lg:justify-center"
+          className="flex flex-wrap gap-x-[10px] gap-y-[11px] lg:flex-1 lg:justify-start"
         >
           {(["all", ...eventTypes] as Filter[]).map((type) => {
             const active = filter === type;
@@ -43,7 +44,9 @@ const ProgrammeListing = ({ items }: ProgrammeListingProps) => {
                 onClick={() => setFilter(type)}
                 aria-pressed={active}
                 className={`${chipBase} ${
-                  active ? "bg-s2s-maroon text-white" : "bg-white text-s2s-maroon hover:bg-s2s-maroon hover:text-white"
+                  active
+                    ? "bg-s2s-maroon text-white"
+                    : "bg-white text-s2s-maroon hover:bg-s2s-maroon hover:text-white"
                 }`}
               >
                 {type}
@@ -62,7 +65,10 @@ const ProgrammeListing = ({ items }: ProgrammeListingProps) => {
           ))}
         </ul>
       ) : (
-        <p className="mt-10 text-center text-[16px] leading-[28px] text-s2s-muted lg:mt-[59px]" aria-live="polite">
+        <p
+          className="mt-10 text-center text-[16px] leading-[28px] text-s2s-muted lg:mt-[59px]"
+          aria-live="polite"
+        >
           Nothing in this category has been announced yet.
         </p>
       )}

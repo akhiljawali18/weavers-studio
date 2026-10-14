@@ -24,7 +24,8 @@ const ProgrammeCard = ({ slug, titleItalic, titleRegular, type, host, cardImage,
       {titleRegular}
     </h3>
     <p className="mt-[2px] text-[15px] leading-[25px] text-s2s-ink">
-      {eventTypeLabel[type]} • {host}
+      {eventTypeLabel[type]}
+      {host && ` • ${host}`}
     </p>
   </Link>
 );

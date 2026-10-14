@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Decoration from "./home/Decoration";
+import EmailLink from "./EmailLink";
 import { S2S_ASSETS } from "../data/home";
 
 // Weavers Studio's own pages; each opens in a new tab so the microsite stays open.
@@ -75,12 +76,7 @@ const MicrositeFooter = () => {
 
         <address className="not-italic lg:mt-[42px] lg:self-start lg:pr-5">
           <p className="text-s2s-soft">Contact Us</p>
-          <a
-            href="mailto:wsrc@weaversstudio.in"
-            className="block text-s2s-ink hover:text-s2s-maroon"
-          >
-            wsrc@weaversstudio.in
-          </a>
+          <EmailLink address="wsrc@weaversstudio.in" className="block text-s2s-ink hover:text-s2s-maroon" />
           <a
             href="tel:+919874314888"
             className="block tracking-[0.7px] text-s2s-ink hover:text-s2s-maroon"
