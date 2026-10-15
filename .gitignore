@@ -48,6 +48,9 @@ Thumbs.db
 *.exe
 *.war
 
+# Full-size original photos, kept locally only; the site uses the resized copies in public/
+/originals/
+
 # Large media files
 *.mp4
 *.tiff

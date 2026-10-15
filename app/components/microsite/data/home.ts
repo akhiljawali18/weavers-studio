@@ -249,14 +249,14 @@ export const team: TeamMember[] = [
   {
     nameItalic: "Darshan ",
     nameRegular: "Shah",
-    role: "Curator",
+    role: "Project Director",
     image: `${S2S_ASSETS}/team-1.jpg`,
     bio: [{ text: "Founder Trustee", tone: "strong" }, ", Weavers Studio Resource Centre, Kolkata, India"],
   },
   {
     nameItalic: "Dr. Maria Wronska-",
     nameRegular: "Friend",
-    role: "Curator",
+    role: "Co-curator",
     image: `${S2S_ASSETS}/team-2.jpg`,
     bio: [{ text: "Adjunct Senior Research Fellow", tone: "strong" }, ", James Cook University in Cairns"],
   },
@@ -270,7 +270,7 @@ export const team: TeamMember[] = [
   {
     nameItalic: "Peter ",
     nameRegular: "Lee",
-    role: "Mentor",
+    role: "Project Mentor",
     image: `${S2S_ASSETS}/team-4.jpg`,
     bio: [{ text: "Independent Curator", tone: "strong" }, ", founding curator of the NUS Baba House"],
   },

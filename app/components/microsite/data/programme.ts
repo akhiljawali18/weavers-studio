@@ -54,7 +54,14 @@ export type ProgrammeItem = {
   /** "Event details": one entry per paragraph. */
   details: Paragraph[];
   /** The "All registered participants will receive:" list under the details. Leave it out if the event has none. */
-  includes?: { heading: string; items: string[] };
+  includes?: {
+    /** A line just above the heading, e.g. a note about student prices. */
+    before?: Paragraph;
+    heading: string;
+    items: string[];
+    /** Lines just below the list, e.g. a note about meals, or a link to the schedule. */
+    after?: Paragraph[];
+  };
   /** "About the expert": one entry per paragraph. Workshops only; performances and talks never show it. */
   aboutHost?: Paragraph[];
 };
@@ -90,24 +97,32 @@ export const programmeItems: ProgrammeItem[] = [
     venue: " Kolkata Centre for Creativity, 777 Anandapur, E.M. Bypass Kolkata – 700107, India",
     date: " 22 January 2027 & 23 January 2027 (Friday- Saturday)",
     timings: "10:00 AM – 6:00 PM",
-    price: 1500,
+    price: 15000,
     details: [
-      [
-        "Sarong to Sari: Batik as Form, Memory and Asian Consciousness is a two-day international symposium that explores batik as a medium of cultural exchange, artistic practice, and intellectual dialogue between India and Indonesia.",
-      ],
+      "Sarong to Sari: Batik as Form, Memory and Asian Consciousness is a two-day international symposium that explores batik as a medium of cultural exchange, artistic practice, and intellectual dialogue between India and Indonesia.",
     ],
     includes: {
-      heading: "Students reach out to us with a  valid ID to avail the special price. ",
-      // sub-heading: "All registered participants will receive:",
-      items: ["Symposium kit bag (including brochures and stationery) & Participant Badge", "Lunch and tea/coffee breaks"],
+      before: "*Students reach out to us with a valid ID to avail the special price.",
+      heading: "All registered participants will receive:",
+      items: [
+        "Symposium kit bag (including brochures and stationery) & Participant Badge",
+        "Morning tea/coffee and snacks",
+        "Lunch",
+        "Evening tea/coffee and snacks",
+      ],
+      after: [
+        "(The meals provided during both days of the symposium will be vegetarian.)",
+        // When the speakers and schedule are online (a PDF in the images folder, or a
+        // page), add its address to make this a link, e.g. href: `${S2S_ASSETS}/symposium-schedule.pdf`.
+        [{ text: "Preview Speakers and Symposium Schedule", tone: "strong" }],
+      ],
     },
-    aboutHost: [],
   },
 
   // ─── Event 2 ───────────────────────────────────────────────────────────────
   {
     slug: "event-2",
-    titleItalic: "Batik ",
+    titleItalic: "Batik, ",
     titleRegular: "the Dutch Way",
     type: "workshop",
     host: "Sabine Bolk",
@@ -156,9 +171,11 @@ export const programmeItems: ProgrammeItem[] = [
     details: [
       "A two-day journey to Santiniketan for the opening of Sarong to Sari, an exhibition tracing the textile conversations between Indonesia and Bengal. The trip includes the inaugural programme at Arthshila, the exhibition opening at Nandan Museum, Visva-Bharati, and time with the artists, scholars and collectors behind it. For the first time in the last century, Nandan Museum will display objects brought from Java by Rabindranath Tagore in 1927.",
       "Santiniketan is where Indonesian batik found a second home. In the early twentieth century, Rabindranath Tagore's travels to Java and Bali brought the technique back to Kala Bhavana, where it took on a new life as Santiniketan batik. This curated trip follows that thread from Kolkata to Santiniketan over two days.",
-      // When the itinerary PDF is in the images folder, add its address to "here",
-      // e.g. { text: "here", tone: "strong", href: `${S2S_ASSETS}/itinerary-santiniketan.pdf` }.
-      ["View the two-day Itinerary ", { text: "here", tone: "strong" }],
+      // "here" opens the itinerary PDF in a new tab (its file name has a space, hence the encoding).
+      [
+        "View the two-day Itinerary ",
+        { text: "here", tone: "strong", href: `${S2S_ASSETS}/${encodeURIComponent("Santiniketan Itinerary.pdf")}` },
+      ],
       "The package covers return Vande Bharat train travel from Howrah, one night at The Creek Resorts, Santiniketan, all meals, local transport by car and toto, and all curated visits and experiences.",
     ],
   },

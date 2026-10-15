@@ -128,8 +128,14 @@ const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
                     <RichText content={asRichText(paragraph)} />
                   </p>
                 ))}
+                {/* The "receive" list, with any line just above or below it, set tight. */}
                 {item.includes && (
                   <div>
+                    {item.includes.before && (
+                      <p>
+                        <RichText content={asRichText(item.includes.before)} />
+                      </p>
+                    )}
                     <p>{linkEmails(item.includes.heading)}</p>
                     <ul>
                       {item.includes.items.map((entry) => (
@@ -138,6 +144,11 @@ const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
                         </li>
                       ))}
                     </ul>
+                    {item.includes.after?.map((line, index) => (
+                      <p key={index}>
+                        <RichText content={asRichText(line)} />
+                      </p>
+                    ))}
                   </div>
                 )}
               </div>
