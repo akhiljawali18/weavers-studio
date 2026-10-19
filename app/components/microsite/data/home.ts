@@ -37,7 +37,7 @@ export const heroIntro: RichText = [
 ];
 
 export const heroVideo: { src?: string; poster?: string } = {
-  src: `${S2S_ASSETS}/hero-video.mp4`,
+  src: `${S2S_ASSETS}/Web_banner.mp4`,
   poster: `${S2S_ASSETS}/hero-poster.jpg`,
 };
 
@@ -82,6 +82,11 @@ export const snippetVideos: SnippetVideo[] = [
   {
     title: "First thoughts with Peter Lee and Oroon Das",
     src: `${S2S_ASSETS}/snippet-4.mp4`,
+    poster: `${S2S_ASSETS}/snippet-4-poster.jpg`,
+  },
+  {
+    title: "First thoughts with Peter Lee and Oroon Das",
+    src: `${S2S_ASSETS}/snippet-5.mp4`,
     poster: `${S2S_ASSETS}/snippet-4-poster.jpg`,
   },
 ];
