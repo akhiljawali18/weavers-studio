@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Decoration from "./home/Decoration";
 import EmailLink from "./EmailLink";
 import { S2S_ASSETS } from "../data/home";
 
@@ -48,11 +47,11 @@ const MicrositeFooter = () => {
 
   return (
     <footer className="border-t border-[#eeeeee] bg-s2s-paper">
-      {/* On desktop the right-hand 320px is kept for the batik decoration (286px) and
-          a gap, so the icons never run into it. At 1440 the columns sit where the
-          design has them; on narrower screens the three text columns shrink and wrap
-          (the contact column no narrower than its email address) instead. */}
-      <div className="relative mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-10 text-[14px] leading-[25px] lg:grid lg:min-h-[150px] lg:grid-cols-[minmax(0,247fr)_minmax(0,313fr)_minmax(175px,335fr)_auto] lg:items-center lg:gap-0 lg:pb-6 lg:pl-[60px] lg:pr-[320px] lg:pt-0">
+      {/* A five-column grid on desktop: logo, the two text columns, the social icons,
+          then the batik decoration as its own track at the right (286px, with a 34px
+          gap before it from its left margin). At 1440 the columns sit where the design
+          has them; on narrower screens the footer stacks and the batik is hidden. */}
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-8 md:px-5 pl-5 pr-0 py-10 text-[14px] leading-[25px] lg:grid lg:min-h-[150px] lg:grid-cols-[minmax(0,247fr)_minmax(0,313fr)_minmax(175px,335fr)_auto_auto] lg:items-center lg:gap-0 lg:pb-6 lg:pl-[60px] lg:pr-0 lg:pt-0">
         {/* The logo and the two text columns hang 42px from the footer's top edge;
             only the social icons sit on its centre line. */}
         <Image
@@ -76,7 +75,10 @@ const MicrositeFooter = () => {
 
         <address className="not-italic lg:mt-[42px] lg:self-start lg:pr-5">
           <p className="text-s2s-soft">Contact Us</p>
-          <EmailLink address="wsrc@weaversstudio.in" className="block text-s2s-ink hover:text-s2s-maroon" />
+          <EmailLink
+            address="wsrc@weaversstudio.in"
+            className="block text-s2s-ink hover:text-s2s-maroon"
+          />
           <a
             href="tel:+919874314888"
             className="block tracking-[0.7px] text-s2s-ink hover:text-s2s-maroon"
@@ -118,12 +120,17 @@ const MicrositeFooter = () => {
           ))}
         </ul>
 
-        {/* The JPEG has a white ground; multiplying it onto the footer's grey removes the box. */}
-        <Decoration
-          file="footer-batik.jpg"
+        {/* The batik's own grid cell at the far right, flush to the footer's bottom-right
+            corner. The JPEG has a white ground; multiplying it onto the footer's grey
+            removes the box. Hidden on mobile, as in the design. */}
+        <Image
+          src={`${S2S_ASSETS}/footer-batik.jpg`}
+          alt=""
+          aria-hidden
           width={286}
           height={123}
-          className="bottom-0 right-0 mix-blend-multiply"
+          unoptimized
+          className="w-full mix-blend-multiply lg:col-start-5 lg:-mb-6 lg:ml-[34px] lg:block lg:self-end"
         />
       </div>
     </footer>
