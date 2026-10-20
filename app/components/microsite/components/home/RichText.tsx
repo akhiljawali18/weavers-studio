@@ -7,6 +7,7 @@ const toneClass: Record<RichTextTone, string> = {
   bold: "font-bold",
   accent: "font-Bodoni italic text-s2s-maroon",
   maroon: "text-s2s-maroon",
+  italic: "italic",
 };
 
 type RichTextProps = {

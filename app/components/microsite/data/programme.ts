@@ -93,8 +93,12 @@ export const programmeItems: ProgrammeItem[] = [
     titleRegular: "Symposium",
     type: "talk",
     host: "",
-    ...standInPhotos,
-    venue: " Kolkata Centre for Creativity, 777 Anandapur, E.M. Bypass Kolkata – 700107, India",
+    image: `${S2S_ASSETS}/Symposium.jpg`,
+    imageAlt: "Sarong to Sari: Symposium",
+    cardImage: `${S2S_ASSETS}/Symposium.jpg`,
+    cardImageAlt: "Sarong to Sari: Symposium",
+    venue:
+      " Kolkata Centre for Creativity, 777 Anandapur, E.M. Bypass Kolkata – 700107, India",
     date: " 22 January 2027 & 23 January 2027 (Friday- Saturday)",
     timings: "10:00 AM – 6:00 PM",
     price: 15000,
@@ -102,7 +106,12 @@ export const programmeItems: ProgrammeItem[] = [
       "Sarong to Sari: Batik as Form, Memory and Asian Consciousness is a two-day international symposium that explores batik as a medium of cultural exchange, artistic practice, and intellectual dialogue between India and Indonesia.",
     ],
     includes: {
-      before: "*Students reach out to us with a valid ID to avail the special price.",
+      before: [
+        {
+          text: "*Students reach out to us with a valid ID to avail the special price.",
+          tone: "strong",
+        },
+      ],
       heading: "All registered participants will receive:",
       items: [
         "Symposium kit bag (including brochures and stationery) & Participant Badge",
@@ -112,9 +121,13 @@ export const programmeItems: ProgrammeItem[] = [
       ],
       after: [
         "(The meals provided during both days of the symposium will be vegetarian.)",
-        // When the speakers and schedule are online (a PDF in the images folder, or a
-        // page), add its address to make this a link, e.g. href: `${S2S_ASSETS}/symposium-schedule.pdf`.
-        [{ text: "Preview Speakers and Symposium Schedule", tone: "strong" }],
+        [
+          {
+            text: "Preview Speakers and Symposium Schedule",
+            tone: "strong",
+            href: `${S2S_ASSETS}/symposium.pdf`,
+          },
+        ],
       ],
     },
   },
@@ -136,9 +149,24 @@ export const programmeItems: ProgrammeItem[] = [
     price: 2000,
     details: [
       [
-        "A one-day workshop with Dutch artist and batik researcher ",
+        "A ",
+        {
+          text: "one-day workshop",
+          tone: "italic",
+        },
+        " with Dutch artist and batik researcher ",
         { text: "Sabine Bolk", tone: "strong" },
-        ", tracing the European hand in batik's history: colonial trade routes, motifs borrowed and reworked, and the practice of designer Bertha Bake. Participants work batik directly on textile, learning the wax-resist technique while considering how a craft rooted in Java came to absorb patterns like the Dutch tea cosy. The day moves between history and hands-on making, and each participant leaves with a piece of cloth they've batiked themselves.",
+        ", tracing the European hand in batik's history: colonial trade routes, motifs borrowed and reworked, and the practice of designer Bertha Bake. Participants work batik directly on textile, learning the wax-resist technique while considering how a craft rooted in Java came to absorb ",
+        {
+          text: "patterns like the Dutch tea cosy",
+          tone: "italic",
+        },
+        ". The day moves between ",
+        {
+          text: "history and hands-on making",
+          tone: "italic",
+        },
+        ", and each participant leaves with a piece of cloth they've batiked themselves.",
       ],
     ],
     includes: {
@@ -172,12 +200,26 @@ export const programmeItems: ProgrammeItem[] = [
       },
     ],
     details: [
-      "A two-day journey to Santiniketan for the opening of Sarong to Sari, an exhibition tracing the textile conversations between Indonesia and Bengal. The trip includes the inaugural programme at Arthshila, the exhibition opening at Nandan Museum, Visva-Bharati, and time with the artists, scholars and collectors behind it. For the first time in the last century, Nandan Museum will display objects brought from Java by Rabindranath Tagore in 1927.",
-      "Santiniketan is where Indonesian batik found a second home. In the early twentieth century, Rabindranath Tagore's travels to Java and Bali brought the technique back to Kala Bhavana, where it took on a new life as Santiniketan batik. This curated trip follows that thread from Kolkata to Santiniketan over two days.",
+      [
+        "A ",
+        { text: "two-day", tone: "italic" },
+        " journey to Santiniketan for the opening of Sarong to Sari, an exhibition tracing the textile conversations between Indonesia and Bengal. The trip includes the inaugural programme at Arthshila, the exhibition opening at Nandan Museum, Visva-Bharati, and time with the artists, scholars and collectors behind it. For the first time in the last century, Nandan Museum will display objects brought from Java by Rabindranath Tagore in 1927.",
+      ],
+      [
+        {
+          text: "Santiniketan is where Indonesian batik found a second home.",
+          tone: "italic",
+        },
+        " In the early twentieth century, Rabindranath Tagore's travels to Java and Bali brought the technique back to Kala Bhavana, where it took on a new life as Santiniketan batik. This curated trip follows that thread from Kolkata to Santiniketan over two days.",
+      ],
       // "here" opens the itinerary PDF in a new tab (its file name has a space, hence the encoding).
       [
         "View the two-day Itinerary ",
-        { text: "here", tone: "strong", href: `${S2S_ASSETS}/${encodeURIComponent("Santiniketan Itinerary.pdf")}` },
+        {
+          text: "here",
+          tone: "strong",
+          href: `${S2S_ASSETS}/${encodeURIComponent("Santiniketan Itinerary.pdf")}`,
+        },
       ],
       "The package covers return Vande Bharat train travel from Howrah, one night at The Creek Resorts, Santiniketan, all meals, local transport by car and toto, and all curated visits and experiences.",
     ],
@@ -200,7 +242,29 @@ export const programmeItems: ProgrammeItem[] = [
     price: 5000,
     tickets: 25,
     details: [
-      "A four-day hands-on workshop with batik artist Kartik Manna, exploring the fundamentals of contemporary batik. Participants will work through the process from developing original designs and making khakha to waxing, layering colours, de-waxing and revealing the final design. The workshop will introduce traditional batik techniques while encouraging experimentation with contemporary motifs and photographic references. Participants will also learn basic colour theory and ways of presenting finished batik work.",
+      [
+        "A ",
+        {
+          text: "four-day",
+          tone: "italic",
+        },
+        " four-day hands-on workshop with batik artist Kartik Manna, exploring the ",
+        {
+          text: "fundamentals of contemporary batik",
+          tone: "italic",
+        },
+        ". Participants will work through the process from ",
+        {
+          text: "developing original designs",
+          tone: "italic",
+        },
+        " and making khakha to waxing, layering colours, de-waxing and revealing the final design. The workshop will introduce traditional batik techniques while ",
+        {
+          text: "encouraging experimentation",
+          tone: "italic",
+        },
+        " with contemporary motifs and photographic references. Participants will also learn basic colour theory and ways of presenting finished batik work.",
+      ],
     ],
     includes: {
       heading: "All registered participants will receive:",
@@ -228,7 +292,29 @@ export const programmeItems: ProgrammeItem[] = [
     price: 5000,
     tickets: 25,
     details: [
-      "A four-day batik workshop with artist and educator Krishnendu Bag, designed for those interested in batik but without formal training in it. Working only with natural dyes, this workshop will provide a hands-on approach, allowing participants to directly experience the preparation of natural dye, the creation of batik designs, and the application and removal of wax. The workshop will also cover the finer techniques and considerations involved in batik-making, reflecting its position as a demanding yet rewarding craft shaped by both tradition and individual expression.",
+      [
+        "A ",
+        {
+          text: "four-day",
+          tone: "italic",
+        },
+        " batik workshop with artist and educator Krishnendu Bag, designed for those interested in batik but without formal training in it. Working only with natural dyes, this workshop will provide a ",
+        {
+          text: "hands-on approach",
+          tone: "italic",
+        },
+        ", allowing participants to directly experience the ",
+        {
+          text: "preparation of natural dye",
+          tone: "italic",
+        },
+        ", the creation of batik designs, and the application and removal of wax. The workshop will also cover the ",
+        {
+          text: "finer techniques",
+          tone: "italic",
+        },
+        " and considerations involved in batik-making, reflecting its position as a demanding yet rewarding craft shaped by both tradition and individual expression.",
+      ],
     ],
     includes: {
       heading: "All registered participants will receive:",
@@ -255,8 +341,27 @@ export const programmeItems: ProgrammeItem[] = [
     timings: "11:00 AM – 5:00 PM",
     price: 3500,
     details: [
-      "A two-day workshop with artist and designer Sudhiranjan Mukherjee, introducing participants to the traditions of Bengal and Santiniketan Alpona. The workshop will open with a talk on Brata Alpana of Bengal and the history and concept of Santiniketan Alpana, followed by a demonstration. Participants will learn the principles of layout and composition, developing their own designs on paper before translating them into Alpona.",
-      "The second day will look at the relationship between Java Batik and Santiniketan Alpona, including its influence on Santiniketan Batik. Participants will complete their Alpona works and have an opportunity to discuss their work and ask questions.",
+      [
+        "A ",
+        {
+          text: "two-day",
+          tone: "italic",
+        },
+        " workshop with artist and designer Sudhiranjan Mukherjee, introducing participants to the traditions of ",
+        {
+          text: "Bengal and Santiniketan Alpona",
+          tone: "italic",
+        },
+        ". The workshop will open with a talk on Brata Alpana of Bengal and the history and concept of Santiniketan Alpana, followed by a demonstration. Participants will learn the principles of layout and composition, developing their own designs on paper before translating them into Alpona.",
+      ],
+      [
+        "The second day will look at the ",
+        {
+          text: "relationship between Java Batik and Santiniketan Alpona",
+          tone: "italic",
+        },
+        ", including its influence on Santiniketan Batik. Participants will complete their Alpona works and have an opportunity to discuss their work and ask questions.",
+      ],
     ],
     includes: {
       heading: "All registered participants will receive:",
@@ -283,7 +388,16 @@ export const programmeItems: ProgrammeItem[] = [
     timings: "11:00 AM – 5:00 PM (Includes lunch and tea breaks)",
     price: 3500,
     // The full description is still to come; until then only this line shows.
-    details: ["A two-day workshop."],
+    details: [
+      [
+        "A ",
+        {
+          text: "two-day",
+          tone: "italic",
+        },
+        " workshop.",
+      ],
+    ],
     includes: {
       heading: "All registered participants will receive:",
       items: ["Workshop materials", "Lunch and tea/coffee"],
@@ -294,4 +408,5 @@ export const programmeItems: ProgrammeItem[] = [
   },
 ];
 
-export const findProgrammeItem = (slug: string) => programmeItems.find((item) => item.slug === slug);
+export const findProgrammeItem = (slug: string) =>
+  programmeItems.find((item) => item.slug === slug);
