@@ -23,7 +23,7 @@ const TeamSection = () => (
       file="deco-paisley-gold.svg"
       width={187}
       height={99}
-      className="left-0 top-[459px]"
+      className="left-0 top-[459px] lg:block hidden"
     />
 
     <div className="relative min-w-0 lg:flex-1 lg:pt-[53px]">

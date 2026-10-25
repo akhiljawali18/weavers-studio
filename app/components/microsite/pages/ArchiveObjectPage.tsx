@@ -1,7 +1,11 @@
 import BackToTop from "../components/home/BackToTop";
 import Decoration from "../components/home/Decoration";
 import RichText from "../components/home/RichText";
-import { bodyText, displayTitle, labelCaps } from "../components/home/typography";
+import {
+  bodyText,
+  displayTitle,
+  labelCaps,
+} from "../components/home/typography";
 import ObjectGallery from "../components/community/ObjectGallery";
 import type { ArchiveObject } from "../data/community";
 
@@ -16,15 +20,28 @@ type ArchiveObjectPageProps = {
  */
 const ArchiveObjectPage = ({ object }: ArchiveObjectPageProps) => (
   <div className="overflow-x-clip">
-    <div className="relative mx-auto flex max-w-[1440px] flex-col gap-10 px-5 pt-10 lg:flex-row lg:items-start lg:gap-0 lg:px-0 lg:pt-[76px]">
+    <div className="relative mx-auto flex max-w-[1440px] flex-col gap-10  pt-10 lg:flex-row lg:items-start lg:gap-0 lg:pt-[76px]">
       {/* Gold paisley at the page's top-right edge; the JPEG's white ground is multiplied away. */}
-      <Decoration file="com-decor-2.jpg" width={101} height={161} className="right-0 top-[71px] mix-blend-multiply" />
+      <Decoration
+        file="com-decor-2.jpg"
+        width={101}
+        height={161}
+        className="right-0 top-[71px] mix-blend-multiply"
+      />
 
-      <div className="w-full sm:max-w-[560px] lg:ml-[4.17%] lg:w-[38.89%] lg:shrink-0">
+      <div className="relative w-full sm:max-w-[560px] lg:ml-[4.17%] lg:w-[38.89%] lg:shrink-0">
         <ObjectGallery images={object.images} alt={object.imageAlt} />
+        {/* On phones the gold paisley rests on the photograph's top-right corner, as the mobile design draws it. */}
+        <Decoration
+          on="mobile"
+          file="com-decor-2.jpg"
+          width={78}
+          height={124}
+          className="-right-1 top-9 mix-blend-multiply"
+        />
       </div>
 
-      <div className="lg:ml-[11.39%] lg:w-[41.39%] lg:pt-32">
+      <div className="lg:ml-[11.39%] lg:w-[41.39%] lg:pt-32 px-5 lg:px-0">
         <h1 className={displayTitle}>
           <span className="italic">{object.titleItalic}</span>
           {object.titleRegular}
@@ -48,20 +65,36 @@ const ArchiveObjectPage = ({ object }: ArchiveObjectPageProps) => (
               <dt className="max-w-[140px] pl-1 text-[14px] font-medium uppercase leading-[24px] tracking-[1.68px] text-s2s-ink">
                 {fact.label}
               </dt>
-              <dd className="text-[16px] leading-[28px] text-s2s-ink">{fact.value}</dd>
+              <dd className="text-[16px] leading-[28px] text-s2s-ink">
+                {fact.value}
+              </dd>
             </div>
           ))}
         </dl>
       </div>
     </div>
 
-    <div className="relative mx-auto mt-12 max-w-[1440px] px-5 lg:mt-[43px] lg:px-[60px]">
-      <section aria-labelledby="object-details-heading" className="bg-s2s-panel px-5 pb-12 pt-8 lg:px-[88px] lg:pb-[66px] lg:pt-[42px]">
-        <h2 id="object-details-heading" className={`border-b border-s2s-line pb-[14px] lg:pl-[21px] ${labelCaps}`}>
+    <div className="relative mx-auto mt-12 max-w-[1440px] lg:mt-[43px] lg:px-[60px]">
+      <section
+        aria-labelledby="object-details-heading"
+        className="bg-s2s-panel px-5 pb-12 pt-8 lg:px-[88px] lg:pb-[66px] lg:pt-[42px]"
+      >
+        <h2
+          id="object-details-heading"
+          className={`border-b border-s2s-line pb-[14px] lg:pl-[21px] ${labelCaps}`}
+        >
           Object details
         </h2>
-        <div className="mt-[38px] flex flex-col gap-8 lg:flex-row lg:gap-[107px] lg:pl-[27px]">
-          <p className="font-Bodoni text-[21px] italic leading-[36px] text-s2s-ink lg:w-[338px] lg:shrink-0">
+        <div className="relative mt-[38px] flex flex-col gap-8 lg:flex-row lg:gap-[107px] lg:pl-[27px]">
+          {/* On phones the round paisley sits in the gutter the summary's indent leaves to its left. */}
+          <Decoration
+            on="mobile"
+            file="decorCommu-1.svg"
+            width={92}
+            height={209}
+            className="-left-[5px] -top-[8px] max-w-none"
+          />
+          <p className="pl-[92px] font-Bodoni text-[21px] italic leading-[36px] text-s2s-ink sm:pl-0 lg:w-[338px] lg:shrink-0">
             <RichText content={object.summary} />
           </p>
           <div className={`space-y-7 lg:w-[666px] ${bodyText}`}>
@@ -76,8 +109,18 @@ const ArchiveObjectPage = ({ object }: ArchiveObjectPageProps) => (
 
       {/* The ruled corner with the batik square at the panel's lower left, and the
           round paisley (the home page's, mirrored) sitting in it. */}
-      <Decoration file="com-decor-1.jpg" width={329} height={369} className="bottom-[-85px] left-[-1px] mix-blend-multiply" />
-      <Decoration file="deco-paisley-round.svg" width={83} height={113} className="bottom-[83px] left-[141px] -scale-x-100" />
+      <Decoration
+        file="com-decor-1.jpg"
+        width={329}
+        height={369}
+        className="bottom-[-85px] left-[-1px] mix-blend-multiply"
+      />
+      <Decoration
+        file="deco-paisley-round.svg"
+        width={83}
+        height={113}
+        className="bottom-[83px] left-[141px] -scale-x-100"
+      />
     </div>
 
     <BackToTop />

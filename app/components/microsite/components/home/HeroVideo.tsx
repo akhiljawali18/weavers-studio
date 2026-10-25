@@ -6,7 +6,10 @@ import ImageSlot from "./ImageSlot";
 import { S2S_ASSETS } from "../../data/home";
 
 type HeroVideoProps = {
+  /** The landscape film shown from `lg` up. */
   src?: string;
+  /** The portrait film the mobile design uses below `lg`; falls back to `src`. */
+  mobileSrc?: string;
   poster?: string;
 };
 
@@ -28,17 +31,28 @@ const videoIsWelcome = () => {
  * fades in over the still once it is running, and pauses whenever it is scrolled
  * out of view. The speaker in the corner turns the sound on.
  */
-const HeroVideo = ({ src, poster }: HeroVideoProps) => {
+const HeroVideo = ({ src, mobileSrc, poster }: HeroVideoProps) => {
   const frameRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [load, setLoad] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
+  // The portrait film on phones, the landscape one from `lg`; kept in sync if the
+  // viewport crosses the breakpoint.
+  const [activeSrc, setActiveSrc] = useState(src);
+
+  useEffect(() => {
+    const wide = window.matchMedia("(min-width: 1024px)");
+    const pick = () => setActiveSrc(wide.matches ? src : mobileSrc ?? src);
+    pick();
+    wide.addEventListener("change", pick);
+    return () => wide.removeEventListener("change", pick);
+  }, [src, mobileSrc]);
 
   // Decide when to fetch the film: after the window's load event, once the hero is visible.
   useEffect(() => {
     const frame = frameRef.current;
-    if (!src || !frame || !videoIsWelcome()) {
+    if (!activeSrc || !frame || !videoIsWelcome()) {
       return;
     }
 
@@ -65,7 +79,7 @@ const HeroVideo = ({ src, poster }: HeroVideoProps) => {
       window.removeEventListener("load", watch);
       observer?.disconnect();
     };
-  }, [src]);
+  }, [activeSrc]);
 
   // Once loaded, play only while on screen.
   useEffect(() => {
@@ -105,13 +119,13 @@ const HeroVideo = ({ src, poster }: HeroVideoProps) => {
         sizes="(min-width: 1440px) 1296px, (min-width: 992px) 100vw, 317px"
         priority
       />
-      {load && src && (
+      {load && activeSrc && (
         <video
           ref={videoRef}
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
             playing ? "opacity-100" : "opacity-0"
           }`}
-          src={src}
+          src={activeSrc}
           muted
           loop
           playsInline

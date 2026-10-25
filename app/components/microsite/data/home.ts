@@ -36,10 +36,12 @@ export const heroIntro: RichText = [
   { text: "Rabindranath Tagore's 1927 voyage.", tone: "accent" },
 ];
 
-export const heroVideo: { src?: string; poster?: string } = {
-  src: `${S2S_ASSETS}/Web_banner.mp4`,
-  poster: `${S2S_ASSETS}/hero-poster.jpg`,
-};
+export const heroVideo: { src?: string; mobileSrc?: string; poster?: string } =
+  {
+    src: `${S2S_ASSETS}/Web_banner.mp4`,
+    mobileSrc: `${S2S_ASSETS}/landingMobileVideo.mp4`,
+    poster: `${S2S_ASSETS}/hero-poster.jpg`,
+  };
 
 // "\n" marks where the mobile design breaks a line; on desktop the text runs on.
 export const exhibitionVenues = [
@@ -70,24 +72,24 @@ export const snippetVideos: SnippetVideo[] = [
     poster: `${S2S_ASSETS}/snippet-1-poster.jpg`,
   },
   {
-    title: "Behind the scenes: Santiniketan",
-    src: `${S2S_ASSETS}/snippet-2.mp4`,
-    poster: `${S2S_ASSETS}/snippet-2-poster.jpg`,
-  },
-  {
     title: "First thoughts with Darshan Shah",
     src: `${S2S_ASSETS}/snippet-3.mp4`,
-    poster: `${S2S_ASSETS}/snippet-3-poster.jpg`,
+    poster: `${S2S_ASSETS}/snippet-1-poster.jpg`,
   },
   {
     title: "First thoughts with Peter Lee and Oroon Das",
     src: `${S2S_ASSETS}/snippet-4.mp4`,
+    poster: `${S2S_ASSETS}/snippet-1-poster.jpg`,
+  },
+  {
+    title: "Behind the scenes: Santiniketan",
+    src: `${S2S_ASSETS}/snippet-2.mp4`,
     poster: `${S2S_ASSETS}/snippet-4-poster.jpg`,
   },
   {
     title: "First thoughts with Peter Lee and Oroon Das",
     src: `${S2S_ASSETS}/snippet-5.mp4`,
-    poster: `${S2S_ASSETS}/snippet-4-poster.jpg`,
+    poster: `${S2S_ASSETS}/snippet-1-poster.jpg`,
   },
 ];
 
@@ -115,7 +117,10 @@ export const voyageParagraphs: RichText[] = [
     ' was founded on the idea of a place "',
     { text: "where the world makes a home in a single nest", tone: "accent" },
     '", and he was especially drawn to building a pan-Asian alliance through living cultural traditions. In his lifetime, ',
-    { text: "Santiniketan welcomed artists from Indonesia, Japan, Burma and China.", tone: "strong" },
+    {
+      text: "Santiniketan welcomed artists from Indonesia, Japan, Burma and China.",
+      tone: "strong",
+    },
   ],
   [
     { text: "Sarong to Sari", tone: "strong" },
@@ -199,8 +204,15 @@ export const programmeEvents: ProgrammeEvent[] = [
       ["followed by a cultural presentation."],
       ["Kolkata Centre for Creativity (KCC), Kolkata"],
       [],
-      ["Opening & Book Launch on ", { text: "Thursday, 21 January, 2027", tone: "strong" }],
-      ["Exhibition continues till ", { text: "31 March 2027", tone: "strong" }, " in Kolkata"],
+      [
+        "Opening & Book Launch on ",
+        { text: "Thursday, 21 January, 2027", tone: "strong" },
+      ],
+      [
+        "Exhibition continues till ",
+        { text: "31 March 2027", tone: "strong" },
+        " in Kolkata",
+      ],
     ],
     link: { label: "view events", href: "/microsite/programme" },
     image: `${S2S_ASSETS}/exi-1.jpg`,
@@ -211,10 +223,20 @@ export const programmeEvents: ProgrammeEvent[] = [
     titleItalic: "Exhibition travels to",
     titleRegular: "Santiniketan",
     lines: [
-      [{ text: "Saturday, 24 January to Sunday, 4 April 2027", tone: "strong" }],
+      [
+        {
+          text: "Saturday, 24 January to Sunday, 4 April 2027",
+          tone: "strong",
+        },
+      ],
       ["at Arthshila, Santiniketan, India."],
       [],
-      [{ text: "Monday, 25 January to Friday, 26 February 2027", tone: "strong" }],
+      [
+        {
+          text: "Monday, 25 January to Friday, 26 February 2027",
+          tone: "strong",
+        },
+      ],
       ["at Nandan Museum, Visva-Bharati, Santiniketan, India."],
     ],
     link: { label: "view events", href: "/microsite/programme" },
@@ -256,78 +278,218 @@ export const team: TeamMember[] = [
     nameRegular: "Shah",
     role: "Project Director",
     image: `${S2S_ASSETS}/team-1.jpg`,
-    bio: [{ text: "Founder Trustee", tone: "strong" }, ", Weavers Studio Resource Centre, Kolkata, India"],
+    bio: [
+      { text: "Founder Trustee", tone: "strong" },
+      ", Weavers Studio Resource Centre, Kolkata, India",
+    ],
   },
   {
     nameItalic: "Dr. Maria Wronska-",
     nameRegular: "Friend",
     role: "Co-curator",
     image: `${S2S_ASSETS}/team-2.jpg`,
-    bio: [{ text: "Adjunct Senior Research Fellow", tone: "strong" }, ", James Cook University in Cairns"],
+    bio: [
+      { text: "Adjunct Senior Research Fellow", tone: "strong" },
+      ", James Cook University in Cairns",
+    ],
   },
   {
     nameItalic: "Sushobhan ",
     nameRegular: "Adhikary",
     role: "Co-curator",
     image: `${S2S_ASSETS}/team-3.jpg`,
-    bio: [{ text: "Artist, Art historian", tone: "strong" }, ", former curator of Kala Bhavana Museum"],
+    bio: [
+      { text: "Artist, Art historian", tone: "strong" },
+      ", former curator of Kala Bhavana Museum",
+    ],
   },
   {
     nameItalic: "Peter ",
     nameRegular: "Lee",
     role: "Project Mentor",
     image: `${S2S_ASSETS}/team-4.jpg`,
-    bio: [{ text: "Independent Curator", tone: "strong" }, ", founding curator of the NUS Baba House"],
+    bio: [
+      { text: "Independent Curator", tone: "strong" },
+      ", founding curator of the NUS Baba House",
+    ],
   },
   {
     nameItalic: "Oroon ",
     nameRegular: "Das",
     role: "Exhibition designer",
     image: `${S2S_ASSETS}/voice-5.jpg`,
-    bio: [{ text: "Multidisciplinary artist, performer, scenographer, and designer", tone: "strong" }],
+    bio: [
+      {
+        text: "Multidisciplinary artist, performer, scenographer, and designer",
+        tone: "strong",
+      },
+    ],
   },
   {
     nameItalic: "Subham ",
     nameRegular: "China",
     role: "Co-curator",
     image: `${S2S_ASSETS}/team-6.jpg`,
-    bio: [{ text: "PhD at the Department of International Relations", tone: "strong" }, ", Jadavpur University, Kolkata"],
+    bio: [
+      {
+        text: "PhD at the Department of International Relations",
+        tone: "strong",
+      },
+      ", Jadavpur University, Kolkata",
+    ],
   },
   {
     nameItalic: "Kavita N. ",
     nameRegular: "Patel",
     role: "Assistant project director",
     image: `${S2S_ASSETS}/team-7.jpg`,
-    bio: [{ text: "Assistant Project Director", tone: "strong" }, ", Weavers Studio Resource Centre"],
+    bio: [
+      { text: "Assistant Project Director", tone: "strong" },
+      ", Weavers Studio Resource Centre",
+    ],
   },
 ];
 
 export type PartnerLogo = {
   name: string;
+  /** The logo's box on desktop. */
   width: number;
   height: number;
+  /** Its (smaller) box in the mobile design. */
+  mWidth: number;
+  mHeight: number;
   src?: string;
 };
 
 export const partners = {
-  presentedBy: { name: "Weavers Studio Resource Centre", src: `${S2S_ASSETS}/partner-wsrc.jpg`, width: 207, height: 114 },
-  presentingPartner: { name: "Garden Vareli", src: `${S2S_ASSETS}/partner-garden-vareli.jpg`, width: 161, height: 85 },
+  presentedBy: {
+    name: "Weavers Studio Resource Centre",
+    src: `${S2S_ASSETS}/partner-wsrc.jpg`,
+    width: 207,
+    height: 114,
+    mWidth: 143,
+    mHeight: 79,
+  },
+  presentingPartner: {
+    name: "Garden Vareli",
+    src: `${S2S_ASSETS}/partner-garden-vareli.jpg`,
+    width: 161,
+    height: 85,
+    mWidth: 102,
+    mHeight: 54,
+  },
   // Two rows: Emami on its own, the other three beneath it.
   supportedBy: [
-    [{ name: "Emami Foundation", src: `${S2S_ASSETS}/EmamiFoundation.jpg`, width: 282, height: 28 }],
     [
-      { name: "MPJ Jewellers", src: `${S2S_ASSETS}/mpj.jpg`, width: 83, height: 84 },
-      { name: "Sar-La Education Trust", src: `${S2S_ASSETS}/sar-la.jpg`, width: 83, height: 84 },
-      { name: "LGT Wealth India", src: `${S2S_ASSETS}/lgt.jpg`, width: 163, height: 84 },
+      {
+        name: "Emami Foundation",
+        src: `${S2S_ASSETS}/EmamiFoundation.jpg`,
+        width: 282,
+        height: 28,
+        mWidth: 242,
+        mHeight: 24,
+      },
+    ],
+    [
+      {
+        name: "MPJ Jewellers",
+        src: `${S2S_ASSETS}/mpj.jpg`,
+        width: 83,
+        height: 84,
+        mWidth: 60,
+        mHeight: 60,
+      },
+      {
+        name: "Sar-La Education Trust",
+        src: `${S2S_ASSETS}/sar-la.jpg`,
+        width: 83,
+        height: 84,
+        mWidth: 60,
+        mHeight: 60,
+      },
+      {
+        name: "LGT Wealth India",
+        src: `${S2S_ASSETS}/lgt.jpg`,
+        width: 163,
+        height: 84,
+        mWidth: 117,
+        mHeight: 60,
+      },
+    ],
+  ],
+  supportedByMobile: [
+    [
+      {
+        name: "Emami Foundation",
+        src: `${S2S_ASSETS}/EmamiFoundation.jpg`,
+        width: 282,
+        height: 28,
+        mWidth: 242,
+        mHeight: 24,
+      },
+    ],
+    [
+      {
+        name: "MPJ Jewellers",
+        src: `${S2S_ASSETS}/mpj.jpg`,
+        width: 100,
+        height: 101,
+        mWidth: 80,
+        mHeight: 80,
+      },
+      {
+        name: "Sar-La Education Trust",
+        src: `${S2S_ASSETS}/sar-la.jpg`,
+        width: 100,
+        height: 101,
+        mWidth: 80,
+        mHeight: 80,
+      },
+      {
+        name: "LGT Wealth India",
+        src: `${S2S_ASSETS}/lgt.jpg`,
+        width: 200,
+        height: 84,
+        mWidth: 117,
+        mHeight: 80,
+      },
     ],
   ],
   collaboration: [
-    { name: "Indonesia India: Mitra Selamanya, Partners Forever", src: `${S2S_ASSETS}/partner-indonesia.jpg`, width: 256, height: 52 },
-    { name: "Kingdom of the Netherlands", src: `${S2S_ASSETS}/partner-netherlands.jpg`, width: 187, height: 110 },
+    {
+      name: "Indonesia India: Mitra Selamanya, Partners Forever",
+      src: `${S2S_ASSETS}/partner-indonesia.jpg`,
+      width: 256,
+      height: 52,
+      mWidth: 198,
+      mHeight: 40,
+    },
+    {
+      name: "Kingdom of the Netherlands",
+      src: `${S2S_ASSETS}/partner-netherlands.jpg`,
+      width: 187,
+      height: 110,
+      mWidth: 119,
+      mHeight: 70,
+    },
   ],
   venues: [
-    { name: "Kolkata Centre for Creativity", src: `${S2S_ASSETS}/partner-kcc.jpg`, width: 256, height: 80 },
-    { name: "Arthshila Santiniketan", src: `${S2S_ASSETS}/partner-arthshila.png`, width: 159, height: 80 },
+    {
+      name: "Kolkata Centre for Creativity",
+      src: `${S2S_ASSETS}/partner-kcc.jpg`,
+      width: 256,
+      height: 80,
+      mWidth: 160,
+      mHeight: 50,
+    },
+    {
+      name: "Arthshila Santiniketan",
+      src: `${S2S_ASSETS}/partner-arthshila.png`,
+      width: 159,
+      height: 80,
+      mWidth: 119,
+      mHeight: 60,
+    },
   ],
 } satisfies Record<string, PartnerLogo | PartnerLogo[] | PartnerLogo[][]>;
 
@@ -381,10 +543,34 @@ const placeholderCaption: RichText = [
 ];
 
 export const communityArchive: ArchiveItem[] = [
-  { image: `${S2S_ASSETS}/community-1.jpg`, imageAlt: "Paresh Maity", caption: placeholderCaption },
-  { image: `${S2S_ASSETS}/community-2.jpg`, imageAlt: "Shabana Azmi", caption: placeholderCaption },
-  { image: `${S2S_ASSETS}/community-3.jpg`, imageAlt: "Sharmila Tagore", caption: placeholderCaption },
-  { image: `${S2S_ASSETS}/community-4.jpg`, imageAlt: "Community archive photograph", caption: placeholderCaption },
-  { image: `${S2S_ASSETS}/community-5.jpg`, imageAlt: "Community archive photograph", caption: placeholderCaption },
-  { image: `${S2S_ASSETS}/community-6.jpg`, imageAlt: "Community archive photograph", caption: placeholderCaption },
+  {
+    image: `${S2S_ASSETS}/community-1.jpg`,
+    imageAlt: "Paresh Maity",
+    caption: placeholderCaption,
+  },
+  {
+    image: `${S2S_ASSETS}/community-2.jpg`,
+    imageAlt: "Shabana Azmi",
+    caption: placeholderCaption,
+  },
+  {
+    image: `${S2S_ASSETS}/community-3.jpg`,
+    imageAlt: "Sharmila Tagore",
+    caption: placeholderCaption,
+  },
+  {
+    image: `${S2S_ASSETS}/community-4.jpg`,
+    imageAlt: "Community archive photograph",
+    caption: placeholderCaption,
+  },
+  {
+    image: `${S2S_ASSETS}/community-5.jpg`,
+    imageAlt: "Community archive photograph",
+    caption: placeholderCaption,
+  },
+  {
+    image: `${S2S_ASSETS}/community-6.jpg`,
+    imageAlt: "Community archive photograph",
+    caption: placeholderCaption,
+  },
 ];

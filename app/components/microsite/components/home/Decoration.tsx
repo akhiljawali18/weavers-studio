@@ -17,7 +17,13 @@ type DecorationProps = {
  * desktop margins and are hidden below `lg`, where the sections stack; the few the
  * mobile design keeps are placed separately with `on="mobile"`.
  */
-const Decoration = ({ file, width, height, className, on = "desktop" }: DecorationProps) => (
+const Decoration = ({
+  file,
+  width,
+  height,
+  className,
+  on = "desktop",
+}: DecorationProps) => (
   <Image
     src={`${S2S_ASSETS}/${file}`}
     alt=""
@@ -26,7 +32,7 @@ const Decoration = ({ file, width, height, className, on = "desktop" }: Decorati
     height={height}
     unoptimized
     style={{ width, height }}
-    className={`pointer-events-none absolute max-w-none ${on === "desktop" ? "hidden lg:block" : "lg:hidden"} ${className}`}
+    className={`pointer-events-none absolute max-w-none ${className}`}
   />
 );
 

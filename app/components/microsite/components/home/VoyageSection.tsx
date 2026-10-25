@@ -44,13 +44,13 @@ const VoyageSection = () => (
         hiddenOnMobile.voyagePortrait ? "pt-[58px]" : "pt-10"
       }`}
     >
-      {/* The ruled margin with the wave ornament at its foot. */}
-      <Decoration file="deco-voyage-wave.svg" width={745} height={377} className="left-0 top-[35px]" />
+      {/* The ruled margin with the wave ornament at its foot (desktop only). */}
+      <Decoration file="deco-voyage-wave.svg" width={745} height={377} className="left-0 top-[35px] hidden lg:block" />
       {/* The two columns split the width evenly, as in the design. Between 1200 and
           1439px the second paragraph, which is a little longer, gets 51% so the two
           still end on the same line there. */}
       <div className="relative min-h-[437px] pl-[92px] pr-[28px] lg:min-h-0 lg:flex-1 lg:p-0 xl:flex-[49_1_0%] min-[1440px]:flex-1">
-        <Decoration on="mobile" file="deco-voyage-wave-mobile.svg" width={408} height={437} className="-left-[34px] top-0" />
+        <Decoration on="mobile" file="deco-voyage-wave.svg" width={560} height={470} className="-left-[78px] top-0 lg:hidden" />
         <p className={`relative lg:text-justify ${bodyText}`}>
           <RichText content={firstParagraph} />
         </p>

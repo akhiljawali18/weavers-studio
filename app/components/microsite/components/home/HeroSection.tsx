@@ -49,8 +49,12 @@ const HeroSection = () => (
     />
 
     <div className="text-center">
-      <p className={kicker}>Weavers Studio Resource Centre presents</p>
-      {/* On phones the kicker wraps to two lines and the title tucks up under the second. */}
+      {/* The WSRC logo above already carries the full name, so phones show just
+          "presents", as the mobile design does; desktop keeps the full line. */}
+      <p className={kicker}>
+        <span className="lg:hidden">presents</span>
+        <span className="hidden lg:inline">Weavers Studio Resource Centre presents</span>
+      </p>
       <h1 className={`-mt-[12px] md:-mt-[3px] ${homeDisplayTitle}`}>
         <span className="italic">Sarong</span> to{" "}
         <span className="italic">Sari</span>
@@ -67,7 +71,7 @@ const HeroSection = () => (
 
     {/* A tall portrait frame on phones, the wide landscape one from `lg`. */}
     <div className="relative mx-auto mt-[34px] max-w-[317px] lg:mt-10 lg:max-w-none">
-      <HeroVideo src={heroVideo.src} poster={heroVideo.poster} />
+      <HeroVideo src={heroVideo.src} mobileSrc={heroVideo.mobileSrc} poster={heroVideo.poster} />
       <span
         aria-hidden
         className="absolute -left-[52px] -right-[36px] bottom-0 hidden h-px bg-s2s-line lg:block"

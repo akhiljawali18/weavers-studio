@@ -10,17 +10,24 @@ import { typesWithExpert } from "../data/programme";
 import type { Paragraph, ProgrammeItem } from "../data/programme";
 import type { RichText as RichTextContent } from "../types";
 
-const rupees = new Intl.NumberFormat("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const rupees = new Intl.NumberFormat("en-IN", {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
 
 /** A paragraph written as plain text becomes a single unstyled piece. */
-const asRichText = (paragraph: Paragraph): RichTextContent => (typeof paragraph === "string" ? [paragraph] : paragraph);
+const asRichText = (paragraph: Paragraph): RichTextContent =>
+  typeof paragraph === "string" ? [paragraph] : paragraph;
 
 /** Black spaced capitals: "With Sabine Bolk", "Event details", "About the expert". */
-const smallCaps = "text-[14px] font-medium uppercase leading-[17px] tracking-[1.68px] text-black";
+const smallCaps =
+  "text-[14px] font-medium uppercase leading-[17px] tracking-[1.68px] text-black";
 
 /** A panel column heading with the rule beneath it, as in the design. */
 const PanelHeading = ({ children }: { children: string }) => (
-  <h2 className={`border-b border-s2s-line pb-4 pl-[21px] ${smallCaps}`}>{children}</h2>
+  <h2 className={`border-b border-s2s-line pb-4 lg:pl-[21px] ${smallCaps}`}>
+    {children}
+  </h2>
 );
 
 type ProgrammeEventPageProps = {
@@ -33,7 +40,8 @@ type ProgrammeEventPageProps = {
  * Spacing follows the design at 1440px.
  */
 const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
-  const showExpert = typesWithExpert.includes(item.type) && Boolean(item.aboutHost?.length);
+  const showExpert =
+    typesWithExpert.includes(item.type) && Boolean(item.aboutHost?.length);
   // The event's own rows if it lists them (a tour's Dates, Duration, Stay...),
   // otherwise Venue, Date and Timings, skipping any left empty.
   const facts =
@@ -42,16 +50,38 @@ const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
       { label: "Venue", value: item.venue },
       { label: "Date", value: item.date },
       { label: "Timings", value: item.timings },
-    ].filter((fact): fact is { label: string; value: string } => Boolean(fact.value?.trim()));
+    ].filter((fact): fact is { label: string; value: string } =>
+      Boolean(fact.value?.trim()),
+    );
 
   return (
     <div className="overflow-x-clip">
-      <div className="relative mx-auto max-w-[1440px] px-5 pt-10 lg:px-0 lg:pt-[66px]">
-        <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-0">
-          {/* The hairline and the maroon flower with its curved line are pinned to the
-              photograph's own corner, so they stay with it however tall it renders.
-              The JPEG has a white ground, which multiplying drops. */}
-          <div className="relative aspect-[425/566] w-full sm:max-w-[425px] lg:ml-[13.82%] lg:w-[29.51%] lg:shrink-0">
+      <div className="relative mx-auto max-w-[1440px] px-4 pt-10 lg:px-0 lg:pt-[66px]">
+        <div className="flex flex-col gap-[52px] lg:flex-row lg:items-start lg:gap-0">
+          {/* Phones: the photograph sits left of a hairline, with the maroon flourish
+              on its bottom-right corner, exactly as the mobile design draws it. */}
+          <div className="relative w-full lg:hidden">
+            <div className="w-[78.5%]">
+              <ImageSlot
+                src={item.image}
+                alt={item.imageAlt}
+                priority
+                sizes="100vw"
+                className="aspect-[281/374] w-full"
+              />
+            </div>
+            <Decoration
+              on="mobile"
+              file="prog-decor-mobile.svg"
+              width={367}
+              height={392}
+              className="left-0 top-0 max-w-none"
+            />
+          </div>
+
+          {/* Desktop: the photograph with its hairline and flourish on the left. The
+              JPEG has a white ground, which multiplying drops. */}
+          <div className="relative hidden aspect-[425/566] w-full sm:max-w-[425px] lg:ml-[13.82%] lg:block lg:w-[29.51%] lg:shrink-0">
             <ImageSlot
               src={item.image}
               alt={item.imageAlt}
@@ -59,8 +89,16 @@ const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
               sizes="(min-width: 992px) 425px, 100vw"
               className="absolute inset-0"
             />
-            <span aria-hidden className="absolute -bottom-[27px] -left-[24px] top-0 hidden w-px bg-s2s-sand lg:block" />
-            <Decoration file="prog-decor-1.jpg" width={175} height={103} className="-bottom-[9px] -left-[160px] mix-blend-multiply" />
+            <span
+              aria-hidden
+              className="absolute -bottom-[27px] -left-[24px] top-0 hidden w-px bg-s2s-sand lg:block"
+            />
+            <Decoration
+              file="prog-decor-1.jpg"
+              width={175}
+              height={103}
+              className="-bottom-[9px] -left-[160px] mix-blend-multiply"
+            />
           </div>
 
           <div className="lg:ml-[11.11%] lg:w-[41.39%] lg:pt-[71px]">
@@ -68,7 +106,9 @@ const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
               <span className="italic">{item.titleItalic}</span>
               {item.titleRegular}
             </h1>
-            {item.host && <p className={`mt-[6px] ${smallCaps}`}>With {item.host}</p>}
+            {item.host && (
+              <p className={`mt-[6px] ${smallCaps}`}>With {item.host}</p>
+            )}
             {/* The design sets this chip's label a shade redder than the other maroon. */}
             <span className="mt-[23px] inline-flex h-[34px] items-center rounded-[4px] border border-s2s-maroon px-[14px] text-[14px] lowercase leading-none text-[#7c1126]">
               {item.type}
@@ -89,37 +129,37 @@ const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
               ))}
             </dl>
 
-            {item.prices ? (
-              <ul className="mt-[26px] space-y-[6px]">
-                {item.prices.map((option) => (
-                  <li key={option.note} className="text-[14px] leading-[24px] text-s2s-ink">
-                    <span className="font-bold tracking-[1.68px] text-s2s-maroon">₹ {rupees.format(option.amount)}</span>{" "}
-                    {option.note}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              item.price !== undefined && (
-                <p className="mt-[18px] text-[14px] font-bold leading-[40px] tracking-[1.68px] text-s2s-maroon">
-                  ₹ {rupees.format(item.price)}
-                </p>
-              )
+            {!item.prices && item.price !== undefined && (
+              <p className="mt-[18px] text-[14px] font-bold leading-[40px] tracking-[1.68px] text-s2s-maroon">
+                ₹ {rupees.format(item.price)}
+              </p>
             )}
-            <div className={item.prices ? "mt-[24px]" : "mt-[16px]"}>
-              <TicketPicker />
+            {/* Events with more than one price are chosen with a radio before booking. */}
+            <div className={item.prices ? "mt-[26px]" : "mt-[16px]"}>
+              <TicketPicker prices={item.prices} />
             </div>
           </div>
         </div>
 
         {/* The gold paisley at the page's right edge, level with the photograph's top. */}
-        <Decoration file="prog-decor-2.jpg" width={75} height={128} className="right-0 top-[66px] mix-blend-multiply" />
+        <Decoration
+          file="prog-decor-2.jpg"
+          width={75}
+          height={128}
+          className="right-0 top-[66px] mix-blend-multiply lg:block hidden"
+        />
       </div>
 
-      <section aria-label="About this event" className="mx-auto mt-16 max-w-[1440px] px-5 lg:mt-[78px] lg:px-[60px]">
-        <div className="bg-s2s-panel px-5 pb-10 pt-8 lg:px-[88px] lg:pb-[50px] lg:pt-[45px]">
+      <section
+        aria-label="About this event"
+        className="mx-auto mt-16 max-w-[1440px] lg:mt-[78px] lg:px-[60px]"
+      >
+        <div className="bg-s2s-panel px-4 pb-10 pt-8 lg:px-[88px] lg:pb-[50px] lg:pt-[45px]">
           {/* Workshops show "About the expert" beside the details; performances and
               talks have none, and their details take the panel's full width. */}
-          <div className={`grid gap-12 lg:gap-x-6 lg:gap-y-0 ${showExpert ? "lg:grid-cols-2" : ""}`}>
+          <div
+            className={`grid gap-12 lg:gap-x-6 lg:gap-y-0 ${showExpert ? "lg:grid-cols-2" : ""}`}
+          >
             <div>
               <PanelHeading>Event details</PanelHeading>
               <div className={`mt-[38px] space-y-7 lg:pl-[27px] ${bodyText}`}>
@@ -139,7 +179,10 @@ const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
                     <p>{linkEmails(item.includes.heading)}</p>
                     <ul>
                       {item.includes.items.map((entry) => (
-                        <li key={entry} className="relative pl-6 before:absolute before:left-[9px] before:content-['•']">
+                        <li
+                          key={entry}
+                          className="relative pl-6 before:absolute before:left-[9px] before:content-['•']"
+                        >
                           {linkEmails(entry)}
                         </li>
                       ))}
@@ -168,11 +211,19 @@ const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
             )}
           </div>
 
-          <p className={`mt-12 border-t border-s2s-line pt-[22px] lg:mt-[84px] lg:pl-[27px] ${bodyText}`}>
+          <p
+            className={`mt-12 border-t border-s2s-line pt-[22px] lg:mt-[84px] lg:pl-[27px] ${bodyText}`}
+          >
             For further details, please email us on{" "}
-            <EmailLink address="wsrc@weaversstudio.in" className="font-bold hover:text-s2s-maroon" />{" "}
+            <EmailLink
+              address="wsrc@weaversstudio.in"
+              className="font-bold hover:text-s2s-maroon"
+            />{" "}
             or call us on{" "}
-            <a href="tel:+919874314888" className="font-bold hover:text-s2s-maroon">
+            <a
+              href="tel:+919874314888"
+              className="font-bold hover:text-s2s-maroon"
+            >
               +91 98743 14888.
             </a>
           </p>

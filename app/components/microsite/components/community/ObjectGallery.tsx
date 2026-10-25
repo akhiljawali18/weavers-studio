@@ -30,7 +30,7 @@ const ObjectGallery = ({ images, alt }: ObjectGalleryProps) => {
         priority={index === 0}
         sizes="(min-width: 992px) 560px, 100vw"
         imageClassName="object-contain"
-        className={`aspect-[560/566] w-full animate-in fade-in duration-500 ${src ? "bg-white" : "bg-[#d9d9d9]"}`}
+        className={`aspect-[320/375] w-full animate-in fade-in duration-500 sm:aspect-[560/566] ${src ? "bg-white" : "bg-[#d9d9d9]"}`}
       />
       {images.length > 1 && (
         <div className="mt-[25px] flex justify-center gap-[15px]" role="group" aria-label="Photographs">

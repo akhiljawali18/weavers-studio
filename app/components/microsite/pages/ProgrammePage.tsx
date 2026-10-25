@@ -20,7 +20,7 @@ const ProgrammePage = () => (
       alt={programmeHero.imageAlt}
       priority
       sizes="(min-width: 1440px) 1440px, 100vw"
-      className="mx-auto mt-10 aspect-[1440/605] w-full max-w-[1440px] lg:mt-[50px]"
+      className="mx-auto mt-10 aspect-[390/420] w-full max-w-[1440px] lg:mt-[50px] lg:aspect-[1440/605]"
     />
 
     {programmeIntro && (

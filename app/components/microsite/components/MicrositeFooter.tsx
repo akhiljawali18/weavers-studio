@@ -42,18 +42,73 @@ const socialLinks: {
   },
 ];
 
+/** The row of social links; the gap is set by the caller (tighter on phones). */
+const SocialIcons = ({ className = "" }: { className?: string }) => (
+  <ul aria-label="Social media" className={`flex items-center ${className}`}>
+    {socialLinks.map((social) => (
+      <li key={social.name}>
+        {social.href ? (
+          <a
+            href={social.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Weavers Studio on ${social.name} (opens in a new tab)`}
+            className="block rounded-sm transition-opacity hover:opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon"
+          >
+            <Image src={`${S2S_ASSETS}/${social.icon}`} alt="" width={social.width} height={social.height} unoptimized />
+          </a>
+        ) : (
+          <Image src={`${S2S_ASSETS}/${social.icon}`} alt={social.name} width={social.width} height={social.height} unoptimized className="block" />
+        )}
+      </li>
+    ))}
+  </ul>
+);
+
 const MicrositeFooter = () => {
   const year = new Date().getFullYear();
 
   return (
     <footer className="border-t border-[#eeeeee] bg-s2s-paper">
-      {/* A five-column grid on desktop: logo, the two text columns, the social icons,
-          then the batik decoration as its own track at the right (286px, with a 34px
-          gap before it from its left margin). At 1440 the columns sit where the design
-          has them; on narrower screens the footer stacks and the batik is hidden. */}
-      <div className="mx-auto flex max-w-[1440px] flex-col gap-8 md:px-5 pl-5 pr-0 py-10 text-[14px] leading-[25px] lg:grid lg:min-h-[150px] lg:grid-cols-[minmax(0,247fr)_minmax(0,313fr)_minmax(175px,335fr)_auto_auto] lg:items-center lg:gap-0 lg:pb-6 lg:pl-[60px] lg:pr-0 lg:pt-0">
-        {/* The logo and the two text columns hang 42px from the footer's top edge;
-            only the social icons sit on its centre line. */}
+      {/* ─── Phones: the stacked layout the mobile design draws ───
+          Everything hangs from the 16px left edge: logo, the two text blocks, the
+          copyright line (which sits between Contact and the icons here, unlike the
+          desktop column), the social icons, and the batik tucked into the bottom-right. */}
+      <div className="relative overflow-hidden px-4 pb-[90px] pt-7 text-[14px] font-medium leading-[25px] lg:hidden">
+        <Image src={`${S2S_ASSETS}/footer-logo.svg`} alt="Sarong to Sari" width={200} height={76} unoptimized className="h-auto w-[140px]" />
+
+        <div className="mt-[23px]">
+          <p className="text-s2s-soft">Presented by</p>
+          <p className="text-s2s-ink">Weavers Studio Resource Centre, Kolkata</p>
+        </div>
+
+        <address className="mt-[10px] not-italic">
+          <p className="text-s2s-soft">Contact Us</p>
+          <EmailLink address="wsrc@weaversstudio.in" className="block text-s2s-ink hover:text-s2s-maroon" />
+          <a href="tel:+919874314888" className="block tracking-[0.7px] text-s2s-ink hover:text-s2s-maroon">
+            {" "}
+            +91 98743 14888
+          </a>
+        </address>
+
+        <p className="mt-[10px] text-[11px] font-normal uppercase tracking-[1px] text-s2s-soft">©{year} Weavers Studio</p>
+
+        <SocialIcons className="mt-[19px] gap-[15px]" />
+
+        {/* The batik rests in the bottom-right corner; multiplying drops its white ground. */}
+        <Image
+          src={`${S2S_ASSETS}/footer-batik.jpg`}
+          alt=""
+          aria-hidden
+          width={286}
+          height={123}
+          unoptimized
+          className="pointer-events-none absolute bottom-0 right-0 w-[190px] mix-blend-multiply"
+        />
+      </div>
+
+      {/* ─── Desktop: the five-column grid (logo, two text columns, icons, batik) ─── */}
+      <div className="mx-auto hidden max-w-[1440px] text-[14px] leading-[25px] lg:grid lg:min-h-[150px] lg:grid-cols-[minmax(0,247fr)_minmax(0,313fr)_minmax(175px,335fr)_auto_auto] lg:items-center lg:gap-0 lg:pb-6 lg:pl-[60px] lg:pr-0 lg:pt-0">
         <Image
           src={`${S2S_ASSETS}/footer-logo.svg`}
           alt="Sarong to Sari"
@@ -65,64 +120,20 @@ const MicrositeFooter = () => {
 
         <div className="lg:mt-[42px] lg:self-start lg:pr-5">
           <p className="text-s2s-soft">Presented by</p>
-          <p className="text-s2s-ink">
-            Weavers Studio Resource Centre, Kolkata
-          </p>
-          <p className="text-[11px] uppercase tracking-[1px] text-s2s-soft">
-            ©{year} Weavers Studio
-          </p>
+          <p className="text-s2s-ink">Weavers Studio Resource Centre, Kolkata</p>
+          <p className="text-[11px] uppercase tracking-[1px] text-s2s-soft">©{year} Weavers Studio</p>
         </div>
 
         <address className="not-italic lg:mt-[42px] lg:self-start lg:pr-5">
           <p className="text-s2s-soft">Contact Us</p>
-          <EmailLink
-            address="wsrc@weaversstudio.in"
-            className="block text-s2s-ink hover:text-s2s-maroon"
-          />
-          <a
-            href="tel:+919874314888"
-            className="block tracking-[0.7px] text-s2s-ink hover:text-s2s-maroon"
-          >
+          <EmailLink address="wsrc@weaversstudio.in" className="block text-s2s-ink hover:text-s2s-maroon" />
+          <a href="tel:+919874314888" className="block tracking-[0.7px] text-s2s-ink hover:text-s2s-maroon">
             +91 98743 14888
           </a>
         </address>
 
-        <ul aria-label="Social media" className="flex items-center gap-[22px]">
-          {socialLinks.map((social) => (
-            <li key={social.name}>
-              {social.href ? (
-                <a
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Weavers Studio on ${social.name} (opens in a new tab)`}
-                  className="block rounded-sm transition-opacity hover:opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon"
-                >
-                  <Image
-                    src={`${S2S_ASSETS}/${social.icon}`}
-                    alt=""
-                    width={social.width}
-                    height={social.height}
-                    unoptimized
-                  />
-                </a>
-              ) : (
-                <Image
-                  src={`${S2S_ASSETS}/${social.icon}`}
-                  alt={social.name}
-                  width={social.width}
-                  height={social.height}
-                  unoptimized
-                  className="block"
-                />
-              )}
-            </li>
-          ))}
-        </ul>
+        <SocialIcons className="gap-[22px]" />
 
-        {/* The batik's own grid cell at the far right, flush to the footer's bottom-right
-            corner. The JPEG has a white ground; multiplying it onto the footer's grey
-            removes the box. Hidden on mobile, as in the design. */}
         <Image
           src={`${S2S_ASSETS}/footer-batik.jpg`}
           alt=""
