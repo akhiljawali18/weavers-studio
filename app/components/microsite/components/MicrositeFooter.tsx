@@ -42,8 +42,11 @@ const socialLinks: {
   },
 ];
 
-/** The row of social links; the gap is set by the caller (tighter on phones). */
-const SocialIcons = ({ className = "" }: { className?: string }) => (
+/**
+ * The row of social links; the gap is set by the caller (tighter on phones).
+ * `inverted` turns the grey glyphs white, for the maroon mobile menu.
+ */
+export const SocialIcons = ({ className = "", inverted = false }: { className?: string; inverted?: boolean }) => (
   <ul aria-label="Social media" className={`flex items-center ${className}`}>
     {socialLinks.map((social) => (
       <li key={social.name}>
@@ -53,12 +56,28 @@ const SocialIcons = ({ className = "" }: { className?: string }) => (
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Weavers Studio on ${social.name} (opens in a new tab)`}
-            className="block rounded-sm transition-opacity hover:opacity-70 focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon"
+            className={`block rounded-sm transition-opacity hover:opacity-70 focus:outline-none focus-visible:ring-2 ${
+              inverted ? "focus-visible:ring-white" : "focus-visible:ring-s2s-maroon"
+            }`}
           >
-            <Image src={`${S2S_ASSETS}/${social.icon}`} alt="" width={social.width} height={social.height} unoptimized />
+            <Image
+              src={`${S2S_ASSETS}/${social.icon}`}
+              alt=""
+              width={social.width}
+              height={social.height}
+              unoptimized
+              className={inverted ? "brightness-0 invert" : undefined}
+            />
           </a>
         ) : (
-          <Image src={`${S2S_ASSETS}/${social.icon}`} alt={social.name} width={social.width} height={social.height} unoptimized className="block" />
+          <Image
+            src={`${S2S_ASSETS}/${social.icon}`}
+            alt={social.name}
+            width={social.width}
+            height={social.height}
+            unoptimized
+            className={`block ${inverted ? "brightness-0 invert" : ""}`}
+          />
         )}
       </li>
     ))}

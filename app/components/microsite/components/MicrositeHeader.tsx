@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { micrositeNavigation } from "../data/navigation";
 import { S2S_ASSETS } from "../data/home";
 import { useMicrositeNav } from "../hooks/useMicrositeNav";
 import { CloseIcon } from "./icons";
+import { SocialIcons } from "./MicrositeFooter";
 import { stitchMask } from "./home/UnderlineLink";
 
 type NavLinkProps = {
@@ -51,8 +52,43 @@ const NavLink = ({ href, label, onNavigate }: NavLinkProps) => {
   );
 };
 
+/** A link in the maroon phone menu: white lowercase, the current page in Bodoni italic. */
+const MobileNavLink = ({ href, label, onNavigate }: Required<NavLinkProps>) => {
+  const isActive = useMicrositeNav(href);
+
+  return (
+    <Link
+      href={href}
+      onClick={onNavigate}
+      aria-current={isActive ? "page" : undefined}
+      className={`block w-fit lowercase text-white transition-opacity hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-white ${
+        isActive ? "font-Bodoni text-[16px] italic leading-[24.8px]" : "text-[15px] leading-[24.8px]"
+      }`}
+    >
+      {label}
+    </Link>
+  );
+};
+
 const MicrositeHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const closeMenu = () => setMenuOpen(false);
+
+  // While the menu covers the screen the page behind it must not scroll, and Escape
+  // closes it, as it would a dialog.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const { overflow } = document.body.style;
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = overflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [menuOpen]);
 
   return (
     // The white strip above the header (the `before:` layer) sits off-screen while the
@@ -85,34 +121,53 @@ const MicrositeHeader = () => {
 
         <button
           type="button"
-          onClick={() => setMenuOpen((open) => !open)}
+          onClick={() => setMenuOpen(true)}
           aria-expanded={menuOpen}
           aria-controls="microsite-menu"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-label="Open menu"
           className="ml-auto flex h-[25px] w-[25px] items-center justify-center rounded-sm text-s2s-brown focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon lg:hidden"
         >
-          {menuOpen ? (
-            <CloseIcon className="h-[22px] w-[22px]" />
-          ) : (
-            <Image src={`${S2S_ASSETS}/icon-menu.svg`} alt="" width={25} height={25} unoptimized />
-          )}
+          <Image src={`${S2S_ASSETS}/icon-menu.svg`} alt="" width={25} height={25} unoptimized />
         </button>
       </div>
 
+      {/* Phones: the menu covers the whole screen in maroon, with the white logo and a
+          close button where the header's logo and hamburger were. */}
       {menuOpen && (
-        <nav
+        <div
           id="microsite-menu"
-          aria-label="Microsite navigation"
-          className="border-t border-[#eeeeee] bg-white px-5 pb-6 pt-4 lg:hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu"
+          className="fixed inset-0 z-50 flex flex-col overflow-y-auto bg-s2s-maroon animate-in fade-in duration-200 lg:hidden"
         >
-          <ul className="flex flex-col gap-4">
-            {micrositeNavigation.map((item) => (
-              <li key={item.href}>
-                <NavLink href={item.href} label={item.label} onNavigate={() => setMenuOpen(false)} />
-              </li>
-            ))}
-          </ul>
-        </nav>
+          <div className="flex h-[57px] shrink-0 items-center pl-4 pr-[14px]">
+            <Link href="/microsite" onClick={closeMenu} aria-label="Sarong to Sari home" className="shrink-0">
+              <Image src={`${S2S_ASSETS}/mobileLogo.png`} alt="" width={76} height={34} unoptimized priority />
+            </Link>
+            <button
+              type="button"
+              onClick={closeMenu}
+              aria-label="Close menu"
+              autoFocus
+              className="ml-auto flex h-[25px] w-[25px] items-center justify-center rounded-sm text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            >
+              <CloseIcon className="h-[22px] w-[22px]" />
+            </button>
+          </div>
+
+          <nav aria-label="Microsite navigation" className="px-4 pt-[34px]">
+            <ul className="flex flex-col gap-[17px]">
+              {micrositeNavigation.map((item) => (
+                <li key={item.href}>
+                  <MobileNavLink href={item.href} label={item.label} onNavigate={closeMenu} />
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <SocialIcons inverted className="mt-auto gap-[22px] px-4 pb-[88px] pt-10" />
+        </div>
       )}
     </header>
   );
