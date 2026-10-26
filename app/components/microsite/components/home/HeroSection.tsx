@@ -77,14 +77,12 @@ const HeroSection = () => (
         className="absolute -left-[52px] -right-[36px] bottom-0 hidden h-px bg-s2s-line lg:block"
       />
       <Decoration
-        on="mobile"
         file="deco-batik-cluster.svg"
         width={79}
         height={166}
         className="-right-[23px] -top-[11px]"
       />
       <Decoration
-        on="mobile"
         file="deco-paisley-maroon.svg"
         width={95}
         height={118}

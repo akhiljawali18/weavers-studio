@@ -6,24 +6,15 @@ type DecorationProps = {
   file: string;
   width: number;
   height: number;
-  /** Placement, e.g. `left-[25px] top-[617px]`. */
+  /** Placement, e.g. `left-[25px] top-[617px]`. Add `hidden lg:block` or `lg:hidden` to limit it to one layout. */
   className: string;
-  /** `desktop` shows it from `lg` up; `mobile` is a phone layout's own copy, hidden from `lg`. */
-  on?: "desktop" | "mobile";
 };
 
 /**
- * A purely ornamental motif from the design, pinned in place. Most sit in the
- * desktop margins and are hidden below `lg`, where the sections stack; the few the
- * mobile design keeps are placed separately with `on="mobile"`.
+ * A purely ornamental motif from the design, pinned in place. Which screen sizes
+ * show it is up to the caller, through `className`.
  */
-const Decoration = ({
-  file,
-  width,
-  height,
-  className,
-  on = "desktop",
-}: DecorationProps) => (
+const Decoration = ({ file, width, height, className }: DecorationProps) => (
   <Image
     src={`${S2S_ASSETS}/${file}`}
     alt=""

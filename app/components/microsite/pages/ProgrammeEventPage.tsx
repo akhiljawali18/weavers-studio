@@ -71,7 +71,6 @@ const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
               />
             </div>
             <Decoration
-              on="mobile"
               file="prog-decor-mobile.svg"
               width={367}
               height={392}

@@ -33,11 +33,10 @@ const ArchiveObjectPage = ({ object }: ArchiveObjectPageProps) => (
         <ObjectGallery images={object.images} alt={object.imageAlt} />
         {/* On phones the gold paisley rests on the photograph's top-right corner, as the mobile design draws it. */}
         <Decoration
-          on="mobile"
           file="com-decor-2.jpg"
           width={78}
           height={124}
-          className="-right-1 top-9 mix-blend-multiply"
+          className="-right-1 top-9 mix-blend-multiply lg:hidden block"
         />
       </div>
 
@@ -88,11 +87,10 @@ const ArchiveObjectPage = ({ object }: ArchiveObjectPageProps) => (
         <div className="relative mt-[38px] flex flex-col gap-8 lg:flex-row lg:gap-[107px] lg:pl-[27px]">
           {/* On phones the round paisley sits in the gutter the summary's indent leaves to its left. */}
           <Decoration
-            on="mobile"
             file="decorCommu-1.svg"
             width={92}
             height={209}
-            className="-left-[5px] -top-[8px] max-w-none"
+            className="-left-[5px] -top-[8px] max-w-none lg:hidden block"
           />
           <p className="pl-[92px] font-Bodoni text-[21px] italic leading-[36px] text-s2s-ink sm:pl-0 lg:w-[338px] lg:shrink-0">
             <RichText content={object.summary} />
@@ -110,17 +108,17 @@ const ArchiveObjectPage = ({ object }: ArchiveObjectPageProps) => (
       {/* The ruled corner with the batik square at the panel's lower left, and the
           round paisley (the home page's, mirrored) sitting in it. */}
       <Decoration
-        file="com-decor-1.jpg"
+        file="com-decor-1.svg"
         width={329}
         height={369}
-        className="bottom-[-85px] left-[-1px] mix-blend-multiply"
+        className="bottom-[-85px] left-[-1px] mix-blend-multiply lg:block hidden"
       />
-      <Decoration
+      {/* <Decoration
         file="deco-paisley-round.svg"
         width={83}
         height={113}
         className="bottom-[83px] left-[141px] -scale-x-100"
-      />
+      /> */}
     </div>
 
     <BackToTop />
