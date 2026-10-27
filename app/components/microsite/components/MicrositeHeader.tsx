@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { micrositeNavigation } from "../data/navigation";
 import { S2S_ASSETS } from "../data/home";
+import { CART_ADDED_EVENT } from "../cart/cartStore";
+import { useCartCount } from "../hooks/useCart";
 import { useMicrositeNav } from "../hooks/useMicrositeNav";
 import { CloseIcon } from "./icons";
 import { SocialIcons } from "./MicrositeFooter";
@@ -70,6 +72,48 @@ const MobileNavLink = ({ href, label, onNavigate }: Required<NavLinkProps>) => {
   );
 };
 
+/**
+ * The cart link at the header's right end, with a maroon count once tickets are in it.
+ * Each "add to cart" makes the icon and count swell and settle back, so the visitor
+ * sees where the tickets went.
+ */
+const CartLink = () => {
+  const count = useCartCount();
+  // Bumped on every add; used as the key below so the animation restarts each time.
+  const [pulses, setPulses] = useState(0);
+
+  useEffect(() => {
+    const onAdded = () => setPulses((n) => n + 1);
+    window.addEventListener(CART_ADDED_EVENT, onAdded);
+    return () => window.removeEventListener(CART_ADDED_EVENT, onAdded);
+  }, []);
+
+  return (
+    <Link
+      href="/microsite/cart"
+      aria-label={count > 0 ? `Cart, ${count} ${count === 1 ? "ticket" : "tickets"}` : "Cart"}
+      className="relative ml-auto flex h-[25px] w-[25px] shrink-0 items-center justify-center rounded-sm text-s2s-brown transition-colors hover:text-s2s-maroon focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon lg:ml-0"
+    >
+      <span
+        key={pulses}
+        className={`relative flex h-full w-full items-center justify-center ${pulses > 0 ? "motion-safe:animate-cartPulse" : ""}`}
+      >
+        {/* The drawing has a white ground and a wide margin, so it is set larger than the
+            link and multiplied onto the header. */}
+        <Image src={`${S2S_ASSETS}/cartIcon.png`} alt="" width={36} height={36} unoptimized className="max-w-none mix-blend-multiply" />
+        {count > 0 && (
+          <span
+            aria-hidden
+            className="absolute -right-[7px] -top-[5px] flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-s2s-maroon px-[4px] text-[10px] font-medium leading-none text-white"
+          >
+            {count > 99 ? "99+" : count}
+          </span>
+        )}
+      </span>
+    </Link>
+  );
+};
+
 const MicrositeHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
@@ -110,7 +154,7 @@ const MicrositeHeader = () => {
 
         <nav
           aria-label="Microsite navigation"
-          className="hidden lg:ml-[123px] lg:mr-[15px] lg:flex lg:flex-1 lg:items-center lg:justify-between xl:grid xl:grid-cols-[22.9fr_23.7fr_24.4fr_17.2fr_11.8fr]"
+          className="hidden lg:ml-[123px] lg:mr-[32px] lg:flex lg:flex-1 lg:items-center lg:justify-between xl:grid xl:grid-cols-[22.9fr_23.7fr_24.4fr_17.2fr_11.8fr]"
         >
           {micrositeNavigation.map((item, index) => (
             <div key={item.href} className={index === micrositeNavigation.length - 1 ? "xl:justify-self-end" : ""}>
@@ -119,13 +163,15 @@ const MicrositeHeader = () => {
           ))}
         </nav>
 
+        <CartLink />
+
         <button
           type="button"
           onClick={() => setMenuOpen(true)}
           aria-expanded={menuOpen}
           aria-controls="microsite-menu"
           aria-label="Open menu"
-          className="ml-auto flex h-[25px] w-[25px] items-center justify-center rounded-sm text-s2s-brown focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon lg:hidden"
+          className="ml-[18px] flex h-[25px] w-[25px] items-center justify-center rounded-sm text-s2s-brown focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon lg:hidden"
         >
           <Image src={`${S2S_ASSETS}/icon-menu.svg`} alt="" width={25} height={25} unoptimized />
         </button>

@@ -47,8 +47,10 @@ export type ProgrammeItem = {
   facts?: { label: string; value: string }[];
   /** Ticket price in rupees, as a plain number (2000, not "₹ 2,000.00")... */
   price?: number;
-  /** ...or several prices, each with its note, e.g. twin sharing and single occupancy. */
-  prices?: { amount: number; note: string }[];
+  /** ...or several prices, each with its note, e.g. twin sharing and single occupancy.
+      `ticketType` names the option in the cart and the booking list: lowercase words
+      joined by hyphens, unique within the event. */
+  prices?: { amount: number; note: string; ticketType: string }[];
   /** How many tickets the event has in all. Kept for booking; not shown on the page yet. */
   tickets?: number;
   /** "Event details": one entry per paragraph. */
@@ -65,6 +67,9 @@ export type ProgrammeItem = {
   /** "About the expert": one entry per paragraph. Workshops only; performances and talks never show it. */
   aboutHost?: Paragraph[];
 };
+
+/** The ticket type of an event booked at its single `price`. */
+export const STANDARD_TICKET_TYPE = "standard";
 
 export const programmeHero = {
   image: `${S2S_ASSETS}/programme-hero.jpg`,
@@ -193,10 +198,15 @@ export const programmeItems: ProgrammeItem[] = [
       { label: "Departure & return", value: "Howrah Railway Station, Kolkata" },
     ],
     prices: [
-      { amount: 18000, note: "per person, twin sharing (GST included)" },
+      {
+        amount: 18000,
+        note: "per person, twin sharing (GST included)",
+        ticketType: "twin-sharing",
+      },
       {
         amount: 25000,
         note: "per person for single occupancy, including private room and a personal car with driver",
+        ticketType: "single-occupancy",
       },
     ],
     details: [
@@ -410,3 +420,18 @@ export const programmeItems: ProgrammeItem[] = [
 
 export const findProgrammeItem = (slug: string) =>
   programmeItems.find((item) => item.slug === slug);
+
+/** The event's title as one line: "Batik, the Dutch Way". */
+export const programmeTitle = (item: ProgrammeItem) =>
+  `${item.titleItalic}${item.titleRegular}`.trim();
+
+/** One ticket type's price and note, looked up for display only (never stored). */
+export const findTicketOption = (item: ProgrammeItem, ticketType: string) => {
+  if (item.prices) {
+    return item.prices.find((option) => option.ticketType === ticketType);
+  }
+  if (ticketType === STANDARD_TICKET_TYPE && item.price !== undefined) {
+    return { amount: item.price, note: "", ticketType };
+  }
+  return undefined;
+};

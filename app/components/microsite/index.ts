@@ -5,3 +5,4 @@ export { default as MicrositeProgrammePage } from "./pages/ProgrammePage";
 export { default as MicrositeProgrammeEventPage } from "./pages/ProgrammeEventPage";
 export { default as MicrositeCommunityArchivePage } from "./pages/CommunityArchivePage";
 export { default as MicrositeArchiveObjectPage } from "./pages/ArchiveObjectPage";
+export { default as MicrositeCartPage } from "./pages/CartPage";

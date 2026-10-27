@@ -1,18 +1,25 @@
 "use client";
 
-import { useId, useState } from "react";
-
-const MAX_TICKETS = 10;
+import { useEffect, useId, useState } from "react";
+import { addToCart, checkout, MAX_TICKETS } from "../../cart/cartStore";
+import type { CartItem } from "../../cart/cartStore";
+import { STANDARD_TICKET_TYPE } from "../../data/programme";
 
 const rupees = new Intl.NumberFormat("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-type PriceOption = { amount: number; note: string };
+type PriceOption = { amount: number; note: string; ticketType: string };
 
 type TicketPickerProps = {
+  /** The event's slug, saved with the tickets as their `eventId`. */
+  eventId: string;
+  eventName: string;
   /** When an event can be booked more than one way, each option is a radio the
-      visitor must choose from before the "buy tickets" button lets them through. */
+      visitor must choose from before the buttons let them through. */
   prices?: PriceOption[];
 };
+
+/** How long "add to cart" reads "added to cart" after a click. */
+const ADDED_MS = 2000;
 
 // The minus and plus are hairline strokes in the design, drawn here in the
 // button's text colour so they turn maroon on hover with it.
@@ -21,18 +28,48 @@ const stepButton =
   + "transition-colors hover:text-s2s-maroon disabled:cursor-default disabled:hover:text-s2s-ink "
   + "focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon";
 
+const actionButton =
+  "h-[35px] max-w-full rounded-[4px] text-[15px] font-medium lowercase transition-colors duration-200 "
+  + "focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon focus-visible:ring-offset-2 disabled:cursor-not-allowed";
+
 /**
  * The booking-option radios (for events with more than one price), the ticket
- * count, and the "buy tickets" button. Booking is not wired up yet, so the button
- * only carries its looks for now; it stays disabled until an option is chosen.
+ * count, and the two buttons: "buy tickets" saves just this event as the booking
+ * list and goes to payment; "add to cart" keeps it in the cart to buy with others.
+ * Both stay disabled until an option is chosen.
  */
-const TicketPicker = ({ prices }: TicketPickerProps) => {
+const TicketPicker = ({ eventId, eventName, prices }: TicketPickerProps) => {
   const [quantity, setQuantity] = useState(1);
   const [selected, setSelected] = useState<number | null>(null);
+  const [added, setAdded] = useState(false);
   const name = useId();
 
   const needsChoice = Boolean(prices && prices.length > 0);
   const canBuy = !needsChoice || selected !== null;
+
+  useEffect(() => {
+    if (!added) return;
+    const timer = window.setTimeout(() => setAdded(false), ADDED_MS);
+    return () => window.clearTimeout(timer);
+  }, [added]);
+
+  const chosenItem = (): CartItem | null => {
+    if (!canBuy) return null;
+    const ticketType = needsChoice ? prices![selected!].ticketType : STANDARD_TICKET_TYPE;
+    return { eventId, ticketType, quantity, eventName };
+  };
+
+  const onAddToCart = () => {
+    const item = chosenItem();
+    if (!item) return;
+    addToCart(item);
+    setAdded(true);
+  };
+
+  const onBuy = () => {
+    const item = chosenItem();
+    if (item) checkout([item]);
+  };
 
   return (
     <div>
@@ -41,7 +78,7 @@ const TicketPicker = ({ prices }: TicketPickerProps) => {
           <legend className="sr-only">Choose a booking option</legend>
           {prices!.map((option, index) => (
             <label
-              key={option.note}
+              key={option.ticketType}
               className="flex cursor-pointer items-start gap-3 text-[14px] leading-[24px] text-s2s-ink"
             >
               <input
@@ -91,15 +128,28 @@ const TicketPicker = ({ prices }: TicketPickerProps) => {
             <span aria-hidden className="absolute h-[14px] w-px bg-current" />
           </button>
         </div>
-        <button
-          type="button"
-          disabled={!canBuy}
-          aria-disabled={!canBuy}
-          title={canBuy ? undefined : "Choose a booking option first"}
-          className="ml-[36px] h-[35px] w-[250px] max-w-full rounded-[4px] bg-s2s-maroon text-[15px] font-medium lowercase text-white transition-colors duration-200 hover:bg-[#4d0f14] focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-s2s-maroon/50 disabled:hover:bg-s2s-maroon/50"
-        >
-          buy tickets
-        </button>
+        <div className="ml-[36px] flex flex-wrap gap-3">
+          <button
+            type="button"
+            onClick={onBuy}
+            disabled={!canBuy}
+            aria-disabled={!canBuy}
+            title={canBuy ? undefined : "Choose a booking option first"}
+            className={`${actionButton} w-[250px] bg-s2s-maroon text-white hover:bg-[#4d0f14] disabled:bg-s2s-maroon/50 disabled:hover:bg-s2s-maroon/50`}
+          >
+            buy tickets
+          </button>
+          <button
+            type="button"
+            onClick={onAddToCart}
+            disabled={!canBuy}
+            aria-disabled={!canBuy}
+            title={canBuy ? undefined : "Choose a booking option first"}
+            className={`${actionButton} w-[160px] border border-s2s-maroon bg-white text-s2s-maroon hover:bg-s2s-maroon hover:text-white disabled:border-s2s-maroon/50 disabled:text-s2s-maroon/50 disabled:hover:bg-white disabled:hover:text-s2s-maroon/50`}
+          >
+            <span aria-live="polite">{added ? "added to cart" : "add to cart"}</span>
+          </button>
+        </div>
       </div>
     </div>
   );

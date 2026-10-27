@@ -63,6 +63,8 @@ const config: Config = {
         TextAnimate: "TextAnimate 1s infinite",
         // Sarong to Sari links: gaps running along the underline like a stitch.
         stitch: "stitch 0.6s linear infinite",
+        // Sarong to Sari header: the cart icon swells and settles back after "add to cart".
+        cartPulse: "cartPulse 0.6s ease-in-out",
       },
       keyframes: {
         wiggle: {
@@ -76,6 +78,11 @@ const config: Config = {
         stitch: {
           from: { maskPosition: "0 0" },
           to: { maskPosition: "64px 0" },
+        },
+        cartPulse: {
+          "0%, 100%": { transform: "scale(1)" },
+          "35%": { transform: "scale(1.45)" },
+          "65%": { transform: "scale(0.92)" },
         },
       },
       gridTemplateColumns: {

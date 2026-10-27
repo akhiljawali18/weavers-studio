@@ -6,7 +6,7 @@ import RichText from "../components/home/RichText";
 import { bodyText, displayTitle } from "../components/home/typography";
 import TicketPicker from "../components/programme/TicketPicker";
 import EmailLink, { linkEmails } from "../components/EmailLink";
-import { typesWithExpert } from "../data/programme";
+import { programmeTitle, typesWithExpert } from "../data/programme";
 import type { Paragraph, ProgrammeItem } from "../data/programme";
 import type { RichText as RichTextContent } from "../types";
 
@@ -135,7 +135,7 @@ const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
             )}
             {/* Events with more than one price are chosen with a radio before booking. */}
             <div className={item.prices ? "mt-[26px]" : "mt-[16px]"}>
-              <TicketPicker prices={item.prices} />
+              <TicketPicker eventId={item.slug} eventName={programmeTitle(item)} prices={item.prices} />
             </div>
           </div>
         </div>
