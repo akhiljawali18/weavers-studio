@@ -56,7 +56,7 @@ const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
 
   return (
     <div className="overflow-x-clip">
-      <div className="relative mx-auto max-w-[1440px] px-4 pt-10 lg:px-0 lg:pt-[66px]">
+      <div className="relative mx-auto px-4 pt-10 lg:px-0 lg:pt-[66px]">
         <div className="flex flex-col gap-[52px] lg:flex-row lg:items-start lg:gap-0">
           {/* Phones: the photograph sits left of a hairline, with the maroon flourish
               on its bottom-right corner, exactly as the mobile design draws it. */}
@@ -151,7 +151,7 @@ const ProgrammeEventPage = ({ item }: ProgrammeEventPageProps) => {
 
       <section
         aria-label="About this event"
-        className="mx-auto mt-16 max-w-[1440px] lg:mt-[78px] lg:px-[60px]"
+        className="mx-auto mt-16 lg:mt-[78px] lg:px-[60px]"
       >
         <div className="bg-s2s-panel px-4 pb-10 pt-8 lg:px-[88px] lg:pb-[50px] lg:pt-[45px]">
           {/* Workshops show "About the expert" beside the details; performances and

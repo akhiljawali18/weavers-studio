@@ -116,7 +116,7 @@ const HeroVideo = ({ src, mobileSrc, poster }: HeroVideoProps) => {
         src={poster}
         alt="Sarong to Sari exhibition film"
         className="absolute inset-0"
-        sizes="(min-width: 1440px) 1296px, (min-width: 992px) 100vw, 317px"
+        sizes="(min-width: 992px) 100vw, 317px"
         priority
       />
       {load && activeSrc && (

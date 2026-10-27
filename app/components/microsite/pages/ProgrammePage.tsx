@@ -19,8 +19,8 @@ const ProgrammePage = () => (
       src={programmeHero.image}
       alt={programmeHero.imageAlt}
       priority
-      sizes="(min-width: 1440px) 1440px, 100vw"
-      className="mx-auto mt-10 aspect-[390/420] w-full max-w-[1440px] lg:mt-[50px] lg:aspect-[1440/605]"
+      sizes="100vw"
+      className="mx-auto mt-10 aspect-[390/420] w-full lg:mt-[50px] lg:aspect-[1440/605]"
     />
 
     {programmeIntro && (
@@ -28,7 +28,7 @@ const ProgrammePage = () => (
     )}
 
     {/* 1098px of cards at 1440, three 312px columns. */}
-    <section aria-label="Events" className="mx-auto mt-12 max-w-[1138px] px-5 lg:mt-[81px]">
+    <section aria-label="Events" className="mx-auto mt-12 max-w-[1138px] px-5 lg:mt-[81px] min-[1440px]:max-w-[79%]">
       <ProgrammeListing items={programmeItems} />
     </section>
 

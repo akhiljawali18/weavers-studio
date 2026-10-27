@@ -15,7 +15,7 @@ const GalleriesSection = () => (
   <section
     id="galleries"
     aria-labelledby="galleries-heading"
-    className={`relative mx-auto flex w-full max-w-[1440px] scroll-mt-[64px] flex-col lg:flex-row ${sectionGap}`}
+    className={`relative mx-auto flex w-full scroll-mt-[64px] flex-col lg:flex-row ${sectionGap}`}
   >
     <div className="px-4 pb-[33px] lg:w-[33.61%] lg:shrink-0 lg:px-0 lg:pb-0 lg:pl-[10.28%] lg:pt-[172px]">
       <div className="lg:w-[259px]">

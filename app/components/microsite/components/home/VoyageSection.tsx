@@ -12,7 +12,7 @@ const VoyageSection = () => (
   <section
     id="journey"
     aria-labelledby="voyage-heading"
-    className={`relative mx-auto w-full max-w-[1440px] scroll-mt-[64px] ${sectionGap}`}
+    className={`relative mx-auto w-full scroll-mt-[64px] ${sectionGap}`}
   >
     <div className="flex flex-col lg:flex-row">
       <div

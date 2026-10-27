@@ -9,7 +9,7 @@ const SnippetsSection = () => (
   <section
     id="voices"
     aria-labelledby="snippets-heading"
-    className={`relative mx-auto flex w-full max-w-[1440px] scroll-mt-[64px] flex-col lg:flex-row ${sectionGap}`}
+    className={`relative mx-auto flex w-full scroll-mt-[64px] flex-col lg:flex-row ${sectionGap}`}
   >
     <div className="mb-[44px] text-center lg:order-last lg:mb-0 lg:flex-1 lg:pr-[30px] lg:pt-[202px]">
       <h2 id="snippets-heading" className={`italic ${homeDisplayTitle}`}>
@@ -33,7 +33,12 @@ const SnippetsSection = () => (
     </div>
 
     {/* The rule and gold flourish trailing off the right edge. */}
-    <Decoration file="deco-snippets-flourish.svg" width={331} height={46} className="right-0 top-[489px]" />
+    <Decoration
+      file="deco-snippets-flourish.svg"
+      width={331}
+      height={46}
+      className="right-0 top-[489px] lg:block hidden"
+    />
   </section>
 );
 

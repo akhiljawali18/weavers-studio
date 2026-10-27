@@ -159,7 +159,7 @@ const ArchiveBrowser = ({ objects }: ArchiveBrowserProps) => {
       </div>
 
       {visible.length > 0 ? (
-        <ul className="mt-10 grid gap-x-[80px] gap-y-12 sm:grid-cols-2 lg:mt-[50px] lg:grid-cols-3 lg:gap-y-[50px]">
+        <ul className="mt-10 grid gap-x-[80px] gap-y-12 sm:grid-cols-2 lg:mt-[50px] lg:grid-cols-3 lg:gap-y-[50px] min-[1920px]:grid-cols-4">
           {visible.map((object) => (
             <li key={object.slug}>
               <ArchiveCard {...object} />

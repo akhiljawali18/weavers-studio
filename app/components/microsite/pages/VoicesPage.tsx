@@ -8,7 +8,7 @@ import { voices } from "../data/voices";
 const VoicesPage = () => (
   <section
     aria-labelledby="voices-heading"
-    className="relative mx-auto w-full max-w-[1440px] px-5 pt-8 lg:px-[60px] lg:pt-[79px]"
+    className="relative mx-auto w-full px-5 pt-8 lg:px-[60px] lg:pt-[79px]"
   >
     {/* The gold paisley from the team section, turned to face into the page. */}
     <Decoration
@@ -23,7 +23,7 @@ const VoicesPage = () => (
       <span className="italic">from India and</span> Indonesia
     </h1>
 
-    <ul className="mt-12 grid gap-x-[26px] gap-y-[20px] sm:grid-cols-2 lg:mt-[81px] lg:grid-cols-3 lg:gap-y-[60px]">
+    <ul className="mt-12 grid gap-x-[26px] gap-y-[20px] sm:grid-cols-2 lg:mt-[81px] lg:grid-cols-3 lg:gap-y-[60px] min-[1920px]:grid-cols-4">
       {voices.map((voice) => (
         <li key={voice.id}>
           <VoiceCard {...voice} />

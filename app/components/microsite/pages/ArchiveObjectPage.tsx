@@ -20,7 +20,7 @@ type ArchiveObjectPageProps = {
  */
 const ArchiveObjectPage = ({ object }: ArchiveObjectPageProps) => (
   <div className="overflow-x-clip">
-    <div className="relative mx-auto flex max-w-[1440px] flex-col gap-10  pt-10 lg:flex-row lg:items-start lg:gap-0 lg:pt-[76px]">
+    <div className="relative mx-auto flex flex-col gap-10  pt-10 lg:flex-row lg:items-start lg:gap-0 lg:pt-[76px]">
       {/* Gold paisley at the page's top-right edge; the JPEG's white ground is multiplied away. */}
       <Decoration
         file="com-decor-2.jpg"
@@ -73,7 +73,7 @@ const ArchiveObjectPage = ({ object }: ArchiveObjectPageProps) => (
       </div>
     </div>
 
-    <div className="relative mx-auto mt-12 max-w-[1440px] lg:mt-[43px] lg:px-[60px]">
+    <div className="relative mx-auto mt-12 lg:mt-[43px] lg:px-[60px]">
       <section
         aria-labelledby="object-details-heading"
         className="bg-s2s-panel px-5 pb-12 pt-8 lg:px-[88px] lg:pb-[66px] lg:pt-[42px]"
@@ -95,7 +95,7 @@ const ArchiveObjectPage = ({ object }: ArchiveObjectPageProps) => (
           <p className="pl-[92px] font-Bodoni text-[21px] italic leading-[36px] text-s2s-ink sm:pl-0 lg:w-[338px] lg:shrink-0">
             <RichText content={object.summary} />
           </p>
-          <div className={`space-y-7 lg:w-[666px] ${bodyText}`}>
+          <div className={`space-y-7 lg:min-w-0 lg:flex-1 ${bodyText}`}>
             {object.description.map((paragraph, index) => (
               <p key={index}>
                 <RichText content={paragraph} />

@@ -33,7 +33,7 @@ const MobileLines = ({ text }: { text: string }) => (
 const HeroSection = () => (
   <section
     id="exhibition"
-    className="relative mx-auto w-full max-w-[1440px] scroll-mt-[64px] px-5 pt-[30px] lg:px-[72px] lg:pt-[44px]"
+    className="relative mx-auto w-full scroll-mt-[64px] px-5 pt-[30px] lg:px-[72px] lg:pt-[44px]"
   >
     {/* Flush under the header: centred above the title on phones (the negative margin
         cancels the section's top padding), in the top-left corner on desktop. */}

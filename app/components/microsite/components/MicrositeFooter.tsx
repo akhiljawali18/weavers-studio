@@ -127,7 +127,7 @@ const MicrositeFooter = () => {
       </div>
 
       {/* ─── Desktop: the five-column grid (logo, two text columns, icons, batik) ─── */}
-      <div className="mx-auto hidden max-w-[1440px] text-[14px] leading-[25px] lg:grid lg:min-h-[150px] lg:grid-cols-[minmax(0,247fr)_minmax(0,313fr)_minmax(175px,335fr)_auto_auto] lg:items-center lg:gap-0 lg:pb-6 lg:pl-[60px] lg:pr-0 lg:pt-0">
+      <div className="mx-auto hidden text-[14px] leading-[25px] lg:grid lg:min-h-[150px] lg:grid-cols-[minmax(0,247fr)_minmax(0,313fr)_minmax(175px,335fr)_auto_auto] lg:items-center lg:gap-0 lg:pb-6 lg:pl-[60px] lg:pr-0 lg:pt-0">
         <Image
           src={`${S2S_ASSETS}/footer-logo.svg`}
           alt="Sarong to Sari"

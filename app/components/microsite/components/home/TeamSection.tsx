@@ -8,7 +8,7 @@ import { sectionGap } from "./spacing";
 const TeamSection = () => (
   <section
     aria-labelledby="team-heading"
-    className={`relative mx-auto flex w-full max-w-[1440px] flex-col lg:min-h-[685px] lg:flex-row ${sectionGap}`}
+    className={`relative mx-auto flex w-full flex-col lg:min-h-[685px] lg:flex-row ${sectionGap}`}
   >
     <div className="px-5 pb-8 lg:w-[23.61%] lg:shrink-0 lg:px-0 lg:pb-0 lg:pt-[268px]">
       <h2

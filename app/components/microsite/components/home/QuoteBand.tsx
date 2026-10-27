@@ -40,7 +40,7 @@ const QuoteBand = () => (
 
     {/* The cluster spills over the band's lower edge: larger on desktop, smaller
         and tucked to the right on phones. */}
-    <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 mx-auto hidden h-full max-w-[1440px] lg:block">
+    <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 mx-auto hidden h-full lg:block">
       <TurnedCluster width={124} height={260} className="-bottom-[36px] left-[77.43%]" />
     </div>
     <TurnedCluster width={81} height={169} className="-bottom-[23px] right-4 lg:hidden" />

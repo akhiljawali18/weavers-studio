@@ -14,7 +14,7 @@ const CommunitySection = () => (
   <section
     id="community-archive"
     aria-labelledby="testimonials-heading"
-    className={`relative mx-auto w-full max-w-[1440px] scroll-mt-[64px] ${sectionGap}`}
+    className={`relative mx-auto w-full scroll-mt-[64px] ${sectionGap}`}
   >
     <div className="relative">
       <h2

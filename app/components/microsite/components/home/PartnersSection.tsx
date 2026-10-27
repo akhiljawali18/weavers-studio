@@ -54,7 +54,7 @@ const PartnersSection = () => (
     </SectionHeading>
 
     <div className="mt-[42px] bg-s2s-mist">
-      <div className="mx-auto max-w-[1440px] px-5 py-14 lg:px-0 lg:pb-[92px] lg:pt-[82px]">
+      <div className="mx-auto px-5 py-14 lg:px-0 lg:pb-[92px] lg:pt-[82px]">
         <div className="grid gap-12 lg:grid-cols-[26.6%_23.4%_50%] lg:gap-0 grid-cols-2">
           <div className="flex flex-col items-center lg:pl-[16.19%]">
             <p className={label}>Presented by</p>

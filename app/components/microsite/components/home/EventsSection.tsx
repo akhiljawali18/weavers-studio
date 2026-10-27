@@ -6,7 +6,7 @@ const EventsSection = () => (
   <section
     id="programme"
     aria-label="Programme"
-    className={`relative mx-auto w-full max-w-[1440px] scroll-mt-[64px] ${sectionGap}`}
+    className={`relative mx-auto w-full scroll-mt-[64px] ${sectionGap}`}
   >
     <EventsCarousel events={programmeEvents} />
   </section>

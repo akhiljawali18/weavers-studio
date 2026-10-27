@@ -95,7 +95,7 @@ const MicrositeHeader = () => {
     // header is stuck at the top. It covers the hairline of page that some screens and
     // zoom levels show above a sticky element when they round its position.
     <header className="sticky top-0 z-40 bg-white shadow-[0px_5px_34px_0px_rgba(127,102,91,0.1)] before:pointer-events-none before:absolute before:inset-x-0 before:bottom-full before:h-[3px] before:bg-white before:content-['']">
-      <div className="mx-auto flex h-[57px] max-w-[1440px] items-center pl-4 pr-[14px] lg:h-[64px] lg:px-[60px]">
+      <div className="mx-auto flex h-[57px] items-center pl-4 pr-[14px] lg:h-[64px] lg:px-[60px]">
         <Link href="/microsite" className="shrink-0" aria-label="Sarong to Sari home">
           <Image
             src={`${S2S_ASSETS}/s2s-logo.svg`}

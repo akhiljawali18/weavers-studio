@@ -57,7 +57,7 @@ const ProgrammeListing = ({ items }: ProgrammeListingProps) => {
       </div>
 
       {visible.length > 0 ? (
-        <ul className="mt-10 grid gap-x-[81px] gap-y-12 sm:grid-cols-2 lg:mt-[59px] lg:grid-cols-3 lg:gap-y-[50px]">
+        <ul className="mt-10 grid gap-x-[81px] gap-y-12 sm:grid-cols-2 lg:mt-[59px] lg:grid-cols-3 lg:gap-y-[50px] min-[1920px]:grid-cols-4">
           {visible.map((item) => (
             <li key={item.slug}>
               <ProgrammeCard {...item} />
