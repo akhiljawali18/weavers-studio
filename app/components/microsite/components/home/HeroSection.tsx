@@ -53,7 +53,9 @@ const HeroSection = () => (
           "presents", as the mobile design does; desktop keeps the full line. */}
       <p className={kicker}>
         <span className="lg:hidden">presents</span>
-        <span className="hidden lg:inline">Weavers Studio Resource Centre presents</span>
+        <span className="hidden lg:inline">
+          Weavers Studio Resource Centre presents
+        </span>
       </p>
       <h1 className={`-mt-[12px] md:-mt-[3px] ${homeDisplayTitle}`}>
         <span className="italic">Sarong</span> to{" "}
@@ -71,36 +73,40 @@ const HeroSection = () => (
 
     {/* A tall portrait frame on phones, the wide landscape one from `lg`. */}
     <div className="relative mx-auto mt-[34px] max-w-[317px] lg:mt-10 lg:max-w-none">
-      <HeroVideo src={heroVideo.src} mobileSrc={heroVideo.mobileSrc} poster={heroVideo.poster} />
+      <HeroVideo
+        src={heroVideo.src}
+        mobileSrc={heroVideo.mobileSrc}
+        poster={heroVideo.poster}
+      />
       <span
         aria-hidden
         className="absolute -left-[52px] -right-[36px] bottom-0 hidden h-px bg-s2s-line lg:block"
       />
-      <Decoration
+      {/* <Decoration
         file="deco-batik-cluster.svg"
         width={79}
         height={166}
-        className="-right-[23px] -top-[11px]"
-      />
+        className="-right-[23px] -top-[11px] lg:block hidden"
+      /> */}
       <Decoration
         file="deco-paisley-maroon.svg"
         width={95}
         height={118}
-        className="-left-[21px] bottom-0"
+        className="-left-[21px] bottom-0 lg:hidden block"
       />
       {/* Desktop: the cluster overlaps the film's top-right corner and the paisley
           sits on its foot, so both are pinned to the film and follow its height. */}
-      <Decoration
+      {/* <Decoration
         file="deco-batik-cluster.svg"
         width={124}
         height={260}
         className="-right-[42px] -top-[48px]"
-      />
+      /> */}
       <Decoration
         file="deco-paisley-maroon.svg"
         width={130}
         height={161}
-        className="-bottom-px -left-[47px]"
+        className="-bottom-px -left-[47px] lg:block hidden"
       />
     </div>
 

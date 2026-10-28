@@ -290,7 +290,7 @@ export const team: TeamMember[] = [
     image: `${S2S_ASSETS}/team-2.jpg`,
     bio: [
       { text: "Adjunct Senior Research Fellow", tone: "strong" },
-      ", James Cook University in Cairns",
+      ", James Cook University in Cairns, Australia",
     ],
   },
   {
@@ -300,7 +300,7 @@ export const team: TeamMember[] = [
     image: `${S2S_ASSETS}/team-3.jpg`,
     bio: [
       { text: "Artist, Art historian", tone: "strong" },
-      ", former curator of Kala Bhavana Museum",
+      ", former curator of Kala Bhavana Museum, Santiniketan, India",
     ],
   },
   {
@@ -310,7 +310,7 @@ export const team: TeamMember[] = [
     image: `${S2S_ASSETS}/team-4.jpg`,
     bio: [
       { text: "Independent Curator", tone: "strong" },
-      ", founding curator of the NUS Baba House",
+      ", founding curator of the NUS Baba House, Singapore",
     ],
   },
   {
@@ -320,7 +320,7 @@ export const team: TeamMember[] = [
     image: `${S2S_ASSETS}/voice-5.jpg`,
     bio: [
       {
-        text: "Multidisciplinary artist, performer, scenographer, and designer",
+        text: "Multidisciplinary artist, performer, scenographer, and designer, India",
         tone: "strong",
       },
     ],
@@ -335,7 +335,7 @@ export const team: TeamMember[] = [
         text: "PhD at the Department of International Relations",
         tone: "strong",
       },
-      ", Jadavpur University, Kolkata",
+      ", Jadavpur University, Kolkata, India",
     ],
   },
   {
@@ -345,7 +345,7 @@ export const team: TeamMember[] = [
     image: `${S2S_ASSETS}/team-7.jpg`,
     bio: [
       { text: "Assistant Project Director", tone: "strong" },
-      ", Weavers Studio Resource Centre",
+      ", Weavers Studio Resource Centre, Kolkata, India ",
     ],
   },
 ];
@@ -493,7 +493,7 @@ export const partners = {
   ],
 } satisfies Record<string, PartnerLogo | PartnerLogo[] | PartnerLogo[][]>;
 
-export const testimonialsTitle = "Testimonials";
+export const testimonialsTitle = "Testimonials from previous Exhibition";
 
 export type Testimonial = {
   attribution: string;
@@ -505,72 +505,47 @@ export type Testimonial = {
 // The three slides of the "Testimonials" component in Figma, in its order.
 export const testimonials: Testimonial[] = [
   {
-    attribution: "Ina Puri | Author",
+    attribution: " Arthur MacGregor",
     quote:
-      '"It all began with a casual visit to the store\'s original address where I remember being quite delighted to find many beautiful weaves...thereafter Weavers Studio became a frequent haunt, each time there is something new to admire and acquire!"',
+      "I still find myself pouring over the cover illustration. It is such a wonderful collection of boats against a frieze of wonderfully mixed architecture.",
     width: 764,
   },
   {
-    attribution: "Jayasri Burman | Painter & Sculptor",
-    quote:
-      "I am very grateful, because as an artist when I visit Weavers Studio I really enjoy looking at all the textiles and I get so inspired by the colours and the textures… I come back to my own studio and do something different!",
+    attribution: "Mary Schoeser",
+    quote: "An outstanding book brimming with gathered insights and imagery.",
     width: 840,
   },
   {
-    attribution: "Sangeeta Datta | Film Director",
+    attribution: "Sarah Mahaffy",
     quote:
-      "I enjoy wearing these saris, they are not merely pieces of textile but a reflection of all the work and the energy and the joy and the positivity that Weavers Studio stands for.",
+      "The Weavers Studio Resource Centre in Kolkata has many beautiful examples, particularly of kantha. These textiles show a spirit of resistance from the artisans who made them.",
     // 671 in Figma; the browser's Bodoni sets the second line 0.4px wider, so it
     // needs one more pixel to keep "that" on that line as the design does.
     width: 672,
   },
 ];
 
+/**
+ * One card in the carousel under the testimonials: a photograph (`image`) or a
+ * clip (`video`, played with a button like the Snippets). `imageAlt` describes
+ * either; `caption`, when given, sits under the card.
+ */
 export type ArchiveItem = {
   imageAlt: string;
-  caption: RichText;
+  caption?: RichText;
   image?: string;
+  video?: string;
 };
 
-// The design repeats one placeholder caption under every photo; it is kept as-is
-// until the real captions are written.
-const placeholderCaption: RichText = [
-  "Artist ",
-  { text: "Paresh Maity", tone: "accent" },
-  " wears our bespoke ",
-  { text: "Patchwork Kurta", tone: "maroon" },
-  ", its jewel-toned patches making a statement.",
-];
-
+// Captions are still to be written, so the cards show without them for now.
 export const communityArchive: ArchiveItem[] = [
-  {
-    image: `${S2S_ASSETS}/community-1.jpg`,
-    imageAlt: "Paresh Maity",
-    caption: placeholderCaption,
-  },
-  {
-    image: `${S2S_ASSETS}/community-2.jpg`,
-    imageAlt: "Shabana Azmi",
-    caption: placeholderCaption,
-  },
-  {
-    image: `${S2S_ASSETS}/community-3.jpg`,
-    imageAlt: "Sharmila Tagore",
-    caption: placeholderCaption,
-  },
-  {
-    image: `${S2S_ASSETS}/community-4.jpg`,
-    imageAlt: "Community archive photograph",
-    caption: placeholderCaption,
-  },
-  {
-    image: `${S2S_ASSETS}/community-5.jpg`,
-    imageAlt: "Community archive photograph",
-    caption: placeholderCaption,
-  },
-  {
-    image: `${S2S_ASSETS}/community-6.jpg`,
-    imageAlt: "Community archive photograph",
-    caption: placeholderCaption,
-  },
+  { image: `${S2S_ASSETS}/testimonial-1.png`, imageAlt: "Testimonial 1" },
+  { video: `${S2S_ASSETS}/testimonial-2.mp4`, imageAlt: "Testimonial 2" },
+  { image: `${S2S_ASSETS}/testimonial-3.png`, imageAlt: "Testimonial 3" },
+  { video: `${S2S_ASSETS}/testimonial-4.mp4`, imageAlt: "Testimonial 4" },
+  { image: `${S2S_ASSETS}/testimonial-5.png`, imageAlt: "Testimonial 5" },
+  { video: `${S2S_ASSETS}/testimonial-6.mp4`, imageAlt: "Testimonial 6" },
+  { image: `${S2S_ASSETS}/testimonial-7.jpg`, imageAlt: "Testimonial 7" },
+  { video: `${S2S_ASSETS}/testimonial-8.mp4`, imageAlt: "Testimonial 8" },
+  { video: `${S2S_ASSETS}/testimonial-9.mp4`, imageAlt: "Testimonial 9" },
 ];

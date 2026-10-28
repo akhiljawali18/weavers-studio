@@ -3,7 +3,12 @@ import ImageSlot from "./ImageSlot";
 import RichText from "./RichText";
 import SectionHeading from "./SectionHeading";
 import { bodyText } from "./typography";
-import { hiddenOnMobile, voyageImage, voyageIntro, voyageParagraphs } from "../../data/home";
+import {
+  hiddenOnMobile,
+  voyageImage,
+  voyageIntro,
+  voyageParagraphs,
+} from "../../data/home";
 import { sectionGap } from "./spacing";
 
 const [firstParagraph, secondParagraph] = voyageParagraphs;
@@ -21,7 +26,12 @@ const VoyageSection = () => (
         }`}
       >
         <div className="lg:max-w-[448px]">
-          <SectionHeading id="voyage-heading" kicker="A century since" align="start-on-mobile" variant="home">
+          <SectionHeading
+            id="voyage-heading"
+            kicker="A century since"
+            align="start-on-mobile"
+            variant="home"
+          >
             <span className="italic">Tagore’s</span> voyage
           </SectionHeading>
           <p className={`mt-[21px] lg:mt-10 ${bodyText}`}>
@@ -45,18 +55,30 @@ const VoyageSection = () => (
       }`}
     >
       {/* The ruled margin with the wave ornament at its foot (desktop only). */}
-      <Decoration file="deco-voyage-wave.svg" width={745} height={377} className="left-0 top-[35px] hidden lg:block" />
+      <Decoration
+        file="deco-voyage-wave.svg"
+        width={745}
+        height={377}
+        className="left-0 top-[35px] hidden lg:block"
+      />
       {/* The two columns split the width evenly, as in the design. Between 1200 and
           1439px the second paragraph, which is a little longer, gets 51% so the two
           still end on the same line there. */}
-      <div className="relative min-h-[437px] pl-[92px] pr-[28px] lg:min-h-0 lg:flex-1 lg:p-0 xl:flex-[49_1_0%] min-[1440px]:flex-1">
-        <Decoration file="deco-voyage-wave.svg" width={560} height={470} className="-left-[78px] top-0 lg:hidden" />
+      <div className="relative min-h-[350px] pl-[92px] pr-[28px] lg:min-h-0 lg:flex-1 lg:p-0 xl:flex-[49_1_0%] min-[1440px]:flex-1">
+        <Decoration
+          file="deco-voyage-wave.svg"
+          width={560}
+          height={470}
+          className="-left-[78px] top-0 lg:hidden"
+        />
         <p className={`relative lg:text-justify ${bodyText}`}>
           <RichText content={firstParagraph} />
         </p>
       </div>
       {/* Both paragraphs are justified on desktop, so their right edges line up. */}
-      <p className={`pl-[17px] pr-[28px] lg:flex-1 lg:p-0 lg:text-justify xl:flex-[51_1_0%] min-[1440px]:flex-1 ${bodyText}`}>
+      <p
+        className={`pl-[17px] pr-[28px] lg:flex-1 lg:p-0 lg:text-justify xl:flex-[51_1_0%] min-[1440px]:flex-1 ${bodyText}`}
+      >
         <RichText content={secondParagraph} />
       </p>
     </div>

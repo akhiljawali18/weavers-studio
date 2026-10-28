@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
-import { addToCart, checkout, MAX_TICKETS } from "../../cart/cartStore";
+import { MAX_TICKETS } from "../../cart/cartStore";
 import type { CartItem } from "../../cart/cartStore";
+import { MAIN_CART_PAGE_URL, sendToMainCart } from "../../cart/mainCartApi";
 import { STANDARD_TICKET_TYPE } from "../../data/programme";
 
 const rupees = new Intl.NumberFormat("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -34,24 +35,30 @@ const actionButton =
 
 /**
  * The booking-option radios (for events with more than one price), the ticket
- * count, and the two buttons: "buy tickets" saves just this event as the booking
- * list and goes to payment; "add to cart" keeps it in the cart to buy with others.
- * Both stay disabled until an option is chosen.
+ * count, and the two buttons. Both send the tickets to the main site's cart;
+ * "buy tickets" then takes the visitor there to pay, while "add to cart" keeps them
+ * here to choose more. Both stay disabled until an option is chosen.
  */
 const TicketPicker = ({ eventId, eventName, prices }: TicketPickerProps) => {
   const [quantity, setQuantity] = useState(1);
   const [selected, setSelected] = useState<number | null>(null);
-  const [added, setAdded] = useState(false);
+  // Which button is waiting on the main site, and how the last "add to cart" went.
+  const [sending, setSending] = useState<"add" | "buy" | null>(null);
+  const [addResult, setAddResult] = useState<"added" | "failed" | null>(null);
+  const [buyFailed, setBuyFailed] = useState(false);
   const name = useId();
 
   const needsChoice = Boolean(prices && prices.length > 0);
   const canBuy = !needsChoice || selected !== null;
 
   useEffect(() => {
-    if (!added) return;
-    const timer = window.setTimeout(() => setAdded(false), ADDED_MS);
+    if (!addResult && !buyFailed) return;
+    const timer = window.setTimeout(() => {
+      setAddResult(null);
+      setBuyFailed(false);
+    }, ADDED_MS);
     return () => window.clearTimeout(timer);
-  }, [added]);
+  }, [addResult, buyFailed]);
 
   const chosenItem = (): CartItem | null => {
     if (!canBuy) return null;
@@ -59,17 +66,37 @@ const TicketPicker = ({ eventId, eventName, prices }: TicketPickerProps) => {
     return { eventId, ticketType, quantity, eventName };
   };
 
-  const onAddToCart = () => {
+  const onAddToCart = async () => {
     const item = chosenItem();
-    if (!item) return;
-    addToCart(item);
-    setAdded(true);
+    if (!item || sending) return;
+    setSending("add");
+    try {
+      await sendToMainCart([item]);
+      setAddResult("added");
+    } catch {
+      setAddResult("failed");
+    } finally {
+      setSending(null);
+    }
   };
 
-  const onBuy = () => {
+  // Sends the tickets, then takes the visitor to the main site's cart to pay.
+  const onBuy = async () => {
     const item = chosenItem();
-    if (item) checkout([item]);
+    if (!item || sending) return;
+    setSending("buy");
+    try {
+      await sendToMainCart([item]);
+      window.location.assign(MAIN_CART_PAGE_URL);
+    } catch {
+      setSending(null);
+      setBuyFailed(true);
+    }
   };
+
+  const addLabel =
+    sending === "add" ? "adding…" : addResult === "added" ? "added to cart" : addResult === "failed" ? "try again" : "add to cart";
+  const buyLabel = sending === "buy" ? "please wait…" : buyFailed ? "try again" : "buy tickets";
 
   return (
     <div>
@@ -136,8 +163,9 @@ const TicketPicker = ({ eventId, eventName, prices }: TicketPickerProps) => {
             aria-disabled={!canBuy}
             title={canBuy ? undefined : "Choose a booking option first"}
             className={`${actionButton} w-[250px] bg-s2s-maroon text-white hover:bg-[#4d0f14] disabled:bg-s2s-maroon/50 disabled:hover:bg-s2s-maroon/50`}
+            aria-busy={sending === "buy"}
           >
-            buy tickets
+            <span aria-live="polite">{buyLabel}</span>
           </button>
           <button
             type="button"
@@ -146,8 +174,9 @@ const TicketPicker = ({ eventId, eventName, prices }: TicketPickerProps) => {
             aria-disabled={!canBuy}
             title={canBuy ? undefined : "Choose a booking option first"}
             className={`${actionButton} w-[160px] border border-s2s-maroon bg-white text-s2s-maroon hover:bg-s2s-maroon hover:text-white disabled:border-s2s-maroon/50 disabled:text-s2s-maroon/50 disabled:hover:bg-white disabled:hover:text-s2s-maroon/50`}
+            aria-busy={sending === "add"}
           >
-            <span aria-live="polite">{added ? "added to cart" : "add to cart"}</span>
+            <span aria-live="polite">{addLabel}</span>
           </button>
         </div>
       </div>

@@ -190,7 +190,10 @@ export const programmeItems: ProgrammeItem[] = [
     titleRegular: "Santiniketan, India",
     type: "tour",
     host: "",
-    ...standInPhotos,
+    image: `${S2S_ASSETS}/Santiniketan.jpg`,
+    imageAlt: "A batik painting of a woman reading",
+    cardImage: `${S2S_ASSETS}/Santiniketan.jpg`,
+    cardImageAlt: "Sabine Bolk holding up a batik cloth",
     facts: [
       { label: "Dates", value: "24 – 25 January 2027 (Sunday- Monday)" },
       { label: "Duration", value: "1 night, 2 days" },

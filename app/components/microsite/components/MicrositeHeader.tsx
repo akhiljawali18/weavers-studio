@@ -75,9 +75,10 @@ const MobileNavLink = ({ href, label, onNavigate }: Required<NavLinkProps>) => {
 /**
  * The cart link at the header's right end, with a maroon count once tickets are in it.
  * Each "add to cart" makes the icon and count swell and settle back, so the visitor
- * sees where the tickets went.
+ * sees where the tickets went. Not shown while the cart lives on the main site;
+ * exported so it stays ready to put back.
  */
-const CartLink = () => {
+export const CartLink = () => {
   const count = useCartCount();
   // Bumped on every add; used as the key below so the animation restarts each time.
   const [pulses, setPulses] = useState(0);
@@ -154,7 +155,7 @@ const MicrositeHeader = () => {
 
         <nav
           aria-label="Microsite navigation"
-          className="hidden lg:ml-[123px] lg:mr-[32px] lg:flex lg:flex-1 lg:items-center lg:justify-between xl:grid xl:grid-cols-[22.9fr_23.7fr_24.4fr_17.2fr_11.8fr]"
+          className="hidden lg:ml-[123px] lg:mr-[15px] lg:flex lg:flex-1 lg:items-center lg:justify-between xl:grid xl:grid-cols-[22.9fr_23.7fr_24.4fr_17.2fr_11.8fr]"
         >
           {micrositeNavigation.map((item, index) => (
             <div key={item.href} className={index === micrositeNavigation.length - 1 ? "xl:justify-self-end" : ""}>
@@ -163,7 +164,9 @@ const MicrositeHeader = () => {
           ))}
         </nav>
 
-        <CartLink />
+        {/* The cart is kept on the main site for now, so the header shows no cart link.
+            To bring it back: render <CartLink /> here, set the button below to `ml-[18px]`
+            and the nav above to `lg:mr-[32px]`. */}
 
         <button
           type="button"
@@ -171,7 +174,7 @@ const MicrositeHeader = () => {
           aria-expanded={menuOpen}
           aria-controls="microsite-menu"
           aria-label="Open menu"
-          className="ml-[18px] flex h-[25px] w-[25px] items-center justify-center rounded-sm text-s2s-brown focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon lg:hidden"
+          className="ml-auto flex h-[25px] w-[25px] items-center justify-center rounded-sm text-s2s-brown focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon lg:hidden"
         >
           <Image src={`${S2S_ASSETS}/icon-menu.svg`} alt="" width={25} height={25} unoptimized />
         </button>

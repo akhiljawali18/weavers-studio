@@ -3,6 +3,7 @@ import Decoration from "./Decoration";
 import ImageSlot from "./ImageSlot";
 import RichText from "./RichText";
 import Testimonials from "./Testimonials";
+import VideoCard from "./VideoCard";
 import {
   communityArchive,
   testimonialsTitle,
@@ -63,15 +64,25 @@ const CommunitySection = () => (
             key={index}
             className="w-[260px] shrink-0 snap-start md:w-[290px]"
           >
-            <ImageSlot
-              src={item.image}
-              alt={item.imageAlt}
-              sizes="290px"
-              className="aspect-[290/448] w-full"
-            />
-            <figcaption className="mt-3 text-[14px] leading-[25px] text-s2s-ink">
-              <RichText content={item.caption} />
-            </figcaption>
+            {item.video ? (
+              <VideoCard
+                title={item.imageAlt}
+                src={item.video}
+                className="aspect-[290/448] w-full"
+              />
+            ) : (
+              <ImageSlot
+                src={item.image}
+                alt={item.imageAlt}
+                sizes="290px"
+                className="aspect-[290/448] w-full"
+              />
+            )}
+            {item.caption && (
+              <figcaption className="mt-3 text-[14px] leading-[25px] text-s2s-ink">
+                <RichText content={item.caption} />
+              </figcaption>
+            )}
           </figure>
         ))}
       </Carousel>
