@@ -15,7 +15,13 @@ const VoicesPage = () => (
       file="deco-paisley-gold.svg"
       width={226}
       height={120}
-      className="right-0 top-[49px] -scale-x-100"
+      className="right-0 top-[49px] -scale-x-100 lg:block hidden"
+    />
+    <Decoration
+      file="deco-paisley-gold.svg"
+      width={126}
+      height={120}
+      className="right-0 top-[49px] -scale-x-100 lg:hidden block"
     />
 
     <p className={kicker}>Artists, scholars and curators</p>

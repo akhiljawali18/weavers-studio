@@ -24,12 +24,21 @@ const CommunitySection = () => (
       >
         {testimonialsTitle}
       </h2>
+      <p className="px-5 font-Bodoni italic text-s2s-maroon font-medium leading-[29px] tracking-[1.92px] text-s2s-ink lg:pl-[158px]">
+        Textiles from Bengal: A Shared Legacy
+      </p>
       {/* The rule under the heading, curling up at its end. */}
       <Decoration
-        file="testi-decor.jpg"
-        width={594}
-        height={27}
-        className="left-0 top-[20px]"
+        file="testi-decor.png"
+        width={620}
+        height={20}
+        className="left-0 top-[45px] lg:block hidden"
+      />
+      <Decoration
+        file="testi-decor.png"
+        width={390}
+        height={20}
+        className="left-0 top-[80px] lg:hidden block"
       />
     </div>
 

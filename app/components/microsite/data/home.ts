@@ -79,7 +79,7 @@ export const snippetVideos: SnippetVideo[] = [
   {
     title: "First thoughts with Peter Lee and Oroon Das",
     src: `${S2S_ASSETS}/snippet-4.mp4`,
-    poster: `${S2S_ASSETS}/snippet-1-poster.jpg`,
+    poster: `${S2S_ASSETS}/snippet-3-poster.jpg`,
   },
   {
     title: "Behind the scenes: Santiniketan",
@@ -89,7 +89,17 @@ export const snippetVideos: SnippetVideo[] = [
   {
     title: "First thoughts with Peter Lee and Oroon Das",
     src: `${S2S_ASSETS}/snippet-5.mp4`,
-    poster: `${S2S_ASSETS}/snippet-1-poster.jpg`,
+    poster: `${S2S_ASSETS}/snippet-5-poster.jpg`,
+  },
+  {
+    title: "Behind the scenes: Santiniketan",
+    src: `${S2S_ASSETS}/snippet-6.mp4`,
+    poster: `${S2S_ASSETS}/snippet-6-poster.jpg`,
+  },
+  {
+    title: "First thoughts with Peter Lee and Oroon Das",
+    src: `${S2S_ASSETS}/snippet-7.mp4`,
+    poster: `${S2S_ASSETS}/snippet-3-poster.jpg`,
   },
 ];
 
@@ -493,7 +503,7 @@ export const partners = {
   ],
 } satisfies Record<string, PartnerLogo | PartnerLogo[] | PartnerLogo[][]>;
 
-export const testimonialsTitle = "Testimonials from previous Exhibition";
+export const testimonialsTitle = "Testimonials & Press";
 
 export type Testimonial = {
   attribution: string;
@@ -539,13 +549,13 @@ export type ArchiveItem = {
 
 // Captions are still to be written, so the cards show without them for now.
 export const communityArchive: ArchiveItem[] = [
+  { video: `${S2S_ASSETS}/testimonial-9.mp4`, imageAlt: "Testimonial 9" },
   { image: `${S2S_ASSETS}/testimonial-1.png`, imageAlt: "Testimonial 1" },
   { video: `${S2S_ASSETS}/testimonial-2.mp4`, imageAlt: "Testimonial 2" },
   { image: `${S2S_ASSETS}/testimonial-3.png`, imageAlt: "Testimonial 3" },
   { video: `${S2S_ASSETS}/testimonial-4.mp4`, imageAlt: "Testimonial 4" },
   { image: `${S2S_ASSETS}/testimonial-5.png`, imageAlt: "Testimonial 5" },
   { video: `${S2S_ASSETS}/testimonial-6.mp4`, imageAlt: "Testimonial 6" },
-  { image: `${S2S_ASSETS}/testimonial-7.jpg`, imageAlt: "Testimonial 7" },
+  { image: `${S2S_ASSETS}/testimonial-7.jpeg`, imageAlt: "Testimonial 7" },
   { video: `${S2S_ASSETS}/testimonial-8.mp4`, imageAlt: "Testimonial 8" },
-  { video: `${S2S_ASSETS}/testimonial-9.mp4`, imageAlt: "Testimonial 9" },
 ];

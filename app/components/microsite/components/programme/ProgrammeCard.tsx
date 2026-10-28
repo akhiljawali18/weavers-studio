@@ -8,7 +8,15 @@ import type { ProgrammeItem } from "../../data/programme";
  * columns), its Bodoni title, and "Type • Host" beneath. The whole card opens the
  * event's own page.
  */
-const ProgrammeCard = ({ slug, titleItalic, titleRegular, type, host, cardImage, cardImageAlt }: ProgrammeItem) => (
+const ProgrammeCard = ({
+  slug,
+  titleItalic,
+  titleRegular,
+  type,
+  host,
+  cardImage,
+  cardImageAlt,
+}: ProgrammeItem) => (
   <Link
     href={`/microsite/programme/${slug}`}
     className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon focus-visible:ring-offset-4"
@@ -17,7 +25,7 @@ const ProgrammeCard = ({ slug, titleItalic, titleRegular, type, host, cardImage,
       src={cardImage}
       alt={cardImageAlt}
       sizes="(min-width: 992px) 312px, (min-width: 576px) 50vw, 100vw"
-      className="aspect-[358/278] w-full sm:aspect-[3/4]"
+      className="aspect-[358/278] lg:w-full sm:aspect-[3/4]"
       imageClassName="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
     />
     <h3 className="mt-[22px] font-Bodoni text-[24px] font-normal leading-[36px] text-s2s-ink transition-colors duration-300 group-hover:text-s2s-maroon">

@@ -11,7 +11,7 @@ import { archiveObjects, communityIntro } from "../data/community";
  */
 const CommunityArchivePage = () => (
   <div className="overflow-x-clip">
-    <div className="relative mx-auto mt-10 lg:mt-[54px]">
+    <div className="relative mx-auto mt-0 lg:mt-[54px]">
       <section
         aria-labelledby="community-archive-heading"
         className="bg-s2s-mist px-5 py-12 lg:w-[95.83%] lg:pb-[86px] lg:pl-[11.94%] lg:pr-0 lg:pt-[54px]"

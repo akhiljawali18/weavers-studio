@@ -6,7 +6,10 @@ import type { CartItem } from "../../cart/cartStore";
 import { MAIN_CART_PAGE_URL, sendToMainCart } from "../../cart/mainCartApi";
 import { STANDARD_TICKET_TYPE } from "../../data/programme";
 
-const rupees = new Intl.NumberFormat("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const rupees = new Intl.NumberFormat("en-IN", {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
 
 type PriceOption = { amount: number; note: string; ticketType: string };
 
@@ -25,13 +28,13 @@ const ADDED_MS = 2000;
 // The minus and plus are hairline strokes in the design, drawn here in the
 // button's text colour so they turn maroon on hover with it.
 const stepButton =
-  "relative flex h-[24px] items-center justify-center rounded-sm text-s2s-ink "
-  + "transition-colors hover:text-s2s-maroon disabled:cursor-default disabled:hover:text-s2s-ink "
-  + "focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon";
+  "relative flex h-[24px] items-center justify-center rounded-sm text-s2s-ink " +
+  "transition-colors hover:text-s2s-maroon disabled:cursor-default disabled:hover:text-s2s-ink " +
+  "focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon";
 
 const actionButton =
-  "h-[35px] max-w-full rounded-[4px] text-[15px] font-medium lowercase transition-colors duration-200 "
-  + "focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon focus-visible:ring-offset-2 disabled:cursor-not-allowed";
+  "h-[35px] max-w-full rounded-[4px] text-[15px] font-medium lowercase transition-colors duration-200 " +
+  "focus:outline-none focus-visible:ring-2 focus-visible:ring-s2s-maroon focus-visible:ring-offset-2 disabled:cursor-not-allowed";
 
 /**
  * The booking-option radios (for events with more than one price), the ticket
@@ -62,7 +65,9 @@ const TicketPicker = ({ eventId, eventName, prices }: TicketPickerProps) => {
 
   const chosenItem = (): CartItem | null => {
     if (!canBuy) return null;
-    const ticketType = needsChoice ? prices![selected!].ticketType : STANDARD_TICKET_TYPE;
+    const ticketType = needsChoice
+      ? prices![selected!].ticketType
+      : STANDARD_TICKET_TYPE;
     return { eventId, ticketType, quantity, eventName };
   };
 
@@ -95,8 +100,19 @@ const TicketPicker = ({ eventId, eventName, prices }: TicketPickerProps) => {
   };
 
   const addLabel =
-    sending === "add" ? "adding…" : addResult === "added" ? "added to cart" : addResult === "failed" ? "try again" : "add to cart";
-  const buyLabel = sending === "buy" ? "please wait…" : buyFailed ? "try again" : "buy tickets";
+    sending === "add"
+      ? "adding…"
+      : addResult === "added"
+        ? "added to cart"
+        : addResult === "failed"
+          ? "try again"
+          : "add to cart";
+  const buyLabel =
+    sending === "buy"
+      ? "please wait…"
+      : buyFailed
+        ? "try again"
+        : "buy tickets";
 
   return (
     <div>
@@ -127,8 +143,14 @@ const TicketPicker = ({ eventId, eventName, prices }: TicketPickerProps) => {
         </fieldset>
       )}
 
-      <div className={`flex flex-wrap items-center gap-y-4 ${needsChoice ? "mt-[24px]" : ""}`}>
-        <div role="group" aria-label="Number of tickets" className="flex items-center gap-[14px]">
+      <div
+        className={`flex flex-wrap items-center gap-y-4 ${needsChoice ? "mt-[24px]" : ""}`}
+      >
+        <div
+          role="group"
+          aria-label="Number of tickets"
+          className="flex items-center gap-[14px]"
+        >
           <button
             type="button"
             onClick={() => setQuantity((count) => Math.max(1, count - 1))}
@@ -146,7 +168,9 @@ const TicketPicker = ({ eventId, eventName, prices }: TicketPickerProps) => {
           </output>
           <button
             type="button"
-            onClick={() => setQuantity((count) => Math.min(MAX_TICKETS, count + 1))}
+            onClick={() =>
+              setQuantity((count) => Math.min(MAX_TICKETS, count + 1))
+            }
             disabled={quantity >= MAX_TICKETS}
             aria-label="One ticket more"
             className={`${stepButton} w-[14px]`}
@@ -155,7 +179,7 @@ const TicketPicker = ({ eventId, eventName, prices }: TicketPickerProps) => {
             <span aria-hidden className="absolute h-[14px] w-px bg-current" />
           </button>
         </div>
-        <div className="ml-[36px] flex flex-wrap gap-3">
+        <div className="lg:ml-[36px] flex flex-wrap gap-3">
           <button
             type="button"
             onClick={onBuy}
@@ -173,7 +197,7 @@ const TicketPicker = ({ eventId, eventName, prices }: TicketPickerProps) => {
             disabled={!canBuy}
             aria-disabled={!canBuy}
             title={canBuy ? undefined : "Choose a booking option first"}
-            className={`${actionButton} w-[160px] border border-s2s-maroon bg-white text-s2s-maroon hover:bg-s2s-maroon hover:text-white disabled:border-s2s-maroon/50 disabled:text-s2s-maroon/50 disabled:hover:bg-white disabled:hover:text-s2s-maroon/50`}
+            className={`${actionButton} lg:w-[160px] w-[250px] border border-s2s-maroon bg-white text-s2s-maroon hover:bg-s2s-maroon hover:text-white disabled:border-s2s-maroon/50 disabled:text-s2s-maroon/50 disabled:hover:bg-white disabled:hover:text-s2s-maroon/50`}
             aria-busy={sending === "add"}
           >
             <span aria-live="polite">{addLabel}</span>
