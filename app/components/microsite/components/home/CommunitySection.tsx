@@ -38,7 +38,7 @@ const CommunitySection = () => (
         file="testi-decor.png"
         width={390}
         height={20}
-        className="left-0 top-[80px] lg:hidden block"
+        className="left-0 top-[50px] lg:hidden block"
       />
     </div>
 
